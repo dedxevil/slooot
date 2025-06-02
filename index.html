@@ -454,7 +454,7 @@
         <div id="home-content">
             <section class="mb-12 fade-in">
                 <div class="text-center mb-16">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Discover Uniqye and useful Web Tools</h1>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Discover unique and useful Web Tools</h1>
                     <p class="text-xl opacity-80 max-w-2xl mx-auto">A curated collection of handy web tools to simplify
                         your digital life.</p>
                 </div>
@@ -805,10 +805,15 @@
                 </div>
 
                 <div class="text-center md:text-right">
-                    <p class="opacity-70">Built with ❤️ by <a href="https://17x.studio"
-                            class="underline hover:text-purple-400 transition-colors">17x.studio</a></p>
-                    <p class="mt-2 opacity-50">© 2023 toools.in. All rights reserved.</p>
-                </div>
+  <p class="opacity-70">
+    Built with ⌛️ by 
+    <a href="https://17x.in" target="_blank" rel="noopener noreferrer"
+       class="underline hover:text-purple-400 transition-colors">
+      17x
+    </a>
+  </p>
+  <p class="mt-2 opacity-50" id="footer-year">© 2023 toools.in. All rights reserved.</p>
+</div>
             </div>
         </div>
     </footer>
@@ -1091,7 +1096,11 @@
 //         });
 
 
-
+ document.addEventListener('DOMContentLoaded', () => {
+    const yearSpan = document.getElementById('footer-year');
+    const currentYear = new Date().getFullYear();
+    yearSpan.textContent = `© ${currentYear} toools.in. All rights reserved.`;
+  });
 
 
     </script>
