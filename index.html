@@ -998,26 +998,80 @@ toolCards.forEach(card => {
         // Add more mappings as needed
     };
 
-
 window.addEventListener('DOMContentLoaded', () => {
-    const toolSlug = window.location.pathname.replace(/^\/+|\/+$/g, '');
+  const slug = window.location.pathname.replace(/^\/+|\/+$/g, '');
 
-    const toolId = toolMap[toolSlug];
+  const toolId = toolMap[slug];
 
-    if (toolId) {
-        // Simulate card click to reuse existing code
-        const card = [...document.querySelectorAll('.tool-card')]
-            .find(c => c.getAttribute('data-tool') === toolId);
-        if (card) {
-            card.click();
-        } else {
-            window.location.href = '/';
-        }
-    } else if (toolSlug !== '') {
-        // Redirect to home if unknown tool slug
-        window.location.href = '/';
+  if (toolId) {
+    // simulate card click OR load directly
+    const card = [...document.querySelectorAll('.tool-card')]
+      .find(c => c.getAttribute('data-tool') === toolId);
+
+    if (card) {
+      card.click();
+    } else {
+      // load widget directly if no card exists
+      loadToolById(slug, toolId);
     }
+  } else if (slug) {
+    // Invalid slug, redirect home
+    window.location.href = '/';
+  }
 });
+
+function loadToolById(toolSlug, toolId) {
+  const toolTitle = toolSlug
+    .split('-')
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
+
+  document.title = `${toolTitle} \n toools.in`;
+  history.replaceState({ tool: toolSlug }, '', `/${toolSlug}`);
+
+  let widgetContainer = document.getElementById('widget-container');
+  if (!widgetContainer) {
+    widgetContainer = document.createElement('div');
+    widgetContainer.id = 'widget-container';
+    widgetContainer.className = 'fade-in mt-12';
+    document.querySelector('main').appendChild(widgetContainer);
+  } else {
+    widgetContainer.innerHTML = '';
+  }
+
+  widgetContainer.innerHTML = `
+    <div class="tool-container">
+      <div id="iframe-loader" style="display:flex;align-items:center;justify-content:center;padding:4rem 0;">
+        <span class="loader-text" style="font-weight:600;">Loading tool...</span>
+      </div>
+      <div id="tool-content" style="display:none;">
+        <button id="back-to-tools" class="back-to-tools mb-4">⬅ Back to Tools</button>
+        <div class="iframe-wrapper" style="position:relative;">
+          <div id="iframe-container"></div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  setTimeout(() => {
+    const script = document.createElement('script');
+    script.src = `./${toolId}/widget.js`;
+    script.onload = () => {
+      document.getElementById('iframe-loader')?.remove();
+      document.getElementById('tool-content').style.display = 'block';
+    };
+    script.onerror = () => {
+      window.location.href = '/';
+    };
+    document.getElementById('iframe-container').appendChild(script);
+
+    document.getElementById('back-to-tools').addEventListener('click', () => {
+      widgetContainer.remove();
+      history.pushState({}, '', '/');
+      document.title = 'toools.in';
+    });
+  }, 300);
+}
 
 
 
