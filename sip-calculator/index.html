@@ -10,6 +10,19 @@
         rel="stylesheet">
     <link rel="icon"
         href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="0.9em" font-size="90">🛠️</text></svg>'>
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Free SIP Calculator with inflation adjustment. Plan your investments better with visual insights.">
+    <meta name="keywords"
+        content="SIP Calculator, Mutual Fund Calculator, Investment Calculator, Inflation Adjusted SIP, SIP Returns, SIP Growth Chart, Finance Tools">
+    <meta name="author" content="toools.in">
+    <meta name="description" content="Use this free SIP Calculator to estimate your mutual fund returns with inflation adjustment and growth charts. Visual SIP tool for investors in India.">
+<meta name="keywords" content="SIP Calculator, Mutual Fund SIP, SIP Return Calculator, SIP with Inflation, Compounded SIP Returns, SIP Investment Calculator, Monthly SIP Planner, Mutual Fund Growth Calculator, Wealth Accumulation Tool, SIP Chart India">
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
@@ -491,9 +504,83 @@
     <main class="container mx-auto py-8">
 
         </div>
+        <section id="sip-calculator" class="category-section fade-in">
+       <h2 class="text-3xl font-bold finance-header mb-8 text-center mx-auto">SIP Calculator</h2>
 
-        <!-- Widget Container (initially empty) -->
-        <div id="widget-container" class="fade-in mt-12"></div>
+
+            <div class="card p-8 mb-12 max-w-4xl mx-auto shadow-lg space-y-8 ">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block font-medium mb-1">Monthly Investment (₹)</label>
+                        <input type="number" id="monthly-investment" value="5000"
+                            class="w-full p-3 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-white">
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">Annual Return Rate (%)</label>
+                        <input type="number" id="return-rate" value="12"
+                            class="w-full p-3 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-white">
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">Investment Duration (Years): <span
+                                id="years-display">10</span></label>
+                        <input type="range" id="years" value="10" min="1" max="40" class="w-full">
+                    </div>
+                    <div>
+                        <label class="block font-medium mb-1">Expected Inflation Rate (%): <span
+                                id="inflation-display">0</span></label>
+                        <input type="range" id="inflation" value="0" min="0" max="15" step="0.5" class="w-full">
+                    </div>
+                </div>
+
+                <button onclick="calculateSIP()"
+                    class="w-full py-3 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold hover:shadow-lg transition">
+                    Calculate
+                </button>
+
+                <div class="pt-4" id="sip-results" style="display: none;">
+                    <h3 class="text-xl font-bold mb-3">Results:</h3>
+                    <p>Total Invested: <strong id="invested-amount"></strong></p>
+                    <p>Wealth Gained: <strong id="wealth-gained"></strong></p>
+                    <p>Final Value (Inflation Adjusted): <strong id="final-value-adjusted"></strong></p>
+                    <p class="mt-4 text-lg italic text-purple-700 dark:text-purple-300" id="result-summary"></p>
+                </div>
+            </div>
+
+<div id="chart-section" class="max-w-5xl mx-auto text-center mb-2 hidden">
+  <canvas id="monthly-chart" height="200"></canvas>
+  <button id="download-btn" onclick="downloadResult()" class="mt-4 px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition">
+    Download Chart + Result
+  </button>
+</div>
+
+
+<section class="max-w-3xl mx-auto my-16 px-4 text-lg leading-relaxed text-gray-700 dark:text-gray-500 mb-24">
+  <h3 class="text-2xl font-bold mb-4 text-center">How to Use the SIP Calculator</h3>
+  <ul class="list-disc pl-5 space-y-3">
+    <li>Enter your monthly SIP amount to calculate future returns with compounding interest.</li>
+    <li>Adjust the expected annual return rate typically offered by mutual funds or index funds.</li>
+    <li>Set your investment duration in years using the slider.</li>
+    <li>Use the inflation rate slider to factor in real-world economic conditions.</li>
+    <li>Click <strong>Calculate</strong> to see your total invested amount, future value, inflation-adjusted returns, and growth percentage.</li>
+    <li>Visualize your investment growth over time using the interactive SIP chart.</li>
+    <li>Use the <strong>Download</strong> button to save a copy of your chart and results for financial planning or presentations.</li>
+  </ul>
+
+  <p class="mt-6">
+    This SIP Calculator helps you estimate returns from mutual fund SIP investments while adjusting for inflation and compounding effects. Whether you're investing in ELSS, debt funds, equity mutual funds, or index-based SIPs, this tool is built for accurate and real-time calculations.
+  </p>
+</section>
+
+            <!-- <div
+                class="embed-code-container mt-12 max-w-3xl mx-auto bg-gray-100 dark:bg-gray-800 rounded-lg shadow p-4">
+                <h3 class="text-lg font-semibold mb-2">Embed This SIP Calculator</h3>
+                <pre class="embed-code"
+                    id="embed-code">&lt;iframe src="https://toools.in/sip-calculator" width="100%" height="600" frameborder="0"&gt;&lt;/iframe&gt;</pre>
+                <button class="copy-embed-btn"
+                    onclick="navigator.clipboard.writeText(document.getElementById('embed-code').innerText)">Copy
+                    Code</button>
+            </div> -->
+        </section>
 
         <!-- Home Content -->
         <div id="home-content">
@@ -509,7 +596,7 @@
         <section id="finance" class="mb-16 category-section fade-in">
             <h2 class="text-3xl font-bold category-header finance-header">Finance Tools</h2>
             <div class="tool-grid">
-                <a href="#" class="card p-6 tool-card" data-tool="sip-calculator">
+                <!-- <a href="#" class="card p-6 tool-card" data-tool="clacpis">
                     <div class="tool-icon finance-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
@@ -519,7 +606,7 @@
                     </div>
                     <h3 class="text-xl font-semibold mb-2">SIP Calculator</h3>
                     <p class="opacity-70">Calculate returns on your systematic investment plans.</p>
-                </a>
+                </a> -->
 
                 <a href="#" class="card p-6 tool-card" data-tool="emi-calculator">
                     <div class="tool-icon finance-icon">
@@ -955,6 +1042,179 @@
             const currentYear = new Date().getFullYear();
             yearSpan.textContent = `© ${currentYear} toools.in. All rights reserved.`;
         });
+
+        const yearsSlider = document.getElementById("years");
+        const inflationSlider = document.getElementById("inflation");
+
+        yearsSlider.oninput = () => document.getElementById("years-display").textContent = yearsSlider.value;
+        inflationSlider.oninput = () => document.getElementById("inflation-display").textContent = inflationSlider.value;
+
+        let sipChart;
+
+function formatINR(amount) {
+  return amount.toLocaleString('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0
+  });
+}
+function numberToWords(num) {
+  return formatINR(num) ;
+  //+ ` (${toWords(num)})`;
+}
+
+
+function toWords(num) {
+  const a = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve',
+    'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+  const b = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+
+  if ((num = num.toString()).length > 9) return '…';
+
+  let n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+  if (!n) return '';
+
+  let str = '';
+  str += (n[1] != 0) ? (a[+n[1]] || b[n[1][0]] + ' ' + a[n[1][1]]) + ' crore ' : '';
+  str += (n[2] != 0) ? (a[+n[2]] || b[n[2][0]] + ' ' + a[n[2][1]]) + ' lakh ' : '';
+  str += (n[3] != 0) ? (a[+n[3]] || b[n[3][0]] + ' ' + a[n[3][1]]) + ' thousand ' : '';
+  str += (n[4] != 0) ? (a[+n[4]] || b[n[4][0]] + ' ' + a[n[4][1]]) + ' hundred ' : '';
+  str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[+n[5]] || b[n[5][0]] + ' ' + a[n[5][1]]) + ' ' : '';
+  return str.trim();
+}
+
+
+        function calculateSIP() {
+            const P = +document.getElementById("monthly-investment").value;
+            const r = (+document.getElementById("return-rate").value) / 100 / 12;
+            const years = +yearsSlider.value;
+            const months = years * 12;
+            const i = +document.getElementById("inflation").value / 100;
+
+            if (!P || !r || !months) return;
+
+            let balance = 0;
+            const monthlyData = [];
+            const investedData = [];
+            let totalInvested = 0;
+
+            for (let m = 1; m <= months; m++) {
+                balance = balance * (1 + r) + P;
+                totalInvested += P;
+                monthlyData.push(balance);
+                investedData.push(totalInvested);
+            }
+
+            const inflationAdjusted = balance / Math.pow(1 + i, years);
+            const gained = inflationAdjusted - totalInvested;
+
+            const percentGrowth = ((gained / totalInvested) * 100).toFixed(2);
+const inflationFinalWords = toWords(Math.round(inflationAdjusted));
+
+            document.getElementById("invested-amount").innerHTML = numberToWords(totalInvested);
+            document.getElementById("wealth-gained").innerHTML = numberToWords(gained);
+            document.getElementById("final-value-adjusted").innerHTML = numberToWords(inflationAdjusted);
+
+document.getElementById("result-summary").innerHTML =
+  `With ₹${P.toLocaleString('en-IN')} invested monthly for ${years} years, 
+  you gain ₹${gained.toLocaleString('en-IN')} after inflation 
+  (<strong>${percentGrowth}%</strong> growth).<br>
+  Your adjusted future value is <strong>${formatINR(inflationAdjusted)}</strong> 
+  (<em>${inflationFinalWords}</em>).`;
+
+            document.getElementById("sip-results").style.display = 'block';
+            document.getElementById("download-btn").classList.remove("hidden");
+            document.getElementById("chart-section").classList.remove("hidden");
+
+            drawSIPLineChart(monthlyData, investedData);
+        }
+
+        function drawSIPLineChart(data, investedData) {
+            const ctx = document.getElementById('monthly-chart').getContext('2d');
+            if (sipChart) sipChart.destroy();
+
+            const color = getComputedStyle(document.body).color || '#111';
+
+            sipChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.map((_, i) => `M${i + 1}`),
+                    datasets: [
+                        {
+                            label: 'SIP Value',
+                            data,
+                            borderColor: '#9333ea',
+                            backgroundColor: 'rgba(147, 51, 234, 0.1)',
+                            borderWidth: 2,
+                            tension: 0.3
+                        },
+                        {
+                            label: 'Total Invested',
+                            data: investedData,
+                            borderColor: '#6366f1',
+                            backgroundColor: 'transparent',
+                            borderDash: [5, 5],
+                            borderWidth: 2,
+                            tension: 0.3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                color,
+                                callback: value => '₹' + value.toLocaleString('en-IN')
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function downloadChart() {
+            const link = document.createElement('a');
+            link.download = 'sip-chart.png';
+            link.href = document.getElementById('monthly-chart').toDataURL('image/png');
+            link.click();
+        }
+
+function downloadResult() {
+  const chartCanvas = document.getElementById('monthly-chart');
+  const results = document.getElementById('sip-results');
+
+  // Create a temp container with both chart and result
+  const container = document.createElement('div');
+  container.style.padding = '20px';
+  container.style.background = '#ffffff';
+  container.style.color = '#000000';
+  container.style.fontFamily = 'Arial';
+  container.appendChild(results.cloneNode(true));
+
+  document.body.appendChild(container);
+
+  html2canvas(container).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'sip-summary.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    document.body.removeChild(container);
+  });
+}
+
 
 
     </script>
