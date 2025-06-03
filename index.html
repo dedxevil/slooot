@@ -8,7 +8,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="0.9em" font-size="90">🛠️</text></svg>'>
+    <link rel="icon"
+        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="0.9em" font-size="90">🛠️</text></svg>'>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
@@ -414,6 +415,47 @@
             background-color: var(--light-card);
             color: #1e293b;
         }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .logo-icon svg {
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes fadeInSlide {
+            0% {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .logo-text {
+            animation: fadeInSlide 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .logo-icon svg {
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover .logo-icon svg {
+            transform: rotate(-10deg) scale(1.1);
+        }
     </style>
 </head>
 
@@ -428,8 +470,9 @@
                             d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
                     </svg>
                 </div>
-                <h1 class="logo-text" id="site-title">toools.in</h1>
+                <h1 class="logo-text" id="site-title">Toools</h1>
             </a>
+
 
             <div class="flex items-center space-x-6">
                 <nav class="hidden md:flex space-x-6" id="main-nav">
@@ -439,6 +482,7 @@
                     <a href="#fun" class="nav-link text-lg font-medium">Fun</a>
                     <a href="#dev" class="nav-link text-lg font-medium">Dev</a>
                 </nav>
+
                 <div class="theme-toggle" id="themeToggle"></div>
             </div>
         </div>
@@ -806,15 +850,15 @@
                 </div>
 
                 <div class="text-center md:text-right">
-  <p class="opacity-70">
-    Built with ⌛️ by 
-    <a href="https://17x.in" target="_blank" rel="noopener noreferrer"
-       class="underline hover:text-purple-400 transition-colors">
-      17x
-    </a>
-  </p>
-  <p class="mt-2 opacity-50" id="footer-year">© 2023 toools.in. All rights reserved.</p>
-</div>
+                    <p class="opacity-70">
+                        Built with ⌛️ by
+                        <a href="https://17x.in" target="_blank" rel="noopener noreferrer"
+                            class="underline hover:text-purple-400 transition-colors">
+                            17x
+                        </a>
+                    </p>
+                    <p class="mt-2 opacity-50" id="footer-year">© 2023 toools.in. All rights reserved.</p>
+                </div>
             </div>
         </div>
     </footer>
@@ -906,202 +950,11 @@
         window.addEventListener('scroll', highlightNavLink);
         window.addEventListener('load', highlightNavLink);
 
-// document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-//     anchor.addEventListener('click', function(e) {
-//         e.preventDefault();
-
-//         const targetId = this.getAttribute('href');
-//         if (targetId === '#') return;
-
-//         const targetElement = document.querySelector(targetId);
-//         if (targetElement) {
-//             window.scrollTo({
-//                 top: targetElement.offsetTop - 80,
-//                 behavior: 'smooth'
-//             });
-//         }
-//     });
-// });
-
-
-        // // Tool loading functionality
-        // const toolCards = document.querySelectorAll('.tool-card');
-
-// toolCards.forEach(card => {
-//   card.addEventListener('click', () => {
-//     const tool = card.getAttribute('data-tool'); // e.g., 'pwdgen'
-//     const toolSlug = Object.keys(toolMap).find(key => toolMap[key] === tool); // reverse-lookup
-//     if (!toolSlug) return;
-
-//     history.pushState({ tool: toolSlug }, '', `/${toolSlug}`);
-//     const toolTitle = toolSlug
-//       .split('-')
-//       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-//       .join(' ');
-
-//     document.title = `${toolTitle} \n toools.in`;
-
-//     let widgetContainer = document.getElementById('widget-container');
-//     if (!widgetContainer) {
-//       widgetContainer = document.createElement('div');
-//       widgetContainer.id = 'widget-container';
-//       widgetContainer.className = 'fade-in mt-12';
-//       document.querySelector('main').appendChild(widgetContainer);
-//     } else {
-//       widgetContainer.innerHTML = ''; // Clear previous widget
-//     }
-
-//     widgetContainer.innerHTML = `
-//       <div class="tool-container">
-//         <div id="iframe-loader" style="display:flex;align-items:center;justify-content:center;padding:4rem 0;">
-//           <span class="loader-text" style="font-weight:600;">Loading tool...</span>
-//         </div>
-//         <div id="tool-content" style="display:none;">
-//           <button id="back-to-tools" class="back-to-tools mb-4">⬅ Back to Tools</button>
-//           <div class="iframe-wrapper" style="position:relative;">
-//             <div id="iframe-container"></div>
-//           </div>
-//         </div>
-//       </div>
-//     `;
-
-//     // Delay for loader appearance
-//     setTimeout(() => {
-//       const script = document.createElement('script');
-//       script.src = `./${tool}/widget.js`;
-//       script.onload = () => {
-//         const loader = document.getElementById('iframe-loader');
-//         const content = document.getElementById('tool-content');
-//         if (loader) loader.remove();
-//         if (content) content.style.display = 'block';
-//       };
-//       script.onerror = () => {
-//         window.location.href = '/';
-//       };
-
-//       document.getElementById('iframe-container').appendChild(script);
-
-//       // Attach event listener to the now-inserted back button
-//       document.getElementById('back-to-tools').addEventListener('click', () => {
-//         widgetContainer.remove();
-//         history.pushState({}, '', '/');
-//         document.title = 'toools.in';
-//       });
-//     }, 300); // reduced delay for faster feedback
-//   });
-// });
-
-
-
-
-    // const toolMap = {
-    //     'password-generator': 'pwdgen',
-    //     'sip-calculator': 'clacpis',
-    //     'emi-calculator': 'emi',
-    //     'tax-calculator': 'tax',
-    //     'currency-converter': 'curr',
-    //     'compound-interest': 'ci',
-    //     // Add more mappings as needed
-    // };
-
-// window.addEventListener('DOMContentLoaded', () => {
-//   const slug = window.location.pathname.replace(/^\/+|\/+$/g, '');
-
-//   const toolId = toolMap[slug];
-
-//   if (toolId) {
-//     // simulate card click OR load directly
-//     const card = [...document.querySelectorAll('.tool-card')]
-//       .find(c => c.getAttribute('data-tool') === toolId);
-
-//     if (card) {
-//       card.click();
-//     } else {
-//       // load widget directly if no card exists
-//       loadToolById(slug, toolId);
-//     }
-//   } else if (slug) {
-//     // Invalid slug, redirect home
-//     window.location.href = '/';
-//   }
-// });
-
-// function loadToolById(toolSlug, toolId) {
-//   const toolTitle = toolSlug
-//     .split('-')
-//     .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-//     .join(' ');
-
-//   document.title = `${toolTitle} \n toools.in`;
-//   history.replaceState({ tool: toolSlug }, '', `/${toolSlug}`);
-
-//   let widgetContainer = document.getElementById('widget-container');
-//   if (!widgetContainer) {
-//     widgetContainer = document.createElement('div');
-//     widgetContainer.id = 'widget-container';
-//     widgetContainer.className = 'fade-in mt-12';
-//     document.querySelector('main').appendChild(widgetContainer);
-//   } else {
-//     widgetContainer.innerHTML = '';
-//   }
-
-//   widgetContainer.innerHTML = `
-//     <div class="tool-container">
-//       <div id="iframe-loader" style="display:flex;align-items:center;justify-content:center;padding:4rem 0;">
-//         <span class="loader-text" style="font-weight:600;">Loading tool...</span>
-//       </div>
-//       <div id="tool-content" style="display:none;">
-//         <button id="back-to-tools" class="back-to-tools mb-4">⬅ Back to Tools</button>
-//         <div class="iframe-wrapper" style="position:relative;">
-//           <div id="iframe-container"></div>
-//         </div>
-//       </div>
-//     </div>
-//   `;
-
-//   setTimeout(() => {
-//     const script = document.createElement('script');
-//     script.src = `./${toolId}/widget.js`;
-//     script.onload = () => {
-//       document.getElementById('iframe-loader')?.remove();
-//       document.getElementById('tool-content').style.display = 'block';
-//     };
-//     script.onerror = () => {
-//       window.location.href = '/';
-//     };
-//     document.getElementById('iframe-container').appendChild(script);
-
-//     document.getElementById('back-to-tools').addEventListener('click', () => {
-//       widgetContainer.remove();
-//       history.pushState({}, '', '/');
-//       document.title = 'toools.in';
-//     });
-//   }, 300);
-// }
-
-
-
-//         window.addEventListener('popstate', (event) => {
-//             const tool = event.state?.tool;
-//             if (tool) {
-//                 const card = [...document.querySelectorAll('.tool-card')]
-//                     .find(c => c.getAttribute('data-tool') === tool);
-//                 if (card) {
-//                     card.click();
-//                 } else {
-//                     window.location.href = '/';
-//                 }
-//             } else {
-//                 window.location.href = '/';
-//             }
-//         });
-
-
- document.addEventListener('DOMContentLoaded', () => {
-    const yearSpan = document.getElementById('footer-year');
-    const currentYear = new Date().getFullYear();
-    yearSpan.textContent = `© ${currentYear} toools.in. All rights reserved.`;
-  });
+        document.addEventListener('DOMContentLoaded', () => {
+            const yearSpan = document.getElementById('footer-year');
+            const currentYear = new Date().getFullYear();
+            yearSpan.textContent = `© ${currentYear} toools.in. All rights reserved.`;
+        });
 
 
     </script>
