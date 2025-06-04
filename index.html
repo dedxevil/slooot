@@ -483,7 +483,12 @@
                     <a href="#dev" class="nav-link text-lg font-medium">Dev</a>
                 </nav>
 
-                <div class="theme-toggle" id="themeToggle"></div>
+                                <div class="flex items-center space-x-2">
+                    <div class="theme-toggle" id="themeToggle"></div>
+                    <span id="themeIcon" class="w-5 h-5">
+                        <!-- Icon will be injected here -->
+                    </span>
+                </div>
             </div>
         </div>
     </header>
@@ -889,6 +894,8 @@
                 header.classList.add('bg-white');
             }
         }
+         const themeIcon = document.getElementById('themeIcon');
+        updateThemeIcon(savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
 
         themeToggle.addEventListener('click', () => {
             if (body.classList.contains('dark')) {
@@ -902,6 +909,8 @@
                 header.classList.add('bg-dark-bg');
                 localStorage.setItem('theme', 'dark');
             }
+            const newTheme = document.body.classList.contains('dark') ? 'light' : 'dark';
+            updateThemeIcon(newTheme);
         });
 
         // Intersection Observer for fade-in animations
@@ -955,7 +964,17 @@
             const currentYear = new Date().getFullYear();
             yearSpan.textContent = `© ${currentYear} toools.in. All rights reserved.`;
         });
-
+     function updateThemeIcon(theme) {
+            themeIcon.innerHTML = theme === 'dark'
+                ? `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+           d="M12 3v1m0 16v1m8.66-8.66l-.71.71M4.05 4.05l-.71.71M21 12h-1M4 12H3m16.95 4.95l-.71-.71M4.05 19.95l-.71-.71M12 5a7 7 0 100 14 7 7 0 000-14z" />
+       </svg>`
+                : `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-800 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+           d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
+       </svg>`;
+        }
 
     </script>
 </body>
