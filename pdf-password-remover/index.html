@@ -4,16 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Negative Marking Calculator</title>
+    <title>PDF Password Remover</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-  <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">📑</text></svg>'>
+    <link rel="icon"
+        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">📄</text></svg>'>
     <!-- SEO Meta Tags -->
-   
+
     <meta name="author" content="toools.in">
-<meta name="description" content="Use this free Negative Marking Calculator to accurately calculate your exam score with negative marking. Ideal for JEE, NEET, UPSC, SSC, and other competitive exams. Estimate total marks including deductions.">
-<meta name="keywords" content="Negative Marking Calculator, Competitive Exam Score Estimator, NEET Negative Marking, JEE Marks Calculator, UPSC Test Score, Online Test Score Calculator, SSC CGL Marking Tool, Exam Marks Deduction Tool">
+    <meta name="description"
+        content="Remove password from a PDF file instantly using this secure and free online tool. Unlock and download password-protected PDFs in one click. Works in your browser.">
+    <meta name="keywords"
+        content="PDF Password Remover, Unlock PDF, Remove PDF Password, Secure PDF Unlocker, Free PDF Tool, Decrypt PDF Online, PDF without Password, Unlock Encrypted PDF">
+
+
+
+
+    <!-- Chart.js CDN -->
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -461,6 +470,20 @@
         .logo-container:hover .logo-icon svg {
             transform: rotate(-10deg) scale(1.1);
         }
+
+        @keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.animate-slideIn {
+  animation: slideIn 0.3s ease-out;
+}
     </style>
 </head>
 
@@ -488,7 +511,7 @@
                     <a href="#dev" class="nav-link text-lg font-medium">Dev</a>
                 </nav>
 
-                                <div class="flex items-center space-x-2">
+                <div class="flex items-center space-x-2">
                     <div class="theme-toggle" id="themeToggle"></div>
                     <span id="themeIcon" class="w-5 h-5">
                         <!-- Icon will be injected here -->
@@ -500,64 +523,50 @@
 
     <main class="container mx-auto py-8">
 
-        
-        <section id="negative-marking-calculator" class="category-section fade-in">
-  <h2 class="text-3xl font-bold utility-header mb-8 text-center mx-auto">Negative Marking Calculator</h2>
+        <section id="pdf-password-remover" class="category-section fade-in">
+            <h2 class="text-3xl font-bold utility-header mb-8 text-center mx-auto">PDF Password Remover</h2>
 
-  <div class="card p-8 mb-12 max-w-4xl mx-auto shadow-lg space-y-6">
-    <div class="grid md:grid-cols-2 gap-6">
-      <div>
-        <label class="block font-medium mb-1">Number of Correct Answers</label>
-        <input type="number" id="correct-answers" class="w-full p-3 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-white" value="0" />
-      </div>
-      <div>
-        <label class="block font-medium mb-1">Number of Incorrect Answers</label>
-        <input type="number" id="incorrect-answers" class="w-full p-3 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-white" value="0" />
-      </div>
-      <div>
-        <label class="block font-medium mb-1">Marks per Correct Answer</label>
-        <input type="number" id="marks-per-correct" class="w-full p-3 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-white" value="0" />
-      </div>
-      <div>
-        <label class="block font-medium mb-1">Negative Marking Ratio</label>
-        <select id="negative-ratio" class="w-full p-3 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-white">
-          <option value="0.25">1/4</option>
-          <option value="0.33">1/3</option>
-          <option value="0.5" selected>1/2</option>
-          <option value="1">1</option>
-        </select>
-      </div>
-    </div>
+            <div class="card p-8 mb-12 max-w-4xl mx-auto shadow-lg space-y-6">
+                <input type="file" id="locked-pdf" accept="application/pdf"
+                    class="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-white" />
 
-   <button onclick="calculateNegativeMarking()" class="w-full py-3 rounded-md bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:shadow-lg transition">
-      Calculate Score
-    </button>
+                <input type="password" id="pdf-password" placeholder="Enter PDF Password"
+                    class="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-white" />
 
-    <div class="pt-4 border-t mt-6" id="negative-result" style="display: none;">
-      <h3 class="text-xl font-bold mb-2">Total Score: <span id="final-score" class="text-blue-600">0</span></h3>
-      <p class="text-sm text-gray-600 dark:text-gray-400">Marks from Correct: <span id="correct-marks"></span></p>
-      <p class="text-sm text-gray-600 dark:text-gray-400">Marks Deducted: <span id="deducted-marks"></span></p>
-    </div>
-  </div>
+                <button onclick="removePDFPassword()"
+                    class="w-full py-3 rounded-md bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:shadow-lg transition">
+                    Remove Password
+                </button>
 
-  <section class="max-w-3xl mx-auto my-16 px-4 text-lg leading-relaxed text-gray-700 dark:text-gray-400 mb-24">
-    <h3 class="text-2xl font-bold mb-4 text-center">How to Use the Negative Marking Calculator</h3>
-    <ul class="list-disc pl-5 space-y-3">
-      <li>Enter the number of correct answers you've attempted.</li>
-      <li>Enter the number of incorrect answers you’ve submitted.</li>
-      <li>Set the marks allotted for each correct answer.</li>
-      <li>Select the negative marking ratio used in your exam (e.g., 1/4, 1/3, 1/2).</li>
-      <li>Click <strong>Calculate Score</strong> to view your final score, total correct marks, and deducted marks.</li>
-    </ul>
+                <div id="pdf-remove-status"
+                    class="text-center text-green-600 dark:text-green-400 font-medium hidden mt-4">
+                    ✅ Password removed! Downloading unlocked PDF...
+                </div>
+                <div id="pdf-remove-error" class="text-center text-red-500 dark:text-red-400 font-medium hidden mt-4">
+                    ❌ Failed to unlock PDF. Please check the password.
+                </div>
+            </div>
 
-    <p class="mt-6">
-      This Negative Marking Calculator is useful for competitive exams like UPSC, SSC, CAT, NEET, JEE, and more where accuracy is crucial. Use it to assess your performance and optimize your test strategy.
-    </p>
-  </section>
-</section>
+            <section
+                class="max-w-3xl mx-auto my-16 px-4 text-lg leading-relaxed text-gray-700 dark:text-gray-400 mb-24">
+                <h3 class="text-2xl font-bold mb-4 text-center">How to Remove Password from a PDF</h3>
+                <ul class="list-disc pl-5 space-y-3">
+                    <li>Upload a password-protected PDF file.</li>
+                    <li>Enter the correct password used to open the file.</li>
+                    <li>Click <strong>Remove Password</strong>.</li>
+                    <li>The unlocked PDF will automatically download to your device.</li>
+                </ul>
+
+                <p class="mt-6">
+                    This PDF Password Remover tool helps you unlock PDF files directly in your browser. It's fast,
+                    private, and doesn't upload your file anywhere. Perfect for removing passwords from invoices,
+                    eBooks, contracts, and more.
+                </p>
+            </section>
+        </section>
 
 
-         <div id="tools-container"></div>
+        <div id="tools-container"></div>
 
     </main>
 
@@ -619,7 +628,7 @@
             }
         }
 
-         const themeIcon = document.getElementById('themeIcon');
+        const themeIcon = document.getElementById('themeIcon');
         updateThemeIcon(savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
 
         themeToggle.addEventListener('click', () => {
@@ -690,24 +699,66 @@
             yearSpan.textContent = `© ${currentYear} toools.in. All rights reserved.`;
         });
 
-function calculateNegativeMarking() {
-  const correct = parseInt(document.getElementById('correct-answers').value) || 0;
-  const incorrect = parseInt(document.getElementById('incorrect-answers').value) || 0;
-  const marksPerCorrect = parseFloat(document.getElementById('marks-per-correct').value) || 1;
-  const negativeRatio = parseFloat(document.getElementById('negative-ratio').value) || 0;
+        function showToast(message, type = 'success') {
+  const toast = document.createElement('div');
+  const color = type === 'success' ? 'bg-green-600' : 'bg-red-600';
 
-  const marksFromCorrect = correct * marksPerCorrect;
-  const marksDeducted = incorrect * (marksPerCorrect * negativeRatio);
-  const finalScore = marksFromCorrect - marksDeducted;
+  toast.className = `${color} text-white px-4 py-3 rounded shadow-md animate-slideIn`;
+  toast.textContent = message;
 
-  document.getElementById('final-score').textContent = finalScore.toFixed(2);
-  document.getElementById('correct-marks').textContent = marksFromCorrect.toFixed(2);
-  document.getElementById('deducted-marks').textContent = marksDeducted.toFixed(2);
-  document.getElementById('negative-result').style.display = 'block';
+  document.getElementById('toast-container').appendChild(toast);
+
+  setTimeout(() => {
+    toast.classList.add('opacity-0');
+    setTimeout(() => toast.remove(), 500);
+  }, 3000);
 }
 
+async function removePDFPassword() {
+  const fileInput = document.getElementById("locked-pdf");
+  const password = document.getElementById("pdf-password").value;
+  const file = fileInput.files[0];
 
-     function updateThemeIcon(theme) {
+  document.getElementById("pdf-remove-status").classList.add("hidden");
+  document.getElementById("pdf-remove-error").classList.add("hidden");
+
+  if (!file || !password) {
+    showToast("Please select a PDF and enter the password.", "error");
+    return;
+  }
+
+  try {
+    const reader = new FileReader();
+    reader.onload = async () => {
+      try {
+        const bytes = new Uint8Array(reader.result);
+        const pdfDoc = await PDFLib.PDFDocument.load(bytes, { password });
+
+        const saved = await pdfDoc.save();
+        const blob = new Blob([saved], { type: "application/pdf" });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+       const originalName = file.name.replace(/\.pdf$/i, "");
+a.download = `${originalName}_unlocked.pdf`;
+
+        a.click();
+
+        document.getElementById("pdf-remove-status").classList.remove("hidden");
+        showToast("✅ PDF unlocked successfully!");
+      } catch (err) {
+        document.getElementById("pdf-remove-error").classList.remove("hidden");
+        showToast("❌ Failed to unlock. Incorrect password?", "error");
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  } catch (e) {
+    showToast("Something went wrong while reading the PDF.", "error");
+  }
+}
+
+        function updateThemeIcon(theme) {
             themeIcon.innerHTML = theme === 'dark'
                 ? `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -720,7 +771,8 @@ function calculateNegativeMarking() {
         }
 
     </script>
-     <script src="../sloot-content.js"></script>
+    <script src="../sloot-content.js"></script>
+    <div id="toast-container" class="fixed bottom-6 right-6 space-y-2 z-50"></div>
 </body>
 
 </html>

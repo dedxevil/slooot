@@ -4,16 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Negative Marking Calculator</title>
+    <title>Online PDF Merger tool</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-  <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">📑</text></svg>'>
+    <link rel="icon"
+        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">📄</text></svg>'>
     <!-- SEO Meta Tags -->
-   
+
     <meta name="author" content="toools.in">
-<meta name="description" content="Use this free Negative Marking Calculator to accurately calculate your exam score with negative marking. Ideal for JEE, NEET, UPSC, SSC, and other competitive exams. Estimate total marks including deductions.">
-<meta name="keywords" content="Negative Marking Calculator, Competitive Exam Score Estimator, NEET Negative Marking, JEE Marks Calculator, UPSC Test Score, Online Test Score Calculator, SSC CGL Marking Tool, Exam Marks Deduction Tool">
+    <meta name="description"
+        content="Use this free online PDF Merger tool to combine multiple PDF files instantly. Merge documents securely in your browser without uploading. Fast, private, and easy-to-use.">
+    <meta name="keywords"
+        content="PDF Merger, Merge PDF Online, Combine PDF Files, Free PDF Tool, Join PDFs, Secure PDF Merger, Client-side PDF Merge, Offline PDF Merger, PDF Combiner, Merge PDFs Without Uploading">
+
+
+
+    <!-- Chart.js CDN -->
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -488,7 +496,7 @@
                     <a href="#dev" class="nav-link text-lg font-medium">Dev</a>
                 </nav>
 
-                                <div class="flex items-center space-x-2">
+                <div class="flex items-center space-x-2">
                     <div class="theme-toggle" id="themeToggle"></div>
                     <span id="themeIcon" class="w-5 h-5">
                         <!-- Icon will be injected here -->
@@ -500,64 +508,46 @@
 
     <main class="container mx-auto py-8">
 
-        
-        <section id="negative-marking-calculator" class="category-section fade-in">
-  <h2 class="text-3xl font-bold utility-header mb-8 text-center mx-auto">Negative Marking Calculator</h2>
+        <section id="pdf-merger" class="category-section fade-in">
+            <h2 class="text-3xl font-bold utility-header mb-8 text-center mx-auto">PDF Merger</h2>
 
-  <div class="card p-8 mb-12 max-w-4xl mx-auto shadow-lg space-y-6">
-    <div class="grid md:grid-cols-2 gap-6">
-      <div>
-        <label class="block font-medium mb-1">Number of Correct Answers</label>
-        <input type="number" id="correct-answers" class="w-full p-3 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-white" value="0" />
-      </div>
-      <div>
-        <label class="block font-medium mb-1">Number of Incorrect Answers</label>
-        <input type="number" id="incorrect-answers" class="w-full p-3 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-white" value="0" />
-      </div>
-      <div>
-        <label class="block font-medium mb-1">Marks per Correct Answer</label>
-        <input type="number" id="marks-per-correct" class="w-full p-3 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-white" value="0" />
-      </div>
-      <div>
-        <label class="block font-medium mb-1">Negative Marking Ratio</label>
-        <select id="negative-ratio" class="w-full p-3 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-white">
-          <option value="0.25">1/4</option>
-          <option value="0.33">1/3</option>
-          <option value="0.5" selected>1/2</option>
-          <option value="1">1</option>
-        </select>
-      </div>
-    </div>
+            <div class="card p-8 mb-12 max-w-4xl mx-auto shadow-lg space-y-6">
+                <input type="file" id="pdf-files" multiple accept="application/pdf"
+                    class="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-white" />
 
-   <button onclick="calculateNegativeMarking()" class="w-full py-3 rounded-md bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:shadow-lg transition">
-      Calculate Score
-    </button>
+                <div id="file-list" class="text-sm text-gray-600 dark:text-gray-400"></div>
 
-    <div class="pt-4 border-t mt-6" id="negative-result" style="display: none;">
-      <h3 class="text-xl font-bold mb-2">Total Score: <span id="final-score" class="text-blue-600">0</span></h3>
-      <p class="text-sm text-gray-600 dark:text-gray-400">Marks from Correct: <span id="correct-marks"></span></p>
-      <p class="text-sm text-gray-600 dark:text-gray-400">Marks Deducted: <span id="deducted-marks"></span></p>
-    </div>
-  </div>
+                <button onclick="mergePDFs()"
+                    class="w-full py-3 rounded-md bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:shadow-lg transition">
+                    Merge PDFs
+                </button>
 
-  <section class="max-w-3xl mx-auto my-16 px-4 text-lg leading-relaxed text-gray-700 dark:text-gray-400 mb-24">
-    <h3 class="text-2xl font-bold mb-4 text-center">How to Use the Negative Marking Calculator</h3>
-    <ul class="list-disc pl-5 space-y-3">
-      <li>Enter the number of correct answers you've attempted.</li>
-      <li>Enter the number of incorrect answers you’ve submitted.</li>
-      <li>Set the marks allotted for each correct answer.</li>
-      <li>Select the negative marking ratio used in your exam (e.g., 1/4, 1/3, 1/2).</li>
-      <li>Click <strong>Calculate Score</strong> to view your final score, total correct marks, and deducted marks.</li>
-    </ul>
+                <div id="pdf-merge-status"
+                    class="text-center text-green-600 dark:text-green-400 font-medium hidden mt-4">
+                    ✅ Merged PDF ready! Downloading...
+                </div>
+            </div>
 
-    <p class="mt-6">
-      This Negative Marking Calculator is useful for competitive exams like UPSC, SSC, CAT, NEET, JEE, and more where accuracy is crucial. Use it to assess your performance and optimize your test strategy.
-    </p>
-  </section>
-</section>
+            <section
+                class="max-w-3xl mx-auto my-16 px-4 text-lg leading-relaxed text-gray-700 dark:text-gray-400 mb-24">
+                <h3 class="text-2xl font-bold mb-4 text-center">How to Use the PDF Merger Tool</h3>
+                <ul class="list-disc pl-5 space-y-3">
+                    <li>Select two or more PDF files from your device.</li>
+                    <li>Click the <strong>Merge PDFs</strong> button.</li>
+                    <li>The tool will combine them in the order you selected.</li>
+                    <li>Your merged PDF will automatically download to your device.</li>
+                </ul>
+
+                <p class="mt-6">
+                    This free PDF Merger tool helps you combine multiple PDF documents quickly and securely. Whether
+                    it's merging reports, study materials, invoices, or scanned pages — it's all done client-side with
+                    no file uploads, ensuring privacy and speed.
+                </p>
+            </section>
+        </section>
 
 
-         <div id="tools-container"></div>
+        <div id="tools-container"></div>
 
     </main>
 
@@ -619,7 +609,7 @@
             }
         }
 
-         const themeIcon = document.getElementById('themeIcon');
+        const themeIcon = document.getElementById('themeIcon');
         updateThemeIcon(savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
 
         themeToggle.addEventListener('click', () => {
@@ -690,24 +680,42 @@
             yearSpan.textContent = `© ${currentYear} toools.in. All rights reserved.`;
         });
 
-function calculateNegativeMarking() {
-  const correct = parseInt(document.getElementById('correct-answers').value) || 0;
-  const incorrect = parseInt(document.getElementById('incorrect-answers').value) || 0;
-  const marksPerCorrect = parseFloat(document.getElementById('marks-per-correct').value) || 1;
-  const negativeRatio = parseFloat(document.getElementById('negative-ratio').value) || 0;
+        async function mergePDFs() {
+            const input = document.getElementById("pdf-files");
+            const files = input.files;
+            if (files.length < 2) {
+                alert("Please select at least two PDF files to merge.");
+                return;
+            }
 
-  const marksFromCorrect = correct * marksPerCorrect;
-  const marksDeducted = incorrect * (marksPerCorrect * negativeRatio);
-  const finalScore = marksFromCorrect - marksDeducted;
+            const mergedPdf = await PDFLib.PDFDocument.create();
 
-  document.getElementById('final-score').textContent = finalScore.toFixed(2);
-  document.getElementById('correct-marks').textContent = marksFromCorrect.toFixed(2);
-  document.getElementById('deducted-marks').textContent = marksDeducted.toFixed(2);
-  document.getElementById('negative-result').style.display = 'block';
-}
+            for (let file of files) {
+                const bytes = await file.arrayBuffer();
+                const pdf = await PDFLib.PDFDocument.load(bytes);
+                const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+                copiedPages.forEach((page) => mergedPdf.addPage(page));
+            }
 
+            const mergedPdfBytes = await mergedPdf.save();
+            const blob = new Blob([mergedPdfBytes], { type: "application/pdf" });
+            const url = URL.createObjectURL(blob);
 
-     function updateThemeIcon(theme) {
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "merged.pdf";
+            a.click();
+
+            document.getElementById("pdf-merge-status").classList.remove("hidden");
+        }
+
+        // Optional: list selected files
+        document.getElementById("pdf-files").addEventListener("change", function () {
+            const list = Array.from(this.files).map(f => `📄 ${f.name}`).join("<br>");
+            document.getElementById("file-list").innerHTML = list;
+        });
+
+        function updateThemeIcon(theme) {
             themeIcon.innerHTML = theme === 'dark'
                 ? `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -720,7 +728,7 @@ function calculateNegativeMarking() {
         }
 
     </script>
-     <script src="../sloot-content.js"></script>
+    <script src="../sloot-content.js"></script>
 </body>
 
 </html>
