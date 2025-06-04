@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPI Payment Link Generator | Create UPI QR Code & Deep Links Instantly | Toools</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="icon"
+        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">🪙</text></svg>'>
+
+    <!-- SEO Meta Tags -->
+
+
+    <meta name="description"
+        content="Generate UPI payment links and QR codes instantly with our free UPI Payment Link Generator. Perfect for freelancers, small businesses, and digital payments. Supports Google Pay, PhonePe, Paytm, BHIM and more.">
+
+    <!-- SEO Keywords -->
+    <meta name="keywords"
+        content="UPI Payment Link Generator, UPI QR Code Generator, Create UPI Links, UPI Deep Link Generator, UPI for Freelancers, UPI for Small Business, UPI Payment Tool, UPI QR Code for Google Pay, PhonePe UPI Link, Paytm UPI QR, BHIM UPI Payment, UPI Donation Link, UPI Invoice Tool, UPI Payment Request Generator, UPI Payment Gateway Alternative, UPI Payment Integration, UPI Payment for Website, UPI Payment for WhatsApp, UPI Payment for Instagram, UPI Payment for Social Media, UPI Payment for NGOs, UPI Payment for Creators, UPI Payment for India, UPI Payment App Support, UPI Payment without App, UPI Payment without Account Number, UPI Payment without IFSC, UPI Payment without Bank Details">
+
+    <meta name="author" content="toools.in">
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #6d28d9;
+            --secondary: #4f46e5;
+            --accent: #8b5cf6;
+            --dark-bg: #121212;
+            --dark-card: #1e1e1e;
+            --light-bg: #f8fafc;
+            --light-card: #ffffff;
+
+            /* Tool icon colors */
+            --finance-color-1: #6d28d9;
+            --finance-color-2: #4f46e5;
+            --social-color-1: #ec4899;
+            --social-color-2: #db2777;
+            --utility-color-1: #0ea5e9;
+            --utility-color-2: #0284c7;
+            --fun-color-1: #f59e0b;
+            --fun-color-2: #d97706;
+            --dev-color-1: #10b981;
+            --dev-color-2: #059669;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .dark {
+            background-color: var(--dark-bg);
+            color: #f1f5f9;
+        }
+
+        .light {
+            background-color: var(--light-bg);
+            color: #1e293b;
+        }
+
+        .card {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .dark .card {
+            background-color: var(--dark-card);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .light .card {
+            background-color: var(--light-card);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(109, 40, 217, 0.3);
+        }
+
+        .tool-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            color: white;
+            font-size: 20px;
+        }
+
+        .finance-icon {
+            background: linear-gradient(135deg, var(--finance-color-1), var(--finance-color-2));
+        }
+
+        .social-icon {
+            background: linear-gradient(135deg, var(--social-color-1), var(--social-color-2));
+        }
+
+        .utility-icon {
+            background: linear-gradient(135deg, var(--utility-color-1), var(--utility-color-2));
+        }
+
+        .fun-icon {
+            background: linear-gradient(135deg, var(--fun-color-1), var(--fun-color-2));
+        }
+
+        .dev-icon {
+            background: linear-gradient(135deg, var(--dev-color-1), var(--dev-color-2));
+        }
+
+        .category-header {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .category-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            border-radius: 2px;
+        }
+
+        .finance-header::after {
+            background: linear-gradient(90deg, var(--finance-color-1), var(--finance-color-2));
+        }
+
+        .social-header::after {
+            background: linear-gradient(90deg, var(--social-color-1), var(--social-color-2));
+        }
+
+        .utility-header::after {
+            background: linear-gradient(90deg, var(--utility-color-1), var(--utility-color-2));
+        }
+
+        .fun-header::after {
+            background: linear-gradient(90deg, var(--fun-color-1), var(--fun-color-2));
+        }
+
+        .dev-header::after {
+            background: linear-gradient(90deg, var(--dev-color-1), var(--dev-color-2));
+        }
+
+        .logo-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .dark .logo-text {
+            color: #ffffff;
+        }
+
+        .light .logo-text {
+            color: #6d28d9;
+        }
+
+        .logo-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
+        }
+
+        .dark .logo-icon {
+            color: #ffffff;
+        }
+
+        .light .logo-icon {
+            color: #6d28d9;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            width: 50px;
+            height: 26px;
+            border-radius: 13px;
+            background-color: #6d28d9;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        .light .theme-toggle::after {
+            transform: translateX(24px);
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .category-section {
+            scroll-margin-top: 100px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* Equal spacing fix */
+        .container {
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+
+        /* Footer styles */
+        footer {
+            border-top: 1px solid;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            position: static;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .dark footer {
+            border-color: #2d2d2d;
+        }
+
+        .light footer {
+            border-color: #e2e8f0;
+        }
+
+        /* Embed code styles */
+        .embed-code-container {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .dark .embed-code-container {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .light .embed-code-container {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .embed-code {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            margin-bottom: 1rem;
+        }
+
+        .dark .embed-code {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #e2e8f0;
+        }
+
+        .light .embed-code {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: #1e293b;
+        }
+
+        .copy-embed-btn {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-embed-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(109, 40, 217, 0.3);
+        }
+
+        /* Guide section styles */
+        .guide-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            border-radius: 16px;
+        }
+
+        .dark .guide-section {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .light .guide-section {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .guide-step {
+            display: flex;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--utility-color-1), var(--utility-color-2));
+            color: white;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        /* Embeddable tool styles */
+        .tooolsin-embed {
+            font-family: 'Outfit', sans-serif;
+            max-width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .tooolsin-embed.dark {
+            background-color: var(--dark-card);
+            color: #f1f5f9;
+        }
+
+        .tooolsin-embed.light {
+            background-color: var(--light-card);
+            color: #1e293b;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .logo-icon svg {
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes fadeInSlide {
+            0% {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .logo-text {
+            animation: fadeInSlide 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .logo-icon svg {
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover .logo-icon svg {
+            transform: rotate(-10deg) scale(1.1);
+        }
+    </style>
+</head>
+
+<body class="dark min-h-screen">
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-opacity-80 dark:bg-opacity-80" id="header">
+        <div class="container mx-auto py-4 flex justify-between items-center">
+            <a href="/" class="logo-container" id="logo-link">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-8 h-8">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
+                    </svg>
+                </div>
+                <h1 class="logo-text" id="site-title">Toools</h1>
+            </a>
+
+
+            <div class="flex items-center space-x-6">
+                <nav class="hidden md:flex space-x-6" id="main-nav">
+                    <a href="#finance" class="nav-link text-lg font-medium">Finance</a>
+                    <a href="#social" class="nav-link text-lg font-medium">Social</a>
+                    <a href="#utility" class="nav-link text-lg font-medium">Utility</a>
+                    <a href="#fun" class="nav-link text-lg font-medium">Fun</a>
+                    <a href="#dev" class="nav-link text-lg font-medium">Dev</a>
+                </nav>
+
+                <div class="theme-toggle" id="themeToggle"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto py-8">
+
+        </div>
+        <section id="upi-link-generator" class="category-section fade-in mt-16">
+            <h2 class="text-3xl font-bold finance-header mb-8 text-center mx-auto">UPI Payment Link Generator</h2>
+
+            <div class="mb-4">
+                <label for="upi-id" class="block mb-1 font-medium">UPI ID (e.g., name@bank):</label>
+                <input type="text" id="upi-id"
+                    class="w-full p-2 rounded border border-gray-300 bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600"
+                    placeholder="yourname@upi" />
+            </div>
+
+            <div class="mb-4">
+                <label for="upi-amount" class="block mb-1 font-medium">Amount (optional):</label>
+                <input type="number" id="upi-amount"
+                    class="w-full p-2 rounded border border-gray-300 bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600"
+                    placeholder="100.00" />
+            </div>
+
+            <div class="mb-4">
+                <label for="upi-note" class="block mb-1 font-medium">Note (optional):</label>
+                <input type="text" id="upi-note"
+                    class="w-full p-2 rounded border border-gray-300 bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600"
+                    placeholder="Payment for services" />
+            </div>
+
+            <div class="mb-6">
+                <button onclick="generateUPILink()"
+                    class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition">Generate UPI
+                    Link</button>
+            </div>
+
+            <div id="upi-result" class="mb-6"></div>
+            <div id="upi-qrcode" class="flex justify-center mb-6"></div>
+
+            <div class="flex justify-center space-x-4">
+                <button id="copyUPILinkBtn"
+                    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition hidden">Copy
+                    Link</button>
+                <button id="downloadUPIQRBtn"
+                    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition hidden">Download QR
+                    Code</button>
+            </div>
+        </section>
+        <section
+            class="max-w-3xl mx-auto my-16 px-4 text-lg leading-relaxed text-gray-700 dark:text-gray-500 mb-24 guide-section">
+            <h3 class="text-2xl font-bold mb-4 text-center">How to Use the UPI Payment Link Generator</h3>
+            <ul class="list-disc pl-5 space-y-3">
+                <li>Enter your <strong>UPI ID</strong> (e.g., <code>yourname@bank</code>) in the input field. This is
+                    your unique identifier for receiving UPI payments.</li>
+                <li>Optionally, enter the <strong>amount</strong> you want to request and a <strong>note or
+                        message</strong> to describe the purpose of the payment.</li>
+                <li>Click the <strong>Generate UPI Link</strong> button to instantly create a secure <strong>UPI payment
+                        link</strong>.</li>
+                <li>The tool will also generate a <strong>QR code for UPI payment</strong> that users can scan using any
+                    UPI-enabled app like Google Pay, PhonePe, Paytm, or BHIM.</li>
+                <li>Use the <strong>Copy Link</strong> button to copy the UPI link to your clipboard for easy sharing
+                    via WhatsApp, SMS, or email.</li>
+                <li>Click <strong>Download QR Code</strong> to save the QR image for printing or embedding on websites,
+                    invoices, or receipts.</li>
+                <li>Ensure your UPI ID is valid and active to receive payments without issues.</li>
+            </ul>
+
+            <p class="mt-6">
+                This free <strong>UPI Payment Link Generator</strong> is ideal for freelancers, small businesses, NGOs,
+                and anyone who wants to collect payments online without sharing bank account details. It supports all
+                major UPI apps and is optimized for fast, secure, and contactless transactions. Whether you're
+                collecting donations, selling products, or requesting service payments, this tool simplifies digital
+                payments with <strong>UPI QR codes</strong> and <strong>UPI deep links</strong>.
+            </p>
+        </section>
+
+        <!-- Home Content -->
+        <div id="tools-container"></div>
+    </main>
+
+    <footer class="py-8 border-t border-gray-800 dark:border-gray-700">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="/" class="logo-container">
+                        <div class="logo-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
+                            </svg>
+                        </div>
+                        <h2 class="logo-text text-xl">toools.in</h2>
+                    </a>
+                    <p class="mt-2 opacity-70">A collection of useful web tools.</p>
+                </div>
+
+                <div class="text-center md:text-right">
+                    <p class="opacity-70">
+                        Built with ⌛️ by
+                        <a href="https://17x.in" target="_blank" rel="noopener noreferrer"
+                            class="underline hover:text-purple-400 transition-colors">
+                            17x
+                        </a>
+                    </p>
+                    <p class="mt-2 opacity-50" id="footer-year">© toools.in. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="copy-toast"
+        class="fixed bottom-6 right-6 bg-green-500 text-white px-4 py-2 rounded shadow-lg opacity-0 pointer-events-none transition-opacity duration-300">
+        Link copied to clipboard!
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const header = document.getElementById('header');
+        const siteTitle = document.getElementById('site-title');
+
+        const logoLink = document.getElementById('logo-link');
+        const mainNav = document.getElementById('main-nav');
+
+        // Check for saved theme preference or use preferred color scheme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            body.className = savedTheme;
+            header.classList.toggle('bg-white', savedTheme === 'light');
+            header.classList.toggle('bg-dark-bg', savedTheme === 'dark');
+        } else {
+            // Use prefers-color-scheme as a fallback
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                body.className = 'dark';
+                header.classList.add('bg-dark-bg');
+            } else {
+                body.className = 'light';
+                header.classList.add('bg-white');
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark')) {
+                body.classList.replace('dark', 'light');
+                header.classList.remove('bg-dark-bg');
+                header.classList.add('bg-white');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.replace('light', 'dark');
+                header.classList.remove('bg-white');
+                header.classList.add('bg-dark-bg');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(element);
+        });
+
+        // Active nav link highlighting
+        const sections = document.querySelectorAll('.category-section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function highlightNavLink() {
+            let current = '';
+            let scrollPosition = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightNavLink);
+        window.addEventListener('load', highlightNavLink);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const yearSpan = document.getElementById('footer-year');
+            const currentYear = new Date().getFullYear();
+            yearSpan.textContent = `© ${currentYear} toools.in. All rights reserved.`;
+        });
+
+        function generateUPILink() {
+            const upiId = document.getElementById('upi-id').value.trim();
+            const amount = document.getElementById('upi-amount').value.trim();
+            const note = document.getElementById('upi-note').value.trim();
+            const result = document.getElementById('upi-result');
+            const qrContainer = document.getElementById('upi-qrcode');
+
+
+            const upiRegex = /^[\w.-]+@[\w.-]+$/;
+
+            if (!upiId || !upiRegex.test(upiId)) {
+                result.innerHTML = "<p class='text-red-500'>Please enter a valid UPI ID (e.g., name@bank).</p>";
+                qrContainer.innerHTML = "";
+                return;
+            }
+
+
+
+            let link = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=Recipient`;
+            if (amount) link += `&am=${encodeURIComponent(amount)}`;
+            if (note) link += `&tn=${encodeURIComponent(note)}`;
+
+            result.innerHTML = `
+      <p class="mb-2 font-medium">Here is your UPI payment link:</p>
+      <a href="${link}" target="_blank" class="text-green-600 underline break-all">${link}</a>
+    `;
+
+            qrContainer.innerHTML = "";
+            QRCode.toCanvas(document.createElement("canvas"), link, { width: 200 }, function (error, canvas) {
+                if (error) {
+                    console.error(error);
+                    return;
+                }
+                qrContainer.appendChild(canvas);
+            });
+
+            // Show buttons
+            document.getElementById("copyUPILinkBtn").classList.remove("hidden");
+            document.getElementById("downloadUPIQRBtn").classList.remove("hidden");
+
+            // Copy link
+            document.getElementById("copyUPILinkBtn").onclick = function () {
+                navigator.clipboard.writeText(link).then(() => {
+                    const toast = document.getElementById('upi-copy-toast');
+                    toast.classList.remove('opacity-0', 'pointer-events-none');
+                    toast.classList.add('opacity-100');
+
+                    setTimeout(() => {
+                        toast.classList.remove('opacity-100');
+                        toast.classList.add('opacity-0', 'pointer-events-none');
+                    }, 3000);
+                }).catch(err => {
+                    console.error("Failed to copy link: ", err);
+                });
+            };
+
+
+            // Download QR
+            document.getElementById("downloadUPIQRBtn").onclick = function () {
+                const canvas = qrContainer.querySelector("canvas");
+                if (canvas) {
+                    const a = document.createElement("a");
+                    a.href = canvas.toDataURL("image/png");
+                    a.download = "upi_qr_code.png";
+                    a.click();
+                }
+            };
+        }
+
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('dark');
+        }
+
+
+    </script>
+    <script src="../sloot-content.js"></script>
+    <div id="upi-copy-toast"
+        class="fixed bottom-6 right-6 bg-green-500 text-white px-4 py-2 rounded shadow-lg opacity-0 pointer-events-none transition-opacity duration-300">
+        Link copied to clipboard!
+    </div>
+
+</body>
+
+</html>
