@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online PDF Merger tool</title>
+    <title>PDF Page Numbering Tool | Add page numbers to your PDF documents instantly.</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -13,16 +13,16 @@
     <!-- SEO Meta Tags -->
 
     <meta name="author" content="toools.in">
-    <meta name="description"
-        content="Use this free online PDF Merger tool to combine multiple PDF files instantly. Merge documents securely in your browser without uploading. Fast, private, and easy-to-use.">
-    <meta name="keywords"
-        content="PDF Merger, Merge PDF Online, Combine PDF Files, Free PDF Tool, Join PDFs, Secure PDF Merger, Client-side PDF Merge, Offline PDF Merger, PDF Combiner, Merge PDFs Without Uploading">
+<meta name="description" content="Add page numbers to your PDF files with customizable style and position. Drag & drop support. Secure, private, and fully in-browser.">
+<meta name="keywords" content="Add Page Numbers to PDF, PDF Page Numbering, Free PDF Tools, PDF Number Position, Client-side PDF Editor, Insert Page Number, Numbered PDF Generator, Offline PDF Tools">
+
+
 
 
 
     <!-- Chart.js CDN -->
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
@@ -508,51 +508,66 @@
 
     <main class="container mx-auto py-8">
 
-        <section id="pdf-merger" class="category-section fade-in">
-            <h2 class="text-3xl font-bold utility-header mb-8 text-center mx-auto">PDF Merger</h2>
+<section id="pdf-add-page-numbers" class="category-section fade-in">
+  <h2 class="text-3xl font-bold utility-header mb-8 text-center mx-auto">Add Page Numbers to PDF</h2>
 
-            <div class="card p-8 mb-12 max-w-4xl mx-auto shadow-lg space-y-6">
-  <!-- Drag & Drop Upload -->
-  <div id="merge-drop-zone" class="w-full border-2 border-dashed border-gray-400 dark:border-gray-600 rounded-md p-6 text-center cursor-pointer transition hover:border-purple-600">
-    <p class="text-gray-600 dark:text-gray-300">Drag & drop your PDF files here, or click to select</p>
-    <input type="file" id="pdf-files" accept="application/pdf" multiple class="hidden" />
+  <div class="card p-8 mb-12 max-w-4xl mx-auto shadow-lg space-y-6">
+    <!-- Drag & Drop -->
+    <div id="drop-zone" class="w-full border-2 border-dashed border-gray-400 dark:border-gray-600 rounded-md p-6 text-center cursor-pointer transition hover:border-purple-600">
+      <p class="text-gray-600 dark:text-gray-300">Drag & drop your PDF here, or click to select a file</p>
+      <input type="file" id="pdf-to-number" accept="application/pdf" class="hidden" />
+    </div>
+
+    <!-- Number Style -->
+    <div>
+      <label class="block font-medium mb-1">Page Number Style</label>
+      <select id="page-number-style"
+        class="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-white">
+        <option value="plain">1</option>
+        <option value="page-x">Page 1</option>
+        <option value="page-x-of-y">Page 1 of 10</option>
+      </select>
+    </div>
+
+    <!-- Location -->
+    <div>
+      <label class="block font-medium mb-1">Page Number Location</label>
+      <select id="page-number-position"
+        class="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-white">
+        <option value="bottom-center">Bottom Center</option>
+        <option value="bottom-left">Bottom Left</option>
+        <option value="bottom-right">Bottom Right</option>
+        <option value="top-left">Top Left</option>
+        <option value="top-center">Top Center</option>
+        <option value="top-right">Top Right</option>
+      </select>
+    </div>
+
+    <button onclick="addPageNumbers()"
+      class="w-full py-3 rounded-md bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:shadow-lg transition">
+      Add Page Numbers
+    </button>
   </div>
 
-  <!-- File List with Reorder -->
-  <div id="file-list" class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-    <!-- List of files will be shown here -->
-  </div>
 
-  <button onclick="mergePDFs()"
-    class="w-full py-3 rounded-md bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:shadow-lg transition">
-    Merge PDFs
-  </button>
-</div>
-
-
-            <section
-                class="max-w-3xl mx-auto my-16 px-4 text-lg leading-relaxed text-gray-700 dark:text-gray-400 mb-24">
-                <h3 class="text-2xl font-bold mb-4 text-center">How to Use the PDF Merger Tool</h3>
-                <ul class="list-disc pl-5 space-y-3">
-                    <li>Select two or more PDF files from your device.</li>
-                    <li>Click the <strong>Merge PDFs</strong> button.</li>
-                    <li>The tool will combine them in the order you selected.</li>
-                    <li>Your merged PDF will automatically download to your device.</li>
-                     <li>Need to add page numbers to your PDFs? Use our <a href="/page-numbers-pdfs" class="text-purple-600 underline hover:text-purple-400">PDF Numbering Tool</a>.</li>
+<section class="max-w-3xl mx-auto my-16 px-4 text-lg leading-relaxed text-gray-700 dark:text-gray-400 mb-24">
+  <h3 class="text-2xl font-bold mb-4 text-center">How to Use the Page Numbering Tool</h3>
+  <ul class="list-disc pl-5 space-y-3">
+    <li>Select a PDF file you want to number.</li>
+    <li>Choose the position: top or bottom of each page.</li>
+    <li>Click <strong>Add Page Numbers</strong> and the modified PDF will download automatically.</li>
+    <li>Need to combine PDFs first? Use our <a href="/merge-pdfs" class="text-purple-600 underline hover:text-purple-400">PDF Merger</a>.</li>
     <li>Want to split a PDF into individual pages? Try the <a href="/split-pdfs" class="text-purple-600 underline hover:text-purple-400">PDF Splitter</a>.</li>
     <li>Locked PDF? Use our <a href="/pdf-password-remover" class="text-purple-600 underline hover:text-purple-400">Password Remover</a>.</li>
-                </ul>
+  </ul>
 
-                <p class="mt-6">
-                    This free PDF Merger tool helps you combine multiple PDF documents quickly and securely. Whether
-                    it's merging reports, study materials, invoices, or scanned pages — it's all done client-side with
-                    no file uploads, ensuring privacy and speed.
-                </p>
-                <p class="mt-6">
+  <p class="mt-6">
     This tool works entirely in your browser. Your file is <strong>never uploaded</strong> to any server, ensuring full privacy and security.
   </p>
-            </section>
-        </section>
+</section>
+
+</section>
+
 
 
         <div id="tools-container"></div>
@@ -688,28 +703,26 @@
             yearSpan.textContent = `© ${currentYear} toools.in. All rights reserved.`;
         });
 
-                function showToast(message, type = 'success') {
-  const toast = document.createElement('div');
-  const color = type === 'success' ? 'bg-green-600' : 'bg-red-600';
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            const color = type === 'success' ? 'bg-green-600' : 'bg-red-600';
 
-  toast.className = `${color} text-white px-4 py-3 rounded shadow-md animate-slideIn`;
-  toast.textContent = message;
+            toast.className = `${color} text-white px-4 py-3 rounded shadow-md animate-slideIn`;
+            toast.textContent = message;
 
-  document.getElementById('toast-container').appendChild(toast);
+            document.getElementById('toast-container').appendChild(toast);
 
-  setTimeout(() => {
-    toast.classList.add('opacity-0');
-    setTimeout(() => toast.remove(), 500);
-  }, 3000);
-}
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
 
-let mergeSelectedFiles = [];
+// Drag-and-drop setup
+const dropZone = document.getElementById("drop-zone");
+const fileInput = document.getElementById("pdf-to-number");
+let selectedFile = null;
 
-const dropZone = document.getElementById("merge-drop-zone");
-const fileInput = document.getElementById("pdf-files");
-const fileListContainer = document.getElementById("file-list");
-
-// Drag & Drop Events
 dropZone.addEventListener("click", () => fileInput.click());
 
 dropZone.addEventListener("dragover", e => {
@@ -724,83 +737,102 @@ dropZone.addEventListener("dragleave", () => {
 dropZone.addEventListener("drop", e => {
   e.preventDefault();
   dropZone.classList.remove("border-purple-600");
+  const files = e.dataTransfer.files;
 
-  const files = Array.from(e.dataTransfer.files).filter(f => f.type === "application/pdf");
-  if (files.length === 0) {
-    showToast("Only PDF files are allowed.", "error");
+  if (files.length !== 1 || files[0].type !== "application/pdf") {
+    showToast("Please drop exactly one valid PDF file.", "error");
     return;
   }
 
-  mergeSelectedFiles.push(...files);
-  renderMergeFileList();
+  selectedFile = files[0];
+  showToast(`✅ Selected: ${selectedFile.name}`);
 });
 
 fileInput.addEventListener("change", () => {
-  const files = Array.from(fileInput.files).filter(f => f.type === "application/pdf");
-  if (files.length === 0) {
-    showToast("Only PDF files are allowed.", "error");
+  if (fileInput.files.length !== 1 || fileInput.files[0].type !== "application/pdf") {
+    showToast("Please select exactly one valid PDF file.", "error");
+    selectedFile = null;
     return;
   }
-
-  mergeSelectedFiles.push(...files);
-  renderMergeFileList();
+  selectedFile = fileInput.files[0];
+  showToast(`✅ Selected: ${selectedFile.name}`);
 });
 
-// Render sortable file list
-function renderMergeFileList() {
-  fileListContainer.innerHTML = mergeSelectedFiles.map((file, index) => `
-    <div class="bg-gray-100 dark:bg-gray-800 rounded px-4 py-2 flex items-center justify-between drag-item" data-index="${index}">
-      <span>📄 ${file.name}</span>
-      <span class="cursor-move text-gray-400 hover:text-purple-400">↕</span>
-    </div>
-  `).join("");
-
-  Sortable.create(fileListContainer, {
-    animation: 150,
-    onEnd: evt => {
-      const movedItem = mergeSelectedFiles.splice(evt.oldIndex, 1)[0];
-      mergeSelectedFiles.splice(evt.newIndex, 0, movedItem);
-      renderMergeFileList(); // refresh the UI with new order
-    }
-  });
-
-  showToast(`${mergeSelectedFiles.length} file(s) ready to merge`);
-}
-
-// Merge PDFs in selected order
-async function mergePDFs() {
-  if (mergeSelectedFiles.length < 2) {
-    showToast("Select at least two PDF files to merge.", "error");
+// Add page numbers with options
+async function addPageNumbers() {
+  if (!selectedFile) {
+    showToast("Please upload a PDF file first.", "error");
     return;
   }
 
-  const mergedPdf = await PDFLib.PDFDocument.create();
+  const position = document.getElementById("page-number-position").value;
+  const style = document.getElementById("page-number-style").value;
 
-  for (const file of mergeSelectedFiles) {
-    const bytes = await file.arrayBuffer();
-    const pdf = await PDFLib.PDFDocument.load(bytes);
-    const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
-    pages.forEach(p => mergedPdf.addPage(p));
+  try {
+    const bytes = await selectedFile.arrayBuffer();
+    const pdfDoc = await PDFLib.PDFDocument.load(bytes);
+    const pages = pdfDoc.getPages();
+    const font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+    const total = pages.length;
+
+    pages.forEach((page, i) => {
+      const text = getPageText(i + 1, total, style);
+      const { x, y } = getPageCoordinates(page, position, text, font);
+      page.drawText(text, {
+        x,
+        y,
+        size: 12,
+        font,
+        color: PDFLib.rgb(0.4, 0.4, 0.4)
+      });
+    });
+
+    const updated = await pdfDoc.save();
+    const blob = new Blob([updated], { type: "application/pdf" });
+    const link = document.createElement("a");
+    const baseName = selectedFile.name.replace(/\.pdf$/i, "");
+    link.download = `${baseName}_numbered.pdf`;
+    link.href = URL.createObjectURL(blob);
+    link.click();
+
+    showToast("✅ Page numbers added!");
+  } catch (err) {
+    console.error(err);
+    showToast("❌ Failed to add page numbers.", "error");
   }
-
-  const mergedBytes = await mergedPdf.save();
-  const blob = new Blob([mergedBytes], { type: "application/pdf" });
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  const timestamp = now.toISOString().slice(0, 19).replace(/[:T]/g, "-");
-a.download = `merged_${timestamp}.pdf`;
-  a.click();
-
-  showToast("✅ Merged PDF downloaded!");
 }
 
-        // Optional: list selected files
-        // document.getElementById("pdf-files").addEventListener("change", function () {
-        //     const list = Array.from(this.files).map(f => `📄 ${f.name}`).join("<br>");
-        //     document.getElementById("file-list").innerHTML = list;
-        // });
+function getPageText(current, total, style) {
+  switch (style) {
+    case "plain": return `${current}`;
+    case "page-x": return `Page ${current}`;
+    case "page-x-of-y": return `Page ${current} of ${total}`;
+    default: return `${current}`;
+  }
+}
+
+function getPageCoordinates(page, position, text, font) {
+  const fontSize = 12;
+  const { width, height } = page.getSize();
+  const textWidth = font.widthOfTextAtSize(text, fontSize);
+  const margin = 20;
+
+  const positions = {
+    "bottom-left": { x: margin, y: margin },
+    "bottom-center": { x: (width - textWidth) / 2, y: margin },
+    "bottom-right": { x: width - textWidth - margin, y: margin },
+    "top-left": { x: margin, y: height - fontSize - margin },
+    "top-center": { x: (width - textWidth) / 2, y: height - fontSize - margin },
+    "top-right": { x: width - textWidth - margin, y: height - fontSize - margin }
+  };
+
+  return positions[position] || positions["bottom-center"];
+}
+
+
+
+
+
 
         function updateThemeIcon(theme) {
             themeIcon.innerHTML = theme === 'dark'

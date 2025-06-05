@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online PDF Merger tool</title>
+    <title>Split PDF Online | PDF Splitter | Split PDF files into individual pages </title>
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -14,15 +14,15 @@
 
     <meta name="author" content="toools.in">
     <meta name="description"
-        content="Use this free online PDF Merger tool to combine multiple PDF files instantly. Merge documents securely in your browser without uploading. Fast, private, and easy-to-use.">
+        content="Split PDF files into individual pages with this free, secure online PDF splitter. No upload needed — works in-browser. Ideal for extracting single pages from multi-page documents.">
     <meta name="keywords"
-        content="PDF Merger, Merge PDF Online, Combine PDF Files, Free PDF Tool, Join PDFs, Secure PDF Merger, Client-side PDF Merge, Offline PDF Merger, PDF Combiner, Merge PDFs Without Uploading">
+        content="PDF Splitter, Split PDF Online, PDF Page Extractor, Free PDF Tool, Separate PDF Pages, Client-side PDF Split, In-browser PDF Splitter, PDF Page Downloader, PDF Tools">
 
 
 
     <!-- Chart.js CDN -->
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
@@ -508,51 +508,42 @@
 
     <main class="container mx-auto py-8">
 
-        <section id="pdf-merger" class="category-section fade-in">
-            <h2 class="text-3xl font-bold utility-header mb-8 text-center mx-auto">PDF Merger</h2>
+<section id="pdf-splitter" class="category-section fade-in">
+  <h2 class="text-3xl font-bold utility-header mb-8 text-center mx-auto">PDF Splitter</h2>
 
-            <div class="card p-8 mb-12 max-w-4xl mx-auto shadow-lg space-y-6">
-  <!-- Drag & Drop Upload -->
-  <div id="merge-drop-zone" class="w-full border-2 border-dashed border-gray-400 dark:border-gray-600 rounded-md p-6 text-center cursor-pointer transition hover:border-purple-600">
-    <p class="text-gray-600 dark:text-gray-300">Drag & drop your PDF files here, or click to select</p>
-    <input type="file" id="pdf-files" accept="application/pdf" multiple class="hidden" />
-  </div>
-
-  <!-- File List with Reorder -->
-  <div id="file-list" class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-    <!-- List of files will be shown here -->
-  </div>
-
-  <button onclick="mergePDFs()"
-    class="w-full py-3 rounded-md bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:shadow-lg transition">
-    Merge PDFs
-  </button>
+  <div class="card p-8 mb-12 max-w-4xl mx-auto shadow-lg space-y-6">
+<!-- Drag & Drop Upload -->
+<div id="split-drop-zone" class="w-full border-2 border-dashed border-gray-400 dark:border-gray-600 rounded-md p-6 text-center cursor-pointer transition hover:border-purple-600">
+  <p class="text-gray-600 dark:text-gray-300">Drag & drop your PDF here, or click to select a file</p>
+  <input type="file" id="pdf-to-split" accept="application/pdf" class="hidden" />
 </div>
 
 
-            <section
-                class="max-w-3xl mx-auto my-16 px-4 text-lg leading-relaxed text-gray-700 dark:text-gray-400 mb-24">
-                <h3 class="text-2xl font-bold mb-4 text-center">How to Use the PDF Merger Tool</h3>
-                <ul class="list-disc pl-5 space-y-3">
-                    <li>Select two or more PDF files from your device.</li>
-                    <li>Click the <strong>Merge PDFs</strong> button.</li>
-                    <li>The tool will combine them in the order you selected.</li>
-                    <li>Your merged PDF will automatically download to your device.</li>
-                     <li>Need to add page numbers to your PDFs? Use our <a href="/page-numbers-pdfs" class="text-purple-600 underline hover:text-purple-400">PDF Numbering Tool</a>.</li>
-    <li>Want to split a PDF into individual pages? Try the <a href="/split-pdfs" class="text-purple-600 underline hover:text-purple-400">PDF Splitter</a>.</li>
-    <li>Locked PDF? Use our <a href="/pdf-password-remover" class="text-purple-600 underline hover:text-purple-400">Password Remover</a>.</li>
-                </ul>
+    <input type="text" id="split-pages" placeholder="Pages to extract (e.g., 1,3,5-7) — optional"
+      class="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-white" />
 
-                <p class="mt-6">
-                    This free PDF Merger tool helps you combine multiple PDF documents quickly and securely. Whether
-                    it's merging reports, study materials, invoices, or scanned pages — it's all done client-side with
-                    no file uploads, ensuring privacy and speed.
-                </p>
-                <p class="mt-6">
-    This tool works entirely in your browser. Your file is <strong>never uploaded</strong> to any server, ensuring full privacy and security.
-  </p>
-            </section>
-        </section>
+    <button onclick="splitPDFPages()"
+      class="w-full py-3 rounded-md bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:shadow-lg transition">
+      Split PDF into Pages
+    </button>
+  </div>
+
+  <section class="max-w-3xl mx-auto my-16 px-4 text-lg leading-relaxed text-gray-700 dark:text-gray-400 mb-24">
+    <h3 class="text-2xl font-bold mb-4 text-center">How to Use the PDF Splitter Tool</h3>
+    <ul class="list-disc pl-5 space-y-3">
+      <li>Upload a PDF file you'd like to split.</li>
+      <li><strong>Optional:</strong> Enter specific pages you want to extract (e.g., <code>1,3,5-7</code>).</li>
+      <li>Click <strong>Split PDF into Pages</strong> and each selected page will be downloaded as a separate file.</li>
+      <li>Need to combine PDFs? Try our <a href="/merge-pdfs" class="text-purple-600 underline hover:text-purple-400">PDF Merger</a>.</li>
+      <li>Need to unlock protected PDFs? Use the <a href="/pdf-password-remover" class="text-purple-600 underline hover:text-purple-400">PDF Password Remover</a>.</li>
+    </ul>
+
+    <p class="mt-6">
+      This tool is completely client-side — your PDF is never uploaded. It's perfect for splitting reports, invoices, or scanned pages from larger documents while maintaining privacy.
+    </p>
+  </section>
+</section>
+
 
 
         <div id="tools-container"></div>
@@ -688,119 +679,131 @@
             yearSpan.textContent = `© ${currentYear} toools.in. All rights reserved.`;
         });
 
-                function showToast(message, type = 'success') {
-  const toast = document.createElement('div');
-  const color = type === 'success' ? 'bg-green-600' : 'bg-red-600';
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            const color = type === 'success' ? 'bg-green-600' : 'bg-red-600';
 
-  toast.className = `${color} text-white px-4 py-3 rounded shadow-md animate-slideIn`;
-  toast.textContent = message;
+            toast.className = `${color} text-white px-4 py-3 rounded shadow-md animate-slideIn`;
+            toast.textContent = message;
 
-  document.getElementById('toast-container').appendChild(toast);
+            document.getElementById('toast-container').appendChild(toast);
 
-  setTimeout(() => {
-    toast.classList.add('opacity-0');
-    setTimeout(() => toast.remove(), 500);
-  }, 3000);
-}
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
 
-let mergeSelectedFiles = [];
+        // Drag & Drop for PDF Splitter
+const splitDropZone = document.getElementById("split-drop-zone");
+const splitFileInput = document.getElementById("pdf-to-split");
+let splitSelectedFile = null;
 
-const dropZone = document.getElementById("merge-drop-zone");
-const fileInput = document.getElementById("pdf-files");
-const fileListContainer = document.getElementById("file-list");
+splitDropZone.addEventListener("click", () => splitFileInput.click());
 
-// Drag & Drop Events
-dropZone.addEventListener("click", () => fileInput.click());
-
-dropZone.addEventListener("dragover", e => {
+splitDropZone.addEventListener("dragover", e => {
   e.preventDefault();
-  dropZone.classList.add("border-purple-600");
+  splitDropZone.classList.add("border-purple-600");
 });
 
-dropZone.addEventListener("dragleave", () => {
-  dropZone.classList.remove("border-purple-600");
+splitDropZone.addEventListener("dragleave", () => {
+  splitDropZone.classList.remove("border-purple-600");
 });
 
-dropZone.addEventListener("drop", e => {
+splitDropZone.addEventListener("drop", e => {
   e.preventDefault();
-  dropZone.classList.remove("border-purple-600");
+  splitDropZone.classList.remove("border-purple-600");
 
-  const files = Array.from(e.dataTransfer.files).filter(f => f.type === "application/pdf");
-  if (files.length === 0) {
-    showToast("Only PDF files are allowed.", "error");
+  const files = e.dataTransfer.files;
+  if (files.length !== 1 || files[0].type !== "application/pdf") {
+    showToast("Please drop exactly one valid PDF file.", "error");
     return;
   }
 
-  mergeSelectedFiles.push(...files);
-  renderMergeFileList();
+  splitSelectedFile = files[0];
+  showToast(`✅ Selected: ${splitSelectedFile.name}`);
 });
 
-fileInput.addEventListener("change", () => {
-  const files = Array.from(fileInput.files).filter(f => f.type === "application/pdf");
-  if (files.length === 0) {
-    showToast("Only PDF files are allowed.", "error");
+splitFileInput.addEventListener("change", () => {
+  if (splitFileInput.files.length !== 1 || splitFileInput.files[0].type !== "application/pdf") {
+    showToast("Please select exactly one valid PDF file.", "error");
+    splitSelectedFile = null;
     return;
   }
 
-  mergeSelectedFiles.push(...files);
-  renderMergeFileList();
+  splitSelectedFile = splitFileInput.files[0];
+  showToast(`✅ Selected: ${splitSelectedFile.name}`);
 });
 
-// Render sortable file list
-function renderMergeFileList() {
-  fileListContainer.innerHTML = mergeSelectedFiles.map((file, index) => `
-    <div class="bg-gray-100 dark:bg-gray-800 rounded px-4 py-2 flex items-center justify-between drag-item" data-index="${index}">
-      <span>📄 ${file.name}</span>
-      <span class="cursor-move text-gray-400 hover:text-purple-400">↕</span>
-    </div>
-  `).join("");
 
-  Sortable.create(fileListContainer, {
-    animation: 150,
-    onEnd: evt => {
-      const movedItem = mergeSelectedFiles.splice(evt.oldIndex, 1)[0];
-      mergeSelectedFiles.splice(evt.newIndex, 0, movedItem);
-      renderMergeFileList(); // refresh the UI with new order
+function parsePageRange(input, maxPages) {
+  const pages = new Set();
+  const parts = input.split(',');
+
+  for (const part of parts) {
+    if (part.includes('-')) {
+      const [start, end] = part.split('-').map(n => parseInt(n.trim(), 10));
+      if (isNaN(start) || isNaN(end) || start > end || start < 1 || end > maxPages) {
+        throw new Error(`Invalid range: ${part}`);
+      }
+      for (let i = start; i <= end; i++) pages.add(i - 1); // zero-based
+    } else {
+      const num = parseInt(part.trim(), 10);
+      if (isNaN(num) || num < 1 || num > maxPages) {
+        throw new Error(`Invalid page: ${part}`);
+      }
+      pages.add(num - 1); // zero-based
     }
-  });
-
-  showToast(`${mergeSelectedFiles.length} file(s) ready to merge`);
+  }
+  return [...pages].sort((a, b) => a - b);
 }
 
-// Merge PDFs in selected order
-async function mergePDFs() {
-  if (mergeSelectedFiles.length < 2) {
-    showToast("Select at least two PDF files to merge.", "error");
+async function splitPDFPages() {
+  const rangeInput = document.getElementById("split-pages").value.trim();
+  const file = splitSelectedFile;
+
+  if (!file) {
+    showToast("Please upload a PDF file to split.", "error");
     return;
   }
 
-  const mergedPdf = await PDFLib.PDFDocument.create();
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
+    const totalPages = pdfDoc.getPageCount();
+    const originalName = file.name.replace(/\.pdf$/i, "");
 
-  for (const file of mergeSelectedFiles) {
-    const bytes = await file.arrayBuffer();
-    const pdf = await PDFLib.PDFDocument.load(bytes);
-    const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
-    pages.forEach(p => mergedPdf.addPage(p));
+    // rest of your logic continues...
+    let pagesToSplit;
+
+    if (rangeInput) {
+      pagesToSplit = parsePageRange(rangeInput, totalPages);
+      if (pagesToSplit.length === 0) throw new Error("No valid pages found.");
+    } else {
+      pagesToSplit = [...Array(totalPages).keys()];
+    }
+
+    for (let i of pagesToSplit) {
+      const newPdf = await PDFLib.PDFDocument.create();
+      const [page] = await newPdf.copyPages(pdfDoc, [i]);
+      newPdf.addPage(page);
+
+      const newBytes = await newPdf.save();
+      const blob = new Blob([newBytes], { type: "application/pdf" });
+
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `${originalName}_page${i + 1}.pdf`;
+      link.click();
+    }
+
+    showToast("✅ PDF split and downloaded!");
+  } catch (error) {
+    console.error("PDF split error:", error);
+    showToast(`❌ ${error.message}`, "error");
   }
-
-  const mergedBytes = await mergedPdf.save();
-  const blob = new Blob([mergedBytes], { type: "application/pdf" });
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  const timestamp = now.toISOString().slice(0, 19).replace(/[:T]/g, "-");
-a.download = `merged_${timestamp}.pdf`;
-  a.click();
-
-  showToast("✅ Merged PDF downloaded!");
 }
 
-        // Optional: list selected files
-        // document.getElementById("pdf-files").addEventListener("change", function () {
-        //     const list = Array.from(this.files).map(f => `📄 ${f.name}`).join("<br>");
-        //     document.getElementById("file-list").innerHTML = list;
-        // });
 
         function updateThemeIcon(theme) {
             themeIcon.innerHTML = theme === 'dark'

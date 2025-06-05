@@ -527,11 +527,20 @@
             <h2 class="text-3xl font-bold utility-header mb-8 text-center mx-auto">PDF Password Remover</h2>
 
             <div class="card p-8 mb-12 max-w-4xl mx-auto shadow-lg space-y-6">
-                <input type="file" id="locked-pdf" accept="application/pdf"
-                    class="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-white" />
+<!-- Drag & Drop Upload -->
+<div id="password-drop-zone" class="w-full border-2 border-dashed border-gray-400 dark:border-gray-600 rounded-md p-6 text-center cursor-pointer transition hover:border-purple-600">
+  <p class="text-gray-600 dark:text-gray-300">Drag & drop your locked PDF here, or click to select</p>
+  <input type="file" id="locked-pdf" accept="application/pdf" class="hidden" />
+</div>
 
-                <input type="password" id="pdf-password" placeholder="Enter PDF Password"
-                    class="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-white" />
+<!-- File Name Display -->
+<div id="password-selected-file" class="text-sm text-gray-600 dark:text-gray-300 mt-2"></div>
+
+<!-- Password Input -->
+<input type="password" id="pdf-password" placeholder="Enter PDF Password"
+  class="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-white" />
+
+
 
                 <button onclick="removePDFPassword()"
                     class="w-full py-3 rounded-md bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:shadow-lg transition">
@@ -555,6 +564,13 @@
                     <li>Enter the correct password used to open the file.</li>
                     <li>Click <strong>Remove Password</strong>.</li>
                     <li>The unlocked PDF will automatically download to your device.</li>
+                    <li>You can also:
+      <ul class="list-disc pl-6 space-y-2 mt-2">
+        <li><a href="/merge-pdfs" class="text-purple-600 underline hover:text-purple-400">Merge multiple PDFs</a></li>
+        <li><a href="/split-pdfs" class="text-purple-600 underline hover:text-purple-400">Split a PDF into individual pages</a></li>
+        <li><a href="/add-page-numbers" class="text-purple-600 underline hover:text-purple-400">Add page numbers</a></li>
+      </ul>
+    </li>
                 </ul>
 
                 <p class="mt-6">
@@ -562,6 +578,10 @@
                     private, and doesn't upload your file anywhere. Perfect for removing passwords from invoices,
                     eBooks, contracts, and more.
                 </p>
+
+                <p class="mt-6">
+    This tool works entirely in your browser. Your file is <strong>never uploaded</strong> to any server, ensuring your documents remain private and secure.
+  </p>
             </section>
         </section>
 
@@ -714,10 +734,61 @@
   }, 3000);
 }
 
+let passwordSelectedFile = null;
+
+const passwordDropZone = document.getElementById("password-drop-zone");
+const passwordFileInput = document.getElementById("locked-pdf");
+
+function updatePasswordFileNameUI(file) {
+  const display = document.getElementById("password-selected-file");
+  display.textContent = `📄 Selected: ${file.name}`;
+}
+
+// Drag-drop listeners
+passwordDropZone.addEventListener("click", () => passwordFileInput.click());
+
+passwordDropZone.addEventListener("dragover", e => {
+  e.preventDefault();
+  passwordDropZone.classList.add("border-purple-600");
+});
+
+passwordDropZone.addEventListener("dragleave", () => {
+  passwordDropZone.classList.remove("border-purple-600");
+});
+
+passwordDropZone.addEventListener("drop", e => {
+  e.preventDefault();
+  passwordDropZone.classList.remove("border-purple-600");
+
+  const files = e.dataTransfer.files;
+  if (files.length !== 1 || files[0].type !== "application/pdf") {
+    showToast("Please drop exactly one valid PDF file.", "error");
+    return;
+  }
+
+  passwordSelectedFile = files[0];
+  updatePasswordFileNameUI(passwordSelectedFile);
+  showToast(`✅ Selected: ${files[0].name}`);
+});
+
+passwordFileInput.addEventListener("change", () => {
+  if (passwordFileInput.files.length !== 1 || passwordFileInput.files[0].type !== "application/pdf") {
+    showToast("Please select exactly one valid PDF file.", "error");
+    passwordSelectedFile = null;
+    updatePasswordFileNameUI({ name: '' });
+    return;
+  }
+
+  passwordSelectedFile = passwordFileInput.files[0];
+  updatePasswordFileNameUI(passwordSelectedFile);
+  showToast(`✅ Selected: ${passwordSelectedFile.name}`);
+});
+
 async function removePDFPassword() {
   const fileInput = document.getElementById("locked-pdf");
   const password = document.getElementById("pdf-password").value;
-  const file = fileInput.files[0];
+const file = passwordSelectedFile;
+
 
   document.getElementById("pdf-remove-status").classList.add("hidden");
   document.getElementById("pdf-remove-error").classList.add("hidden");
