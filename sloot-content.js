@@ -4,7 +4,7 @@ const toolsHTML = `
 <div id="home-content">
   <section class="mt-32 mb-12 fade-in ma-8">
     <div class="text-center mb-16">
-      <h1 class="text-4xl md:text-5xl font-bold mb-4">Discover unique and useful Web Tools</h1>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Assembling the world’s most powerful suite of accessible web tools.</h1>
       <p class="text-xl opacity-80 max-w-2xl mx-auto">
         A curated collection of handy web tools to simplify your digital life.
       </p>
