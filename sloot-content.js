@@ -39,7 +39,7 @@ const toolsHTML = `
                     <p class="opacity-70">Get UPI links and QR Codes instantly.</p>
                 </a>
 
-                <a href="/fd-paayout-calculator" class="card p-6 tool-card" data-tool="fd-paayout-calculator">
+                <a href="/fd-payout-calculator" class="card p-6 tool-card" data-tool="fd-payout-calculator">
                     <div class="tool-icon finance-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
@@ -51,7 +51,7 @@ const toolsHTML = `
                     <p class="opacity-70">Calculate fixed deposit returns for monthly, quarterly and yearly.</p>
                 </a>
 
-                <a href="#" class="card p-6 tool-card" data-tool="currency-converter">
+                <a href="/gratuity-calculator" class="card p-6 tool-card" data-tool="gratuity-calculator">
                     <div class="tool-icon finance-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
@@ -59,8 +59,8 @@ const toolsHTML = `
                                 d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Currency Converter</h3>
-                    <p class="opacity-70">Convert between different currencies.</p>
+                    <h3 class="text-xl font-semibold mb-2">Gratuity Calculator</h3>
+                    <p class="opacity-70">Compute your gratuity amount for free easily.</p>
                 </a>
 
                 <a href="#" class="card p-6 tool-card" data-tool="compound-interest">
@@ -220,7 +220,7 @@ const toolsHTML = `
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Protect PDFs</h3>
-                    <p class="opacity-70">Add aassword to your PDF files instantly.</p>
+                    <p class="opacity-70">Add password to your PDF files instantly.</p>
                 </a>
             </div>
         </section>
