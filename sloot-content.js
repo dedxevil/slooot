@@ -6,12 +6,14 @@ const tools = [
   { name: "SIP Calculator", path: "sip-calculator", emoji: "📊", category: "Finance" },
   { name: "UPI Link Generator", path: "upi-payment-link-generator", emoji: "📲", category: "Finance" },
 
+   { name: "Image Compressor", path: "image-compressor", emoji: "🖼️", category: "Image" },
+
   { name: "SQL Formatter", path: "sql-formatter", emoji: "🗃️", category: "Developer" },
   { name: "YAML to Go Structs", path: "yaml-to-go-structs", emoji: "🧰", category: "Developer" },
   { name: "JWT Decoder", path: "jwt-decoder", emoji: "🔑", category: "Developer" },
 
   { name: "Password Generator", path: "password-generator", emoji: "🔐", category: "Utility" },
-  { name: "MongoID to Timestamp", path: "mongo-objectid-to-timestamp-converter", emoji: "⏱️", category: "Utility" },
+  { name: "Mongo ObjectId to Timestamp", path: "mongo-objectid-to-timestamp-converter", emoji: "⏱️", category: "Utility" },
   { name: "Negative Marking Calculator", path: "negative-marking-calculator", emoji: "➖", category: "Utility" },
   { name: "Copy Paste Emojis", path: "copy-paste-emojis", emoji: "😊", category: "Utility" },
 
