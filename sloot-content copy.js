@@ -1,0 +1,361 @@
+// tools-content.js
+
+const toolsHTML = `
+<div id="home-content">
+  <section class="mt-32 mb-12 fade-in ma-8">
+    <div class="text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">The most extensive library of practical web tools.</h1>
+      <p class="text-xl opacity-80 max-w-2xl mx-auto">
+        A curated collection of handy web tools to simplify your digital life.
+      </p>
+    </div>
+  </section>
+</div>
+
+<section id="finance" class="mb-16 category-section fade-in">
+            <h2 class="text-3xl font-bold category-header finance-header">Finance Tools</h2>
+            <div class="tool-grid">
+                <a href="/sip-calculator" class="card p-6 tool-card" data-tool="sip-calculator">
+                    <div class="tool-icon finance-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">SIP Calculator</h3>
+                    <p class="opacity-70">Calculate returns on your systematic investment plans.</p>
+                </a>
+
+                <a href="/upi-payment-link-generator" class="card p-6 tool-card" data-tool="upi-payment-link-generator">
+                    <div class="tool-icon finance-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">UPI Payment Links Generator</h3>
+                    <p class="opacity-70">Get UPI links and QR Codes instantly.</p>
+                </a>
+
+                <a href="/fd-payout-calculator" class="card p-6 tool-card" data-tool="fd-payout-calculator">
+                    <div class="tool-icon finance-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">FD Payout Calculator</h3>
+                    <p class="opacity-70">Calculate fixed deposit returns for monthly, quarterly and yearly.</p>
+                </a>
+
+                <a href="/gratuity-calculator" class="card p-6 tool-card" data-tool="gratuity-calculator">
+                    <div class="tool-icon finance-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Gratuity Calculator</h3>
+                    <p class="opacity-70">Compute your gratuity amount for free easily.</p>
+                </a>
+
+                <a href="#" class="card p-6 tool-card" data-tool="compound-interest">
+                    <div class="tool-icon finance-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Compound Interest</h3>
+                    <p class="opacity-70">Calculate compound interest on investments.</p>
+                </a>
+            </div>
+        </section>
+
+        <section id="social" class="mb-16 category-section fade-in">
+            <h2 class="text-3xl font-bold category-header social-header">Social Tools</h2>
+            <div class="tool-grid">
+                <a href="/whatsapp-link-generator" class="card p-6 tool-card" data-tool="whatsapp-link-generator">
+                    <div class="tool-icon social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">WhatsApp Link Generator</h3>
+                    <p class="opacity-70">Create direct message links for WhatsApp.</p>
+                </a>
+
+                <a href="#" class="card p-6 tool-card" data-tool="social-post-generator">
+                    <div class="tool-icon social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Social Post Generator</h3>
+                    <p class="opacity-70">Create engaging social media posts.</p>
+                </a>
+
+                <a href="#" class="card p-6 tool-card" data-tool="hashtag-generator">
+                    <div class="tool-icon social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Hashtag Generator</h3>
+                    <p class="opacity-70">Generate trending hashtags for your content.</p>
+                </a>
+
+                <a href="#" class="card p-6 tool-card" data-tool="bio-generator">
+                    <div class="tool-icon social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Bio Generator</h3>
+                    <p class="opacity-70">Create catchy social media bios.</p>
+                </a>
+
+                <a href="#" class="card p-6 tool-card" data-tool="instagram-font-generator">
+                    <div class="tool-icon social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Instagram Font Generator</h3>
+                    <p class="opacity-70">Create stylish text for Instagram posts.</p>
+                </a>
+            </div>
+        </section>
+
+                <section id="utility" class="mb-16 category-section fade-in">
+            <h2 class="text-3xl font-bold category-header utility-header">Utility Tools</h2>
+            <div class="tool-grid">
+                <a href="/negative-marking-calculator" class="card p-6 tool-card" data-tool="negative-marking-calculator">
+                    <div class="tool-icon utility-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Negative Marking Calculator</h3>
+                    <p class="opacity-70">Calculate negative marking for competitive exams like UPSC, SSC, CAT, NEET, JEE.</p>
+                </a>
+                </div>
+                </section>
+                
+
+        <section id="pdf" class="mb-16 category-section fade-in">
+            <h2 class="text-3xl font-bold category-header utility-header">PDF Tools</h2>
+            <div class="tool-grid">
+
+                <a href="/merge-pdfs" class="card p-6 tool-card" data-tool="merge-pdfs">
+                    <div class="tool-icon utility-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Merge PDFs</h3>
+                    <p class="opacity-70">Online PDF Merger tool.</p>
+                </a>
+
+                <a href="/pdf-password-remover/" class="card p-6 tool-card" data-tool="pdf-password-remover">
+                    <div class="tool-icon utility-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">PDF Password Remover</h3>
+                    <p class="opacity-70">Unlock and download password-protected PDFs in one click.</p>
+                </a>
+
+                <a href="/split-pdfs" class="card p-6 tool-card" data-tool="pdf-splitter">
+                    <div class="tool-icon utility-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Split PDFs</h3>
+                    <p class="opacity-70">Split PDF files into individual pages with this free.</p>
+                </a>
+
+                <a href="/page-numbers-pdf" class="card p-6 tool-card" data-tool="pdf-numbering-tool">
+                    <div class="tool-icon utility-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m6.75 12l-3-3m0 0l-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">PDF Page Numbering Tool</h3>
+                    <p class="opacity-70">Add page numbers to your PDF documents instantly.</p>
+                </a>
+                 <a href="/protect-pdf" class="card p-6 tool-card" data-tool="pdf-protection-tool">
+                    <div class="tool-icon utility-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m6.75 12l-3-3m0 0l-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Protect PDFs</h3>
+                    <p class="opacity-70">Add password to your PDF files instantly.</p>
+                </a>
+            </div>
+        </section>
+
+        <section id="fun" class="mb-16 category-section fade-in">
+            <h2 class="text-3xl font-bold category-header fun-header">Fun Tools</h2>
+            <div class="tool-grid">
+                <a href="#" class="card p-6 tool-card" data-tool="flames">
+                    <div class="tool-icon fun-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">FLAMES Calculator</h3>
+                    <p class="opacity-70">The classic relationship predictor game.</p>
+                </a>
+
+                <a href="#" class="card p-6 tool-card" data-tool="meme-generator">
+                    <div class="tool-icon fun-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Meme Generator</h3>
+                    <p class="opacity-70">Create funny memes with custom text.</p>
+                </a>
+
+                <a href="#" class="card p-6 tool-card" data-tool="name-generator">
+                    <div class="tool-icon fun-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Name Generator</h3>
+                    <p class="opacity-70">Generate creative names for various purposes.</p>
+                </a>
+
+                <a href="#" class="card p-6 tool-card" data-tool="fortune-teller">
+                    <div class="tool-icon fun-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Fortune Teller</h3>
+                    <p class="opacity-70">Get your fortune told for fun.</p>
+                </a>
+
+                <a href="#" class="card p-6 tool-card" data-tool="emoji-mixer">
+                    <div class="tool-icon fun-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Emoji Mixer</h3>
+                    <p class="opacity-70">Create fun emoji combinations.</p>
+                </a>
+            </div>
+        </section>
+
+        <section id="dev" class="mb-16 category-section fade-in">
+            <h2 class="text-3xl font-bold category-header dev-header">Developer Tools</h2>
+            <div class="tool-grid">
+                <a href="#" class="card p-6 tool-card" data-tool="json-formatter">
+                    <div class="tool-icon dev-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">JSON Formatter</h3>
+                    <p class="opacity-70">Format and validate JSON data.</p>
+                </a>
+
+                <a href="#" class="card p-6 tool-card" data-tool="html-minifier">
+                    <div class="tool-icon dev-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">HTML Minifier</h3>
+                    <p class="opacity-70">Minify HTML code for faster loading.</p>
+                </a>
+
+                <a href="#" class="card p-6 tool-card" data-tool="css-minifier">
+                    <div class="tool-icon dev-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">CSS Minifier</h3>
+                    <p class="opacity-70">Compress CSS code to reduce file size.</p>
+                </a>
+
+                <a href="#" class="card p-6 tool-card" data-tool="regex-tester">
+                    <div class="tool-icon dev-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Regex Tester</h3>
+                    <p class="opacity-70">Test and debug regular expressions.</p>
+                </a>
+
+                <a href="#" class="card p-6 tool-card" data-tool="cron-expression-generator">
+                    <div class="tool-icon dev-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Cron Expression Generator</h3>
+                    <p class="opacity-70">Create and validate cron expressions.</p>
+                </a>
+            </div>
+        </section>
+`;
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("tools-container").innerHTML = toolsHTML;
+});
