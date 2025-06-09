@@ -37,7 +37,7 @@ function generateGroupedTools(tools) {
     ).join("");
 
     return `
-      <div class="bg-white border border-gray-200 p-6 rounded-xl shadow mb-10">
+     <div class="bg-white-100 text-gray-900 border border-gray-200 p-6 rounded-xl shadow mb-10 dark:bg-gray-900 dark:text-white">
         <h2 class="text-2xl font-semibold mb-4">${category}</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
           ${toolsHTML}
