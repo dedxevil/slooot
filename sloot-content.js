@@ -33,7 +33,7 @@ function generateGroupedTools(tools) {
 
   return Object.entries(grouped).map(([category, toolList]) => {
     const toolsHTML = toolList.map(tool =>
-      `<a href="/${tool.path}" class="block px-4 py-2 rounded hover:bg-gray-100 transition">${tool.emoji} ${tool.name}</a>`
+      `<a href="/${tool.path}" class="block px-4 py-2 rounded hover:bg-gray-700 transition">${tool.emoji} ${tool.name}</a>`
     ).join("");
 
     return `
