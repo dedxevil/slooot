@@ -7,7 +7,8 @@ const tools = [
   { name: "UPI Link Generator", path: "upi-payment-link-generator", emoji: "📲", category: "Finance" },
 
    { name: "Image Compressor", path: "image-compressor", emoji: "🖼️", category: "Image" },
-      { name: "SVG Converter", path: "svg-converter", emoji: "👽️", category: "Image" },
+      { name: "SVG Converter", path: "svg-converter", emoji: "🟩", category: "Image" },
+         { name: "PNG Converter", path: "png-converter", emoji: "🔲", category: "Image" },
 
   { name: "SQL Formatter", path: "sql-formatter", emoji: "🗃️", category: "Developer" },
   { name: "YAML to Go Structs", path: "yaml-to-go-structs", emoji: "🧰", category: "Developer" },
