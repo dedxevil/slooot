@@ -9,13 +9,18 @@ const tools = [
    { name: "Image Compressor", path: "image-compressor", emoji: "🖼️", category: "Image" },
       { name: "SVG Converter", path: "svg-converter", emoji: "🟩", category: "Image" },
          { name: "PNG Converter", path: "png-converter", emoji: "🔲", category: "Image" },
+           { name: "WEBP Converter", path: "webp-converter", emoji: "🔳", category: "Image" },
+           { name: "JPG Converter", path: "jpg-converter", emoji: "🔳", category: "Image" },
+            { name: "BMP Converter", path: "bmp-converter", emoji: "🔳", category: "Image" },
+              { name: "TIFF Converter", path: "tiff-converter", emoji: "🔳", category: "Image" },
+
 
   { name: "SQL Formatter", path: "sql-formatter", emoji: "🗃️", category: "Developer" },
   { name: "YAML to Go Structs", path: "yaml-to-go-structs", emoji: "🧰", category: "Developer" },
   { name: "JWT Decoder", path: "jwt-decoder", emoji: "🔑", category: "Developer" },
+  { name: "Mongo ObjectId to Timestamp", path: "mongo-objectid-to-timestamp-converter", emoji: "⏱️", category: "Developer" },
 
   { name: "Password Generator", path: "password-generator", emoji: "🔐", category: "Utility" },
-  { name: "Mongo ObjectId to Timestamp", path: "mongo-objectid-to-timestamp-converter", emoji: "⏱️", category: "Utility" },
   { name: "Negative Marking Calculator", path: "negative-marking-calculator", emoji: "➖", category: "Utility" },
   { name: "Copy Paste Emojis", path: "copy-paste-emojis", emoji: "😊", category: "Utility" },
 
