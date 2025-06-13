@@ -31,6 +31,8 @@ const tools = [
   { name: "PDF Page Numbers", path: "page-numbers-pdf", emoji: "🔢", category: "PDF" },
 
   { name: "WhatsApp Link Generator", path: "whatsapp-link-generator", emoji: "💬", category: "Social" },
+  { name: "YouTube Video Thumbnail Downloader", path: "youtube-thumbnail-downloader", emoji: "📺️", category: "Social" },
+  // { name: "YouTube Channel Profile Picture Downloader", path: "youtube-channel-profile-picture-downloader", emoji: "📽️", category: "Social" },
 ];
 
 function generateGroupedTools(tools) {

@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube thumbnail downloader | Download YouTube video thumbnails in all sizes — maxres, high quality, medium, and default. Paste multiple URLs and bulk download thumbnails. Fast, free, browser-based.
+    </title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="icon"
+        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">📺️</text></svg>'>
+    <!-- SEO Meta Tags -->
+
+    <meta name="author" content="toools.in">
+  <meta name="description" content="Download YouTube video thumbnails in all sizes — maxres, high quality, medium, and default. Paste multiple URLs and bulk download thumbnails. Fast, free, browser-based.">
+<meta name="keywords" content="YouTube thumbnail downloader, download YouTube thumbnail, high resolution YouTube thumbnail, YouTube preview image, thumbnail grabber, video cover downloader, get thumbnail by video id, youtube thumbnail bulk download, iloveimg youtube thumbnail">
+
+
+
+
+
+
+
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #6d28d9;
+            --secondary: #4f46e5;
+            --accent: #8b5cf6;
+            --dark-bg: #121212;
+            --dark-card: #1e1e1e;
+            --light-bg: #f8fafc;
+            --light-card: #ffffff;
+
+            /* Tool icon colors */
+            --finance-color-1: #6d28d9;
+            --finance-color-2: #4f46e5;
+            --social-color-1: #ec4899;
+            --social-color-2: #db2777;
+            --utility-color-1: #0ea5e9;
+            --utility-color-2: #0284c7;
+            --fun-color-1: #f59e0b;
+            --fun-color-2: #d97706;
+            --dev-color-1: #10b981;
+            --dev-color-2: #059669;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .dark {
+            background-color: var(--dark-bg);
+            color: #f1f5f9;
+        }
+
+        .light {
+            background-color: var(--light-bg);
+            color: #1e293b;
+        }
+
+        .card {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .dark .card {
+            background-color: var(--dark-card);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .light .card {
+            background-color: var(--light-card);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(109, 40, 217, 0.3);
+        }
+
+        .tool-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            color: white;
+            font-size: 20px;
+        }
+
+        .finance-icon {
+            background: linear-gradient(135deg, var(--finance-color-1), var(--finance-color-2));
+        }
+
+        .social-icon {
+            background: linear-gradient(135deg, var(--social-color-1), var(--social-color-2));
+        }
+
+        .utility-icon {
+            background: linear-gradient(135deg, var(--utility-color-1), var(--utility-color-2));
+        }
+
+        .fun-icon {
+            background: linear-gradient(135deg, var(--fun-color-1), var(--fun-color-2));
+        }
+
+        .dev-icon {
+            background: linear-gradient(135deg, var(--dev-color-1), var(--dev-color-2));
+        }
+
+        .category-header {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .category-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            border-radius: 2px;
+        }
+
+        .finance-header::after {
+            background: linear-gradient(90deg, var(--finance-color-1), var(--finance-color-2));
+        }
+
+        .social-header::after {
+            background: linear-gradient(90deg, var(--social-color-1), var(--social-color-2));
+        }
+
+        .utility-header::after {
+            background: linear-gradient(90deg, var(--utility-color-1), var(--utility-color-2));
+        }
+
+        .fun-header::after {
+            background: linear-gradient(90deg, var(--fun-color-1), var(--fun-color-2));
+        }
+
+        .dev-header::after {
+            background: linear-gradient(90deg, var(--dev-color-1), var(--dev-color-2));
+        }
+
+        .logo-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .dark .logo-text {
+            color: #ffffff;
+        }
+
+        .light .logo-text {
+            color: #6d28d9;
+        }
+
+        .logo-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
+        }
+
+        .dark .logo-icon {
+            color: #ffffff;
+        }
+
+        .light .logo-icon {
+            color: #6d28d9;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            width: 50px;
+            height: 26px;
+            border-radius: 13px;
+            background-color: #6d28d9;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        .light .theme-toggle::after {
+            transform: translateX(24px);
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .category-section {
+            scroll-margin-top: 100px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* Equal spacing fix */
+        .container {
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+
+        /* Footer styles */
+        footer {
+            border-top: 1px solid;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            position: static;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .dark footer {
+            border-color: #2d2d2d;
+        }
+
+        .light footer {
+            border-color: #e2e8f0;
+        }
+
+        /* Embed code styles */
+        .embed-code-container {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .dark .embed-code-container {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .light .embed-code-container {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .embed-code {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            margin-bottom: 1rem;
+        }
+
+        .dark .embed-code {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #e2e8f0;
+        }
+
+        .light .embed-code {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: #1e293b;
+        }
+
+        .copy-embed-btn {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-embed-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(109, 40, 217, 0.3);
+        }
+
+        /* Guide section styles */
+        .guide-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            border-radius: 16px;
+        }
+
+        .dark .guide-section {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .light .guide-section {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .guide-step {
+            display: flex;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--utility-color-1), var(--utility-color-2));
+            color: white;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        /* Embeddable tool styles */
+        .tooolsin-embed {
+            font-family: 'Outfit', sans-serif;
+            max-width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .tooolsin-embed.dark {
+            background-color: var(--dark-card);
+            color: #f1f5f9;
+        }
+
+        .tooolsin-embed.light {
+            background-color: var(--light-card);
+            color: #1e293b;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .logo-icon svg {
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes fadeInSlide {
+            0% {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .logo-text {
+            animation: fadeInSlide 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .logo-icon svg {
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover .logo-icon svg {
+            transform: rotate(-10deg) scale(1.1);
+        }
+    </style>
+</head>
+
+<body class="dark min-h-screen">
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-opacity-80 dark:bg-opacity-80" id="header">
+        <div class="container mx-auto py-4 flex justify-between items-center">
+            <a href="/" class="logo-container" id="logo-link">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-8 h-8">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
+                    </svg>
+                </div>
+                <h1 class="logo-text" id="site-title">Toools</h1>
+            </a>
+
+
+            <div class="flex items-center space-x-6">
+
+
+                <div class="flex items-center space-x-2">
+                    <div class="theme-toggle" id="themeToggle"></div>
+                    <span id="themeIcon" class="w-5 h-5">
+                        <!-- Icon will be injected here -->
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto py-8">
+<section id="youtube-thumbnail-downloader" class="category-section fade-in mt-20">
+  <h2 class="text-3xl font-bold text-center mb-8">YouTube Thumbnail Downloader</h2>
+
+  <div class="max-w-3xl mx-auto p-6 space-y-6 bg-white dark:bg-gray-900 rounded-lg shadow-xl">
+    <textarea id="url-input" rows="4" class="w-full p-3 rounded-md border dark:bg-gray-800 border-gray-300 dark:border-gray-700 dark:text-gray-400 text-sm"
+      placeholder="Paste YouTube video URLs here (one per line)"></textarea>
+
+    <button id="download-btn" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 rounded-md transition">
+      Download Thumbnails
+    </button>
+
+    <div id="thumbnail-list" class="space-y-8 hidden">
+      <h3 class="text-2xl font-bold text-center dark:text-gray-200">Thumbnails</h3>
+      <!-- Thumbnails will be inserted here -->
+    </div>
+  </div>
+</section>
+
+
+
+<section class="max-w-3xl mx-auto mt-16 px-4 text-lg leading-relaxed text-gray-700 dark:text-gray-400 space-y-6">
+  <h3 class="text-2xl font-bold text-center">YouTube Thumbnail Downloader Guide</h3>
+
+  <div>
+    <h4 class="text-xl font-semibold mb-2">🔍 What is this tool?</h4>
+    <p>This tool lets you extract and download YouTube thumbnails in all available resolutions including max resolution, HD, medium, and default — just by pasting the video URL(s).</p>
+  </div>
+
+  <div>
+    <h4 class="text-xl font-semibold mb-2">🖱 How to Use</h4>
+    <ul class="list-decimal pl-5 space-y-1">
+      <li>Paste one or more YouTube URLs in the text area</li>
+      <li>Click “Fetch Thumbnails”</li>
+      <li>Download any thumbnail by clicking “Download”</li>
+    </ul>
+  </div>
+
+  <div>
+    <h4 class="text-xl font-semibold mb-2">🎯 Thumbnail Sizes Supported</h4>
+    <ul class="list-disc pl-5">
+      <li><code>maxresdefault.jpg</code> – 1280×720</li>
+      <li><code>hqdefault.jpg</code> – 480×360</li>
+      <li><code>mqdefault.jpg</code> – 320×180</li>
+      <li><code>default.jpg</code> – 120×90</li>
+    </ul>
+  </div>
+
+  <div>
+    <h4 class="text-xl font-semibold mb-2">🔍 SEO Keywords Covered</h4>
+    <p>youtube thumbnail downloader, download youtube cover image, youtube video thumbnail grabber, bulk thumbnail download tool, free youtube preview image downloader, maxresdefault thumbnail, youtube hq thumbnail downloader, video id to thumbnail, youtube image extractor, iloveimg youtube</p>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+        <div id="tools-container"></div>
+
+    </main>
+
+    <footer class="py-8 border-t border-gray-800 dark:border-gray-700">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="/" class="logo-container">
+                        <div class="logo-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
+                            </svg>
+                        </div>
+                        <h2 class="logo-text text-xl">toools.in</h2>
+                    </a>
+                    <p class="mt-2 opacity-70">A collection of useful web tools.</p>
+                </div>
+
+                <div class="text-center md:text-right">
+                    <p class="opacity-70">
+                        Built with ⌛️ by
+                        <a href="https://17x.in" target="_blank" rel="noopener noreferrer"
+                            class="underline hover:text-purple-400 transition-colors">
+                            17x
+                        </a>
+                    </p>
+                    <p class="mt-2 opacity-50" id="footer-year">© toools.in. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const header = document.getElementById('header');
+        const siteTitle = document.getElementById('site-title');
+
+        const logoLink = document.getElementById('logo-link');
+        const mainNav = document.getElementById('main-nav');
+
+        // Check for saved theme preference or use preferred color scheme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            body.className = savedTheme;
+            header.classList.toggle('bg-white', savedTheme === 'light');
+            header.classList.toggle('bg-dark-bg', savedTheme === 'dark');
+        } else {
+            // Use prefers-color-scheme as a fallback
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                body.className = 'dark';
+                header.classList.add('bg-dark-bg');
+            } else {
+                body.className = 'light';
+                header.classList.add('bg-white');
+            }
+        }
+
+        const themeIcon = document.getElementById('themeIcon');
+        updateThemeIcon(savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark')) {
+                body.classList.replace('dark', 'light');
+                header.classList.remove('bg-dark-bg');
+                header.classList.add('bg-white');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.replace('light', 'dark');
+                header.classList.remove('bg-white');
+                header.classList.add('bg-dark-bg');
+                localStorage.setItem('theme', 'dark');
+            }
+            const newTheme = document.body.classList.contains('dark') ? 'light' : 'dark';
+            updateThemeIcon(newTheme);
+        });
+
+        // Intersection Observer for fade-in animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(element);
+        });
+
+        // Active nav link highlighting
+        const sections = document.querySelectorAll('.category-section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function highlightNavLink() {
+            let current = '';
+            let scrollPosition = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightNavLink);
+        window.addEventListener('load', highlightNavLink);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const yearSpan = document.getElementById('footer-year');
+            const currentYear = new Date().getFullYear();
+            yearSpan.textContent = `© ${currentYear} toools.in. All rights reserved.`;
+        });
+
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            const color = type === 'success' ? 'bg-green-600' : 'bg-red-600';
+
+            toast.className = `${color} text-white px-4 py-3 rounded shadow-md animate-slideIn`;
+            toast.textContent = message;
+
+            document.getElementById('toast-container').appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
+document.getElementById("download-btn").addEventListener("click", () => {
+  const input = document.getElementById("url-input").value.trim();
+  const urls = input.split(/\n+/).map(u => u.trim()).filter(Boolean);
+
+  const valid = urls.filter(url => {
+    return /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)/.test(url);
+  });
+
+  if (!valid.length) {
+    showToast("Please enter at least one valid YouTube URL.", "error");
+    return;
+  }
+
+  const container = document.getElementById("thumbnail-list");
+  container.innerHTML = `<h3 class="text-2xl font-bold text-center">Thumbnails</h3>`;
+
+  valid.forEach(url => {
+    const videoId = extractVideoID(url);
+    if (!videoId) return;
+
+    const sizes = ["maxresdefault", "hqdefault", "mqdefault", "default"];
+    sizes.forEach(size => {
+      const thumbUrl = `https://img.youtube.com/vi/${videoId}/${size}.jpg`;
+      const thumb = document.createElement("div");
+      thumb.className = "flex flex-col items-center justify-center p-6 bg-gray-100 dark:bg-gray-800 rounded shadow space-y-3";
+
+      const label = document.createElement("p");
+      label.className = "text-sm font-medium text-gray-700 dark:text-gray-200";
+      label.textContent = `Video ID: ${videoId} – ${size}.jpg`;
+
+      const img = document.createElement("img");
+      img.src = thumbUrl;
+      img.alt = `${videoId} - ${size}`;
+      img.className = "max-w-full rounded shadow border";
+
+   const download = document.createElement("button");
+download.textContent = "Download";
+download.className = "inline-block px-3 py-1 bg-purple-600 text-white rounded hover:bg-purple-700 text-sm";
+
+download.addEventListener("click", async () => {
+  try {
+    const response = await fetch(thumbUrl);
+    const blob = await response.blob();
+    const blobUrl = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = blobUrl;
+    a.download = `${videoId}-${size}.jpg`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(blobUrl);
+  } catch (e) {
+    showToast(`Failed to download ${size} thumbnail`, "error");
+  }
+});
+
+    //   download.className = "inline-block px-3 py-1 bg-purple-600 text-white rounded hover:bg-purple-700 text-sm";
+
+      thumb.appendChild(label);
+      thumb.appendChild(img);
+      thumb.appendChild(download);
+      container.appendChild(thumb);
+    });
+  });
+
+  document.getElementById("thumbnail-list").classList.remove("hidden");
+});
+
+function extractVideoID(url) {
+  const regExp = /^.*((youtu\.be\/)|(v\/)|(watch\?v=))([^#&?]*).*/;
+  const match = url.match(regExp);
+  return match && match[5].length === 11 ? match[5] : null;
+}
+
+
+
+
+
+        function updateThemeIcon(theme) {
+            themeIcon.innerHTML = theme === 'dark'
+                ? `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+           d="M12 3v1m0 16v1m8.66-8.66l-.71.71M4.05 4.05l-.71.71M21 12h-1M4 12H3m16.95 4.95l-.71-.71M4.05 19.95l-.71-.71M12 5a7 7 0 100 14 7 7 0 000-14z" />
+       </svg>`
+                : `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-800 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+           d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
+       </svg>`;
+        }
+
+    </script>
+    <script src="../sloot-content.js"></script>
+    <div id="toast-container" class="fixed bottom-6 right-6 space-y-2 z-50"></div>
+</body>
+
+</html>
