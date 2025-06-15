@@ -4,12 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🟢 Tools | Discover Usable Web Tools 🟢</title>
+    <title>Convert Excel to PDF | Free XLS/XLSX to PDF Converter Online</title>
+
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="icon"
-        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="0.9em" font-size="90">🛠️</text></svg>'>
+        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">❎️</text></svg>'>
+    <!-- SEO Meta Tags -->
+
+    <meta name="author" content="toools.in">
+   <meta name="description" content="Convert Excel spreadsheets (.xls, .xlsx) to PDF online. Free, fast, and privacy-friendly Excel to PDF converter. Works fully in your browser — no upload, no registration." />
+
+<meta name="keywords" content="Excel to PDF, XLSX to PDF, Convert XLS to PDF, Spreadsheet to PDF, Free Excel PDF Converter, Online Excel to PDF, No upload XLS converter, Export Excel to PDF, Secure Excel to PDF tool" />
+
+
+
+
+<!-- Required by jsPDF().html() -->
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.5/dist/purify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+<!-- SheetJS for reading Excel -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<!-- jsPDF for exporting to PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
@@ -475,15 +497,7 @@
 
 
             <div class="flex items-center space-x-6">
-                <!-- <nav class="hidden md:flex space-x-6" id="main-nav">
-                    <a href="#finance" class="nav-link text-lg font-medium">Finance</a>
-                    <a href="#social" class="nav-link text-lg font-medium">Social</a>
-                    <a href="#utility" class="nav-link text-lg font-medium">Utility</a>
-                    <a href="#pdf" class="nav-link text-lg font-medium">PDF</a>
-                    <a href="#fun" class="nav-link text-lg font-medium">Fun</a>
-                    <a href="#dev" class="nav-link text-lg font-medium">Dev</a>
 
-                </nav> -->
 
                 <div class="flex items-center space-x-2">
                     <div class="theme-toggle" id="themeToggle"></div>
@@ -496,11 +510,95 @@
     </header>
 
     <main class="container mx-auto py-8">
+     <section id="excel-to-pdf" class="category-section fade-in mt-20 max-w-3xl mx-auto">
+  <h2 class="text-3xl font-bold text-center mb-8">Excel (XLS, XLSX) to PDF Converter</h2>
 
-        </div>
+ <div class="relative max-w-2xl mx-auto p-6 space-y-6 bg-white dark:bg-gray-900 rounded-lg shadow-xl">
+    <div id="drop-zone-excel" class="border-2 border-dashed border-gray-400 rounded-md p-8 text-center transition hover:border-purple-500 cursor-pointer dark:bg-gray-800 bg-gray-100">
+      <p class="text-sm text-gray-600 dark:text-gray-300">Drag & Drop Excel files here or</p>
+      <label class="mt-2 inline-block bg-purple-600 text-white px-4 py-2 rounded-md cursor-pointer hover:bg-purple-700 transition">
+        Choose Files
+        <input id="excel-file-input" type="file" multiple accept=".xls,.xlsx" class="hidden" />
+      </label>
+    </div>
+
+    <div id="excel-result-list" class="space-y-8 hidden">
+      <h3 class="text-2xl font-bold text-center text-gray-600 dark:text-gray-300">Generated PDFs</h3>
+      <!-- PDF output cards injected here -->
+    </div>
+
+<div id="loader-excel" class="hidden absolute inset-0 bg-black/60 flex items-center justify-center z-10 rounded-md">
+    <div class="animate-spin rounded-full h-10 w-10 border-4 border-t-transparent border-purple-500"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Guide Section -->
+<section class="guide-section mt-16 text-lg leading-relaxed text-gray-700 dark:text-gray-400 space-y-6 max-w-2xl mx-auto px-4">
+  <h2 class="text-3xl font-bold mb-6 text-center">📄 Excel to PDF Converter Guide</h2>
+
+  <div>
+    <h3 class="text-xl font-semibold mb-2">🧾 What Is This Tool?</h3>
+    <p>
+      This free online <strong>Excel to PDF Converter</strong> helps you convert <strong>XLS</strong> and <strong>XLSX</strong> files into clean, professional PDF documents. No software download or email required. All processing is done securely in your browser.
+    </p>
+  </div>
+
+  <div>
+    <h3 class="text-xl font-semibold mb-2">🖱 How to Use</h3>
+    <ol class="list-decimal pl-5 space-y-1">
+      <li>Click "Choose Files" or drag and drop your Excel spreadsheets.</li>
+      <li>The tool will process each sheet and auto-generate a PDF.</li>
+      <li>Click "Download PDF" to save your document locally.</li>
+    </ol>
+  </div>
+
+  <div>
+    <h3 class="text-xl font-semibold mb-2">💡 Best Practices</h3>
+    <ul class="list-disc pl-5 space-y-1">
+      <li>Ensure your Excel sheet is well-formatted and printable.</li>
+      <li>Only .xls and .xlsx formats are supported.</li>
+      <li>For password-protected files, unlock them before uploading.</li>
+    </ul>
+  </div>
+
+  <div>
+    <h3 class="text-xl font-semibold mb-2">🔗 Related Tools</h3>
+    <ul class="list-disc pl-5 space-y-1">
+      <li><a href="/svg-converter" class="underline hover:text-purple-500">SVG Converter</a></li>
+      <li><a href="/bmp-converter" class="underline hover:text-purple-500">BMP Converter</a></li>
+      <li><a href="/png-converter" class="underline hover:text-purple-500">PNG Converter</a></li>
+      <li><a href="/jpg-converter" class="underline hover:text-purple-500">JPG Converter</a></li>
+      <li><a href="/webp-converter" class="underline hover:text-purple-500">WEBP Converter</a></li>
+      <li><a href="/image-pdf-converter" class="underline hover:text-purple-500">Image to PDF Converter</a></li>
+      <li><a href="/pdf-password-remover" class="underline hover:text-purple-500">PDF Password Remover</a></li>
+      <li><a href="/merge-pdfs" class="underline hover:text-purple-500">Merge PDFs</a></li>
+      <li><a href="/split-pdfs" class="underline hover:text-purple-500">Split PDFs</a></li>
+      <li><a href="/page-numbers-pdf" class="underline hover:text-purple-500">Add Page Numbers to PDF</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <h3 class="text-xl font-semibold mb-2">🔍 SEO Keywords Covered</h3>
+    <p>
+      Convert Excel to PDF, XLS to PDF online, XLSX to PDF converter, Excel sheet to PDF tool, free Excel PDF generator, browser-based Excel to PDF, no upload Excel converter, spreadsheet to PDF online, secure Excel to PDF, download Excel as PDF.
+    </p>
+  </div>
+
+  <div>
+    <h3 class="text-xl font-semibold mb-2">🔐 Security & Privacy</h3>
+    <p>
+      Files are never uploaded or stored on any server. Everything runs in your browser. This tool is ideal for confidential financial data, invoices, and private documents.
+    </p>
+  </div>
+</section>
+
+
+
+
+
 
         <div id="tools-container"></div>
-
 
     </main>
 
@@ -561,6 +659,7 @@
                 header.classList.add('bg-white');
             }
         }
+
         const themeIcon = document.getElementById('themeIcon');
         updateThemeIcon(savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
 
@@ -631,6 +730,151 @@
             const currentYear = new Date().getFullYear();
             yearSpan.textContent = `© ${currentYear} toools.in. All rights reserved.`;
         });
+
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            const color = type === 'success' ? 'bg-green-600' : 'bg-red-600';
+
+            toast.className = `${color} text-white px-4 py-3 rounded shadow-md animate-slideIn`;
+            toast.textContent = message;
+
+            document.getElementById('toast-container').appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
+  const { jsPDF } = window.jspdf;
+
+  const excelInput = document.getElementById("excel-file-input");
+  const excelDropZone = document.getElementById("drop-zone-excel");
+  const excelResultList = document.getElementById("excel-result-list");
+
+  excelDropZone.addEventListener("dragover", e => {
+    e.preventDefault();
+    excelDropZone.classList.add("border-purple-500");
+  });
+
+  excelDropZone.addEventListener("dragleave", () => {
+    excelDropZone.classList.remove("border-purple-500");
+  });
+
+  excelDropZone.addEventListener("drop", e => {
+    e.preventDefault();
+    excelDropZone.classList.remove("border-purple-500");
+    handleExcelFiles(e.dataTransfer.files);
+  });
+
+  excelInput.addEventListener("change", e => {
+    handleExcelFiles(e.target.files);
+  });
+
+  async function handleExcelFiles(files) {
+    const supported = /\.(xls|xlsx)$/i;
+
+    for (const file of files) {
+      if (!supported.test(file.name)) {
+        showToast(`Unsupported file: ${file.name}`, "error");
+        continue;
+      }
+
+      showLoader();
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, { type: 'array' });
+
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+        if (!jsonData || jsonData.length === 0) {
+          hideLoader();
+          showToast("Excel sheet is empty", "error");
+          return;
+        }
+
+        const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+
+        const headers = jsonData[0];
+        const body = jsonData.slice(1);
+
+        doc.autoTable({
+          head: [headers],
+          body: body,
+          margin: { top: 40, left: 20, right: 20 },
+          styles: {
+            fontSize: 8,
+            cellPadding: 3,
+            overflow: 'linebreak'
+          },
+          headStyles: {
+            fillColor: [109, 40, 217],
+            textColor: 255,
+            halign: 'center'
+          },
+          bodyStyles: {
+            valign: 'top'
+          },
+          columnStyles: {
+            // Optional: control individual column widths here if needed
+            // 0: { cellWidth: 100 },
+          }
+        });
+
+        const pdfBlob = doc.output("blob");
+        const url = URL.createObjectURL(pdfBlob);
+
+        renderPDFPreview(file.name, url);
+        hideLoader();
+        showToast(`✅ Converted: ${file.name}`);
+      };
+
+      reader.readAsArrayBuffer(file);
+    }
+  }
+
+  function renderPDFPreview(filename, url) {
+    const container = document.createElement("div");
+    container.className = "flex flex-col items-center justify-center p-6 rounded-md bg-gray-100 dark:bg-gray-800 shadow space-y-3";
+
+    const label = document.createElement("p");
+    label.className = "text-sm font-semibold text-gray-700 dark:text-gray-200";
+    label.textContent = `✅ ${filename} → PDF`;
+
+    const iframe = document.createElement("iframe");
+    iframe.src = url;
+    iframe.className = "w-full h-64 border rounded shadow bg-white";
+    iframe.loading = "lazy";
+
+    const downloadBtn = document.createElement("a");
+    downloadBtn.href = url;
+    downloadBtn.download = filename.replace(/\.(xls|xlsx)$/i, ".pdf");
+    downloadBtn.textContent = "Download PDF";
+    downloadBtn.className = "inline-block px-3 py-1 bg-purple-600 text-white rounded hover:bg-purple-700 text-sm";
+
+    container.appendChild(label);
+    container.appendChild(iframe);
+    container.appendChild(downloadBtn);
+
+    excelResultList.appendChild(container);
+    excelResultList.classList.remove("hidden");
+  }
+
+  function showLoader() {
+    document.getElementById("loader-excel").classList.remove("hidden");
+  }
+
+  function hideLoader() {
+    document.getElementById("loader-excel").classList.add("hidden");
+  }
+
+
+
+
         function updateThemeIcon(theme) {
             themeIcon.innerHTML = theme === 'dark'
                 ? `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -644,7 +888,8 @@
         }
 
     </script>
-    <script src="sloot-content.js"></script>
+    <script src="../sloot-content.js"></script>
+    <div id="toast-container" class="fixed bottom-6 right-6 space-y-2 z-50"></div>
 </body>
 
 </html>

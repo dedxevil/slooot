@@ -4,12 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🟢 Tools | Discover Usable Web Tools 🟢</title>
+    <title>Convert JPG, PNG, BMP, WEBP, TIFF, SVG to PDF | Free Online Image to PDF Converter</title>
+
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="icon"
-        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="0.9em" font-size="90">🛠️</text></svg>'>
+        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">📄</text></svg>'>
+    <!-- SEO Meta Tags -->
+
+    <meta name="author" content="toools.in">
+    <meta name="description"
+        content="Convert JPG, PNG, BMP, WEBP, SVG, TIFF to PDF. Fast, browser-based image to PDF tool. Combine images into one PDF without uploading. Free & privacy-friendly. ">
+
+    <meta name="keywords"
+        content="Image to PDF, JPG to PDF, PNG to PDF, WEBP to PDF, BMP to PDF, TIFF to PDF, Convert image to PDF, Combine images to PDF, Free PDF generator, No upload image converter. PNG to SVG, JPG to SVG, WEBP to SVG, Convert Image to SVG, Online SVG Converter, Raster to Vector Tool, Image to Vector, Vectorize Image Online, SVG Generator, Batch Image to SVG Converter, iloveimg alternative, ilovepdf image to svg, svgconvert, vectorizer.ai, image tracing tool, convert photo to svg, image to vector online, photo to svg converter, svgify, base64 image to svg, convert image without upload">
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
@@ -475,15 +489,7 @@
 
 
             <div class="flex items-center space-x-6">
-                <!-- <nav class="hidden md:flex space-x-6" id="main-nav">
-                    <a href="#finance" class="nav-link text-lg font-medium">Finance</a>
-                    <a href="#social" class="nav-link text-lg font-medium">Social</a>
-                    <a href="#utility" class="nav-link text-lg font-medium">Utility</a>
-                    <a href="#pdf" class="nav-link text-lg font-medium">PDF</a>
-                    <a href="#fun" class="nav-link text-lg font-medium">Fun</a>
-                    <a href="#dev" class="nav-link text-lg font-medium">Dev</a>
 
-                </nav> -->
 
                 <div class="flex items-center space-x-2">
                     <div class="theme-toggle" id="themeToggle"></div>
@@ -496,11 +502,106 @@
     </header>
 
     <main class="container mx-auto py-8">
+        <section id="png-to-svg" class="category-section fade-in mt-20">
+            <h2 class="text-3xl font-bold text-center mb-8">PNG / JPG / GIF / WEBP / BMP / SVG / TIFF to PDF Converter</h2>
 
-        </div>
+            <div class="max-w-3xl mx-auto p-6 space-y-6 bg-white dark:bg-gray-900 rounded-lg shadow-xl">
+
+                <div id="drop-zone"
+                    class="border-2 border-dashed border-gray-400 rounded-md p-8 text-center transition hover:border-purple-500 cursor-pointer dark:bg-gray-800 bg-gray-100">
+                    <p class="text-sm text-gray-600 dark:text-gray-300">Drag & Drop images here or</p>
+                    <label
+                        class="mt-2 inline-block bg-purple-600 text-white px-4 py-2 rounded-md cursor-pointer hover:bg-purple-700 transition">
+                        Choose Files
+                       <input id="file-input" type="file" multiple accept="image/png, image/jpeg, image/jpg, image/webp, image/svg+xml, image/bmp, image/tiff" class="hidden" />
+
+
+                    </label>
+                </div>
+
+                <div id="svg-list" class="space-y-8 hidden">
+                    <h3 class="text-2xl font-bold text-center text-gray-600 dark:text-gray-300">Generated SVGs</h3>
+                    <!-- SVG output cards will be injected here -->
+                </div>
+                <div id="loader" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+                    <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-purple-500"></div>
+                </div>
+
+            </div>
+        </section>
+
+
+<section class="guide-section mt-16 text-lg leading-relaxed text-gray-700 dark:text-gray-400 space-y-6 max-w-2xl mx-auto px-6">
+
+  <h2 class="text-3xl font-bold mb-6 text-center">📄 Image to PDF Converter Guide</h2>
+
+  <div>
+    <h3 class="text-xl font-semibold mb-2">🧾 What Is This Tool?</h3>
+    <p>
+      This free <strong>Image to PDF Converter</strong> lets you convert popular image formats like 
+      <strong>JPG</strong>, <strong>PNG</strong>, <strong>BMP</strong>, <strong>WEBP</strong>, <strong>TIFF</strong>, and <strong>SVG</strong> into high-quality PDF documents — completely in your browser, without uploading anything. 
+      It's a simple, privacy-safe, and fast way to <strong>create PDFs from images</strong> on any device.
+    </p>
+  </div>
+
+  <div>
+    <h3 class="text-xl font-semibold mb-2">🖱 How to Use</h3>
+    <ol class="list-decimal pl-5 space-y-1">
+      <li>Click the “Choose Files” button or drag and drop your images onto the upload area.</li>
+      <li>Wait for the tool to process your files. You can upload multiple images at once.</li>
+      <li>The tool automatically resizes and centers each image on a PDF page.</li>
+      <li>Click “Download PDF” to save your document — all processing happens in your browser.</li>
+    </ol>
+  </div>
+
+  <div>
+    <h3 class="text-xl font-semibold mb-2">💡 Best Practices</h3>
+    <ul class="list-disc pl-5 space-y-1">
+      <li>Use high-resolution images for better print quality.</li>
+      <li>Supported formats: <code>.jpg</code>, <code>.jpeg</code>, <code>.png</code>, <code>.bmp</code>, <code>.webp</code>, <code>.tiff</code>, <code>.svg</code>.</li>
+      <li>For large PDFs, use compressed image files for faster processing.</li>
+    </ul>
+  </div>
+
+  <div>
+    <h3 class="text-xl font-semibold mb-2">🔗 Related Tools</h3>
+    <ul class="list-disc pl-5 space-y-1">
+      <li><a href="/svg-converter" class="underline hover:text-purple-500">SVG Converter</a> — Convert raster to vector format.</li>
+      <li><a href="/bmp-converter" class="underline hover:text-purple-500">BMP Converter</a> — Convert images to and from BMP.</li>
+      <li><a href="/png-converter" class="underline hover:text-purple-500">PNG Converter</a> — Convert images to PNG format.</li>
+      <li><a href="/jpg-converter" class="underline hover:text-purple-500">JPG Converter</a> — Convert any image to JPG.</li>
+      <li><a href="/webp-converter" class="underline hover:text-purple-500">WEBP Converter</a> — Convert modern WebP images.</li>
+      <li><a href="/pdf-password-remover" class="underline hover:text-purple-500">PDF Password Remover</a> — Unlock secured PDF files.</li>
+      <li><a href="/merge-pdfs" class="underline hover:text-purple-500">Merge PDFs</a> — Combine multiple PDFs into one.</li>
+      <li><a href="/split-pdfs" class="underline hover:text-purple-500">Split PDFs</a> — Extract pages from PDFs quickly.</li>
+      <li><a href="/page-numbers-pdf" class="underline hover:text-purple-500">Add Page Numbers to PDF</a> — Number your PDF pages easily.</li>
+    </ul>
+  </div>
+
+  <div>
+    <h3 class="text-xl font-semibold mb-2">🔍 SEO Keywords Covered</h3>
+    <p>
+      JPG to PDF converter, PNG to PDF online, convert BMP to PDF, WEBP to PDF generator, image to PDF tool, SVG to PDF online,
+      free image to PDF converter, create PDF from images, bulk image to PDF, no upload PDF maker, privacy-safe PDF tool,
+      convert TIFF to PDF online, best image to PDF converter, drag and drop JPG to PDF, batch image to PDF, combine images to PDF.
+    </p>
+  </div>
+
+  <div>
+    <h3 class="text-xl font-semibold mb-2">🔐 Security & Privacy</h3>
+    <p>
+      This tool works 100% on your device — images never leave your browser. There’s no upload, no server processing, and 
+      no tracking. Perfect for sensitive or personal files.
+    </p>
+  </div>
+
+</section>
+
+
+
+
 
         <div id="tools-container"></div>
-
 
     </main>
 
@@ -561,6 +662,7 @@
                 header.classList.add('bg-white');
             }
         }
+
         const themeIcon = document.getElementById('themeIcon');
         updateThemeIcon(savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
 
@@ -631,6 +733,108 @@
             const currentYear = new Date().getFullYear();
             yearSpan.textContent = `© ${currentYear} toools.in. All rights reserved.`;
         });
+
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            const color = type === 'success' ? 'bg-green-600' : 'bg-red-600';
+
+            toast.className = `${color} text-white px-4 py-3 rounded shadow-md animate-slideIn`;
+            toast.textContent = message;
+
+            document.getElementById('toast-container').appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
+
+        const dropZone = document.getElementById("drop-zone");
+        const fileInput = document.getElementById("file-input");
+        const svgList = document.getElementById("svg-list");
+
+        dropZone.addEventListener("dragover", e => {
+            e.preventDefault();
+            dropZone.classList.add("border-purple-500");
+        });
+        dropZone.addEventListener("dragleave", () => dropZone.classList.remove("border-purple-500"));
+        dropZone.addEventListener("drop", e => {
+            e.preventDefault();
+            dropZone.classList.remove("border-purple-500");
+            handleFiles(e.dataTransfer.files);
+        });
+        fileInput.addEventListener("change", e => handleFiles(e.target.files));
+
+async function handleFiles(files) {
+    const supportedTypes = /\.(png|jpe?g|webp|gif|bmp|svg|tiff?)$/i;
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ unit: 'px', format: 'a4' });
+    let isFirst = true;
+
+    showLoader();
+
+    for (const file of files) {
+        if (!supportedTypes.test(file.name)) {
+            showToast(`Unsupported file: ${file.name}`, "error");
+            continue;
+        }
+
+        const imgDataUrl = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+
+        const img = new Image();
+        img.src = imgDataUrl;
+
+        await new Promise((res) => {
+            img.onload = () => {
+                const ratio = img.width / img.height;
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const pageHeight = pdf.internal.pageSize.getHeight();
+                let width = pageWidth;
+                let height = width / ratio;
+
+                if (height > pageHeight) {
+                    height = pageHeight;
+                    width = height * ratio;
+                }
+
+                if (!isFirst) pdf.addPage();
+                isFirst = false;
+
+                pdf.addImage(img, 'JPEG', (pageWidth - width) / 2, (pageHeight - height) / 2, width, height);
+                res();
+            };
+        });
+    }
+
+    hideLoader();
+
+    if (isFirst) {
+        showToast("No valid images to convert!", "error");
+        return;
+    }
+
+    pdf.save("images.pdf");
+    showToast("PDF generated successfully!");
+}
+
+
+
+
+        function showLoader() {
+            document.getElementById("loader").classList.remove("hidden");
+        }
+        function hideLoader() {
+            document.getElementById("loader").classList.add("hidden");
+        }
+
+
+
         function updateThemeIcon(theme) {
             themeIcon.innerHTML = theme === 'dark'
                 ? `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -644,7 +848,8 @@
         }
 
     </script>
-    <script src="sloot-content.js"></script>
+    <script src="../sloot-content.js"></script>
+    <div id="toast-container" class="fixed bottom-6 right-6 space-y-2 z-50"></div>
 </body>
 
 </html>

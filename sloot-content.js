@@ -6,13 +6,13 @@ const tools = [
   { name: "SIP Calculator", path: "sip-calculator", emoji: "📊", category: "Finance" },
   { name: "UPI Link Generator", path: "upi-payment-link-generator", emoji: "📲", category: "Finance" },
 
-   { name: "Image Compressor", path: "image-compressor", emoji: "🖼️", category: "Image" },
-      { name: "SVG Converter", path: "svg-converter", emoji: "🟩", category: "Image" },
-         { name: "PNG Converter", path: "png-converter", emoji: "🔲", category: "Image" },
-           { name: "WEBP Converter", path: "webp-converter", emoji: "🔳", category: "Image" },
-           { name: "JPG Converter", path: "jpg-converter", emoji: "🔳", category: "Image" },
-            { name: "BMP Converter", path: "bmp-converter", emoji: "🔳", category: "Image" },
-              { name: "TIFF Converter", path: "tiff-converter", emoji: "🔳", category: "Image" },
+  { name: "Image Compressor", path: "image-compressor", emoji: "🖼️", category: "Image" },
+  { name: "SVG Converter", path: "svg-converter", emoji: "🟩", category: "Image" },
+  { name: "PNG Converter", path: "png-converter", emoji: "🔲", category: "Image" },
+  { name: "WEBP Converter", path: "webp-converter", emoji: "🟨", category: "Image" },
+  { name: "JPG Converter", path: "jpg-converter", emoji: "🟦", category: "Image" },
+  { name: "BMP Converter", path: "bmp-converter", emoji: "🟧", category: "Image" },
+  { name: "TIFF Converter", path: "tiff-converter", emoji: "🟪", category: "Image" },
 
 
   { name: "SQL Formatter", path: "sql-formatter", emoji: "🗃️", category: "Developer" },
@@ -29,6 +29,8 @@ const tools = [
   { name: "PDF Password Remover", path: "pdf-password-remover", emoji: "🔓", category: "PDF" },
   { name: "Protect PDFs", path: "protect-pdfs", emoji: "🛡️", category: "PDF" },
   { name: "PDF Page Numbers", path: "page-numbers-pdf", emoji: "🔢", category: "PDF" },
+  { name: "Image to PDF", path: "image-pdf-converter", emoji: "📄", category: "PDF" },
+    { name: "Excel to PDF", path: "excel-to-pdf-converter", emoji: "❎️", category: "PDF" },
 
   { name: "WhatsApp Link Generator", path: "whatsapp-link-generator", emoji: "💬", category: "Social" },
   { name: "YouTube Video Thumbnail Downloader", path: "youtube-thumbnail-downloader", emoji: "📺️", category: "Social" },
@@ -61,11 +63,14 @@ function generateGroupedTools(tools) {
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("tools-container");
   container.innerHTML = `
-    <div class="max-w-5xl mx-auto px-4 mt-20 mb-12 text-center">
-      <h1 class="text-3xl md:text-4xl font-bold mb-3">Curated collection of tools that simplify your time on the internet</h1>
-      <p class="text-base text-gray-600 mb-8">Search or browse tools by category below.</p>
-      <input type="text" id="toolSearch" placeholder="🔍 Search tools..." class="w-full max-w-xl mx-auto p-3 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
-    </div>
+   <div class="max-w-5xl mx-auto px-4 mt-20 mb-12 text-center">
+ <h1 class="text-3xl md:text-4xl font-bold mb-3">Curated collection of tools that simplify your time on the internet</h1>
+<p class="text-2xl text-white font-semibold mb-4">${tools.length} total tools and counting...</p>
+
+ <p class="text-base text-gray-600 mb-8">Search or browse tools by category below.</p>
+ <input type="text" id="toolSearch" placeholder="🔍 Search tools..." class="w-full max-w-xl mx-auto p-3 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+ </div>
+
 
     <div class="max-w-5xl mx-auto px-4 mb-24" id="toolResults">
       ${generateGroupedTools(tools)}
