@@ -32,6 +32,7 @@ const tools = [
   { name: "Image to PDF", path: "image-pdf-converter", emoji: "📑", category: "PDF" },
     { name: "Excel to PDF", path: "excel-to-pdf-converter", emoji: "🧾", category: "PDF" },
      { name: "PDF to Excel", path: "pdf-to-excel-converter", emoji: "❎️", category: "PDF" },
+     { name: "PPT to PDF", path: "ppt-to-pft-converter", emoji: "🛝", category: "PDF" },
 
   { name: "WhatsApp Link Generator", path: "whatsapp-link-generator", emoji: "💬", category: "Social" },
   { name: "YouTube Video Thumbnail Downloader", path: "youtube-thumbnail-downloader", emoji: "📺️", category: "Social" },
