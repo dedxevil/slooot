@@ -29,8 +29,9 @@ const tools = [
   { name: "PDF Password Remover", path: "pdf-password-remover", emoji: "🔓", category: "PDF" },
   { name: "Protect PDFs", path: "protect-pdfs", emoji: "🛡️", category: "PDF" },
   { name: "PDF Page Numbers", path: "page-numbers-pdf", emoji: "🔢", category: "PDF" },
-  { name: "Image to PDF", path: "image-pdf-converter", emoji: "📄", category: "PDF" },
-    { name: "Excel to PDF", path: "excel-to-pdf-converter", emoji: "❎️", category: "PDF" },
+  { name: "Image to PDF", path: "image-pdf-converter", emoji: "📑", category: "PDF" },
+    { name: "Excel to PDF", path: "excel-to-pdf-converter", emoji: "🧾", category: "PDF" },
+     { name: "PDF to Excel", path: "pdf-to-excel-converter", emoji: "❎️", category: "PDF" },
 
   { name: "WhatsApp Link Generator", path: "whatsapp-link-generator", emoji: "💬", category: "Social" },
   { name: "YouTube Video Thumbnail Downloader", path: "youtube-thumbnail-downloader", emoji: "📺️", category: "Social" },

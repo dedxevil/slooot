@@ -4,24 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Compressor | Compress JPG, PNG, SVG or GIF images instantly with our free image compressor tool</title>
+<title>Convert PDF to Excel | Extract Tables to XLSX Free</title>
+
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="icon"
-        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">🖼️</text></svg>'>
+        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">❎️</text></svg>'>
     <!-- SEO Meta Tags -->
 
-    <meta name="author" content="toools.in">
-    <meta name="description"
-        content="Compress JPG, PNG, SVG or GIF images instantly with our free image compressor tool. Drag and drop files or choose from your device. Reduce file size with best quality.">
-    <meta name="keywords"
-        content="Image Compressor, Compress JPG, Compress PNG, GIF Optimizer, SVG Compressor, Online Image Compression, Free Image Optimizer, Reduce Image Size, Lossless Image Compression Tool, Resize Image Fast">
+   <!-- Meta Tags for PDF to Excel -->
+
+<meta name="title" content="Convert PDF to Excel | Extract Tables from PDF to XLSX Online" />
+<meta name="description" content="Extract tables from PDF files and convert them into Excel spreadsheets online. Free, browser-based, no upload required. PDF to XLSX in seconds." />
+<meta name="keywords" content="PDF to Excel, Convert PDF to XLSX, PDF table to Excel, Extract table from PDF, Online PDF to Excel, Table extractor, Browser PDF tool, Secure PDF to Excel" />
+<meta name="author" content="toools.in" />
+<meta name="robots" content="index, follow" />
 
 
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
+
+
+<!-- Required by jsPDF().html() -->
+<!-- PDF.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+
+<!-- SheetJS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<!-- <script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+</script> -->
 
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -501,79 +513,95 @@
     </header>
 
     <main class="container mx-auto py-8">
-        <section id="image-compressor" class="category-section fade-in mt-20">
-            <h2 class="text-3xl font-bold text-center mb-8">Image Compressor</h2>
+<section id="pdf-to-excel" class="category-section fade-in mt-20 max-w-3xl mx-auto">
+  <h2 class="text-3xl font-bold text-center mb-8">PDF to Excel Converter</h2>
 
-            <div class="max-w-3xl mx-auto p-6 space-y-6 bg-white dark:bg-gray-900 rounded-lg shadow-xl">
+  <div class="relative max-w-2xl mx-auto p-6 space-y-6 bg-white dark:bg-gray-900 rounded-lg shadow-xl">
 
-                <div id="drop-zone"
-                    class="border-2 border-dashed border-gray-400 rounded-md p-8 text-center transition hover:border-purple-500 cursor-pointer dark:bg-gray-800 bg-gray-100">
-                    <p class="text-sm text-gray-600 dark:text-gray-300">Drag & Drop your images here or</p>
-                    <label
-                        class="mt-2 inline-block bg-purple-600 text-white px-4 py-2 rounded-md cursor-pointer hover:bg-purple-700 transition">
-                        Choose Files
-                        <input id="file-input" type="file" multiple
-                            accept="image/png, image/jpeg, image/svg+xml, image/gif" class="hidden" />
-                    </label>
-                </div>
+    <div id="drop-zone-pdf"
+      class="border-2 border-dashed border-gray-400 rounded-md p-8 text-center transition hover:border-purple-500 cursor-pointer dark:bg-gray-800 bg-gray-100">
+      <p class="text-sm text-gray-600 dark:text-gray-300">Drag & Drop PDF file here or</p>
+      <label
+        class="mt-2 inline-block bg-purple-600 text-white px-4 py-2 rounded-md cursor-pointer hover:bg-purple-700 transition">
+        Choose File
+        <input id="pdf-file-input" type="file" accept="application/pdf" class="hidden" />
+      </label>
+    </div>
 
-                <div id="compressed-list" class="space-y-8 hidden">
-                    <h3 class="text-2xl font-bold text-center text-gray-500">Compressed Images</h3>
-                </div>
+    <!-- Loader -->
+    <div id="loader-pdf"
+      class="hidden absolute inset-0 bg-black/40 flex items-center justify-center z-10 rounded-md">
+      <div class="animate-spin rounded-full h-10 w-10 border-4 border-t-transparent border-purple-500"></div>
+    </div>
 
-            </div>
-        </section>
-        <section
-            class="max-w-3xl mx-auto mt-16 px-4 text-lg leading-relaxed text-gray-700 dark:text-gray-400 space-y-6">
+    <!-- Result -->
+    <div id="pdf-result" class="space-y-6 hidden">
+      <h3 class="text-2xl font-bold text-center text-gray-600 dark:text-gray-300">Converted Excel</h3>
+      <div id="pdf-output"></div>
+    </div>
 
-            <h3 class="text-2xl font-bold mb-4 text-center">Image Compressor Tool Guide</h3>
+  </div>
+</section>
 
-            <div>
-                <h4 class="text-xl font-semibold mb-2">🖼 Why Compress Images?</h4>
-                <p>
-                    Image compression helps reduce file size without significantly affecting image quality. Smaller
-                    images load faster, use less bandwidth, and improve SEO, especially on websites, apps, blogs, and
-                    emails.
-                </p>
-            </div>
+<section class="guide-section mt-16 text-lg leading-relaxed text-gray-700 dark:text-gray-400 space-y-6 max-w-2xl mx-auto px-4">
+  <h2 class="text-3xl font-bold mb-6 text-center">📄 PDF to Excel Converter Guide</h2>
 
-            <div>
-                <h4 class="text-xl font-semibold mb-2">📂 Supported Formats</h4>
-                <p>
-                    This tool supports:
-                    <strong>JPG, JPEG, PNG, SVG, GIF</strong> formats. Images up to 5MB in size can be compressed
-                    directly in your browser — fast and secure.
-                </p>
-            </div>
+  <div>
+    <h3 class="text-xl font-semibold mb-2">🧾 What Is This Tool?</h3>
+    <p>
+      This free online <strong>PDF to Excel Converter</strong> extracts table-like data from PDF files and converts it into clean, structured <strong>Excel (.xlsx)</strong> spreadsheets. It works entirely in your browser — no uploads, no logins, no data leaves your device.
+    </p>
+  </div>
 
-            <div>
-                <h4 class="text-xl font-semibold mb-2">⚙️ How It Works</h4>
-                <ul class="list-decimal pl-5 space-y-1">
-                    <li>Drag and drop images, or use the "Choose Files" button</li>
-                    <li>The tool compresses each image instantly in your browser</li>
-                    <li>You’ll see a preview and a download button for each compressed file</li>
-                </ul>
-            </div>
+  <div>
+    <h3 class="text-xl font-semibold mb-2">🖱 How to Use</h3>
+    <ol class="list-decimal pl-5 space-y-1">
+      <li>Click “Choose File” or drag and drop your PDF into the tool area.</li>
+      <li>The tool automatically scans the document for tables.</li>
+      <li>If table-like structures are found, an Excel file is generated instantly.</li>
+      <li>If no tables are detected, an error message is displayed.</li>
+    </ol>
+  </div>
 
-            <div>
-                <h4 class="text-xl font-semibold mb-2">🚀 Benefits of This Tool</h4>
-                <ul class="list-disc pl-5 space-y-1">
-                    <li>No server upload – everything happens in your browser</li>
-                    <li>Reduces file size by up to 80% or more</li>
-                    <li>Perfect for web, social media, and email attachments</li>
-                    <li>Works offline after first load (PWA-friendly)</li>
-                </ul>
-            </div>
+  <div>
+    <h3 class="text-xl font-semibold mb-2">💡 Best Practices</h3>
+    <ul class="list-disc pl-5 space-y-1">
+      <li>Use PDFs that contain tabular or grid-like data.</li>
+      <li>This tool works best with digital PDFs (not scanned images).</li>
+      <li>For scanned documents, use OCR-based converters.</li>
+    </ul>
+  </div>
 
-            <div>
-                <h4 class="text-xl font-semibold mb-2">🔍 SEO Keywords Covered</h4>
-                <p>
-                    Image Compressor, Compress PNG, Compress JPG, Reduce Image File Size, Online Image Compression Tool,
-                    Free Image Optimizer, Image Size Reducer, Shrink Photos Online, JPEG Compressor, GIF Optimizer, SVG
-                    Image Compressor
-                </p>
-            </div>
-        </section>
+  <div>
+    <h3 class="text-xl font-semibold mb-2">🔗 Related Tools</h3>
+    <ul class="list-disc pl-5 space-y-1">
+      <li><a href="/excel-to-pdf" class="underline hover:text-purple-500">Excel to PDF</a></li>
+      <li><a href="/image-pdf-converter" class="underline hover:text-purple-500">Image to PDF Converter</a></li>
+      <li><a href="/pdf-password-remover" class="underline hover:text-purple-500">PDF Password Remover</a></li>
+      <li><a href="/merge-pdfs" class="underline hover:text-purple-500">Merge PDFs</a></li>
+      <li><a href="/split-pdfs" class="underline hover:text-purple-500">Split PDFs</a></li>
+      <li><a href="/page-numbers-pdf" class="underline hover:text-purple-500">Add Page Numbers to PDF</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <h3 class="text-xl font-semibold mb-2">🔍 SEO Keywords Covered</h3>
+    <p>
+      PDF to Excel converter, extract tables from PDF, PDF to spreadsheet, convert PDF to .xlsx online, table to Excel converter, browser PDF extractor, no upload PDF to Excel, secure PDF to Excel, free table detection from PDF.
+    </p>
+  </div>
+
+  <div>
+    <h3 class="text-xl font-semibold mb-2">🔐 Security & Privacy</h3>
+    <p>
+      Your files never leave your device. This PDF to Excel converter works 100% client-side using your browser — making it a fast and secure tool to extract tables from PDFs without uploading anything.
+    </p>
+  </div>
+</section>
+
+
+
+
 
 
 
@@ -726,97 +754,99 @@
             }, 3000);
         }
 
-        const dropZone = document.getElementById("drop-zone");
-        const fileInput = document.getElementById("file-input");
-        const compressedList = document.getElementById("compressed-list");
+  // Fix PDF.js worker path
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
 
-        // dropZone.addEventListener("click", () => fileInput.click());
-        dropZone.addEventListener("dragover", (e) => {
-            e.preventDefault();
-            dropZone.classList.add("border-purple-500");
-        });
-        dropZone.addEventListener("dragleave", () => {
-            dropZone.classList.remove("border-purple-500");
-        });
-        dropZone.addEventListener("drop", (e) => {
-            e.preventDefault();
-            dropZone.classList.remove("border-purple-500");
-            handleFiles(e.dataTransfer.files);
-        });
-        fileInput.addEventListener("change", (e) => {
-            handleFiles(e.target.files);
-        });
+  const pdfInput = document.getElementById("pdf-file-input");
+  const dropZonePDF = document.getElementById("drop-zone-pdf");
 
-        function handleFiles(files) {
-            [...files].forEach(async (file) => {
-                if (!file.type.startsWith("image/")) {
-                    showToast("Unsupported file type: " + file.name, "error");
-                    return;
-                }
+  pdfInput.addEventListener("change", e => handlePDF(e.target.files[0]));
+  dropZonePDF.addEventListener("dragover", e => {
+    e.preventDefault();
+    dropZonePDF.classList.add("border-purple-500");
+  });
+  dropZonePDF.addEventListener("dragleave", () => {
+    dropZonePDF.classList.remove("border-purple-500");
+  });
+  dropZonePDF.addEventListener("drop", e => {
+    e.preventDefault();
+    dropZonePDF.classList.remove("border-purple-500");
+    handlePDF(e.dataTransfer.files[0]);
+  });
 
-                if (file.size > 5 * 1024 * 1024) {
-                    showToast(`${file.name} is too large. Max allowed is 5MB.`, "error");
-                    return;
-                }
+  async function handlePDF(file) {
+    if (!file || file.type !== "application/pdf") {
+      showToast("Please upload a valid PDF file.", "error");
+      return;
+    }
 
-                try {
-                    const options = {
-                        maxSizeMB: 0.5,
-                        maxWidthOrHeight: 1024,
-                        maxIteration: 15,
-                        useWebWorker: true,
-                        fileType: file.type.includes("png") ? "image/png" : "image/jpeg"
-                    };
+    showLoaderPDF();
 
-                    const compressedFile = await imageCompression(file, options);
-                    const blobUrl = URL.createObjectURL(compressedFile);
+    const reader = new FileReader();
+    reader.onload = async function () {
+      const typedarray = new Uint8Array(reader.result);
+      const pdf = await pdfjsLib.getDocument({ data: typedarray }).promise;
 
-                    const container = document.createElement("div");
-                    container.className = "flex flex-col items-center justify-center p-6 rounded-md bg-gray-100 dark:bg-gray-800 shadow space-y-3";
+      let extractedData = [];
+
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const textContent = await page.getTextContent();
+        const lines = groupTextByLines(textContent.items);
+        extractedData.push(...lines);
+      }
+
+      const tableData = extractedData
+        .filter(line => line.split(/\s{2,}/).length > 1)
+        .map(line => line.split(/\s{2,}/).map(cell => cell.trim()));
+
+      hideLoaderPDF();
+
+      if (tableData.length === 0) {
+        showToast("❌ No tables found in this PDF.", "error");
+        return;
+      }
+
+      // Generate Excel blob
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.aoa_to_sheet(tableData);
+      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+
+      const wbout = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+      const blob = new Blob([wbout], { type: "application/octet-stream" });
+
+      // Auto-download
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = file.name.replace(/\.pdf$/i, ".xlsx");
+      a.click();
+
+      showToast("✅ Excel file downloaded successfully!");
+    };
+
+    reader.readAsArrayBuffer(file);
+  }
+
+  function groupTextByLines(items) {
+    const lines = {};
+    items.forEach(item => {
+      const y = Math.floor(item.transform[5]);
+      lines[y] = lines[y] || [];
+      lines[y].push(item.str);
+    });
+    const sorted = Object.keys(lines).sort((a, b) => b - a);
+    return sorted.map(y => lines[y].join(' '));
+  }
+
+  function showLoaderPDF() {
+    document.getElementById("loader-pdf").classList.remove("hidden");
+  }
+
+  function hideLoaderPDF() {
+    document.getElementById("loader-pdf").classList.add("hidden");
+  }
 
 
-                    const name = document.createElement("p");
-                    name.className = "text-sm font-semibold text-gray-700 dark:text-gray-200";
-                    function formatSize(bytes) {
-                        return bytes < 1024 * 1024
-                            ? `${(bytes / 1024).toFixed(1)} KB`
-                            : `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
-                    }
-
-                    const originalSize = formatSize(file.size);
-                    const compressedSize = formatSize(compressedFile.size);
-                    const percentSaved = ((1 - compressedFile.size / file.size) * 100).toFixed(1);
-
-                    name.textContent = `✅ ${file.name} — ${originalSize} → ${compressedSize} (${percentSaved}% smaller)`;
-
-
-
-
-
-                    const img = document.createElement("img");
-                    img.src = blobUrl;
-                    img.className = "max-w-xs rounded-md border border-gray-300 shadow";
-
-
-                    const btn = document.createElement("a");
-                    btn.textContent = "Download";
-                    btn.href = blobUrl;
-                    btn.download = file.name.replace(/\.(\w+)$/, "-compressed.$1");
-                    btn.className = "inline-block px-3 py-1 bg-purple-600 text-white rounded hover:bg-purple-700 text-sm";
-
-                    container.appendChild(name);
-                    container.appendChild(img);
-                    container.appendChild(btn);
-
-                    compressedList.appendChild(container);
-                    compressedList.classList.remove("hidden");
-
-                } catch (e) {
-                    console.error(e);
-                    showToast("Failed to compress: " + file.name, "error");
-                }
-            });
-        }
 
 
 
