@@ -782,6 +782,7 @@ async function mergePDFs() {
   const blob = new Blob([mergedBytes], { type: "application/pdf" });
   const url = URL.createObjectURL(blob);
 
+  const now = new Date();
   const a = document.createElement("a");
   a.href = url;
   const timestamp = now.toISOString().slice(0, 19).replace(/[:T]/g, "-");
