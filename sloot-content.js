@@ -38,6 +38,10 @@ const tools = [
 
   { name: "WhatsApp Link Generator", path: "whatsapp-link-generator", emoji: "💬", category: "Social" },
   { name: "YouTube Video Thumbnail Downloader", path: "youtube-thumbnail-downloader", emoji: "📺️", category: "Social" },
+
+  
+  { name: "Word Count and Frequency Analyzer", path: "word-count", emoji: "🔁", category: "Text" },
+  { name: "Text Repeater", path: "text-repeater", emoji: "🔤", category: "Text" },
   // { name: "YouTube Channel Profile Picture Downloader", path: "youtube-channel-profile-picture-downloader", emoji: "📽️", category: "Social" },
 ];
 
