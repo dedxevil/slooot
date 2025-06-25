@@ -35,7 +35,7 @@ const tools = [
   { name: "PPT to PDF", path: "ppt-to-pft-converter", emoji: "🛝", category: "PDF" },
   { name: "PDF Compressor", path: "pdf-compressor", emoji: "📑", category: "PDF" },
   { name: "Rotate PDF pages", path: "rotate-pdf-pages", emoji: "📄", category: "PDF" },
-   { name: "Remove blank PDF pages", path: "remove-blank-pdf-pages", emoji: "📄", category: "PDF" },
+   { name: "Remove blank PDF pages", path: "remove-blank-pages-pdf", emoji: "📄", category: "PDF" },
 
   { name: "WhatsApp Link Generator", path: "whatsapp-link-generator", emoji: "💬", category: "Social" },
   { name: "YouTube Video Thumbnail Downloader", path: "youtube-thumbnail-downloader", emoji: "📺️", category: "Social" },
