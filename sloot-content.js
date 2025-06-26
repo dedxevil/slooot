@@ -43,6 +43,8 @@ const tools = [
   
   { name: "Word Count and Frequency Analyzer", path: "word-count", emoji: "🔁", category: "Text" },
   { name: "Text Repeater", path: "text-repeater", emoji: "🔤", category: "Text" },
+    { name: "Text to Morse Code Converter", path: "text-to-morse-code", emoji: "▫️", category: "Text" },
+  { name: "Morse Code to Text Converter", path: "morse-code-to-text", emoji: "▫️", category: "Text" },
   // { name: "YouTube Channel Profile Picture Downloader", path: "youtube-channel-profile-picture-downloader", emoji: "📽️", category: "Social" },
 ];
 

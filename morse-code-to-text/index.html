@@ -4,29 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <title>Compress PDF Online | Free Secure PDF Compressor Tool</title> -->
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="icon"
-        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">📄</text></svg>'>
+        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">🔤</text></svg>'>
     <!-- SEO Meta Tags -->
 
-    <meta name="author" content="toools.in">
-<meta name="title" content="Remove Blank Pages from PDF – Free Online PDF Cleaner" />
-<meta name="description" content="Remove blank pages from PDF instantly. Free PDF cleaner tool that detects and deletes empty pages in seconds. Works in-browser, no upload, no watermark." />
-<meta name="keywords" content="remove blank pdf pages, pdf cleaner, delete empty pdf pages, remove blank pages online, clean pdf, optimize pdf, pdf tools" />
-<title>Remove Blank Pages from PDF – Free PDF Cleaner</title>
+<meta name="title" content="Morse Code to Text Converter – Free Online Morse Decoder" />
+<meta name="description" content="Decode Morse code into readable text instantly. Free online Morse code to text converter with copy functionality. No login, no ads, works fully in-browser." />
+<meta name="keywords" content="morse to text, decode morse code, morse code decoder, morse translator, morse converter, online morse decoder, free morse tools" />
+<title>Morse Code to Text Converter – Free Online Morse Decoder</title>
 
 
 
 
-<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
-<script>
-  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
-</script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sql-formatter@12.2.3/dist/sql-formatter.min.js"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -474,20 +471,17 @@
         .logo-container:hover .logo-icon svg {
             transform: rotate(-10deg) scale(1.1);
         }
+        textarea {
+  transition: height 0.2s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
 
-        @keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-.animate-slideIn {
-  animation: slideIn 0.3s ease-out;
-}
     </style>
 </head>
 
@@ -520,82 +514,76 @@
     </header>
 
     <main class="container mx-auto py-8">
-
-<section id="remove-blank-pdf-tool" class="category-section fade-in mt-20 max-w-3xl mx-auto">
-  <h2 class="text-3xl font-bold text-center mb-8">Remove Blank Pages from PDF</h2>
+<section id="morse-decode-tool" class="category-section fade-in mt-20 max-w-3xl mx-auto">
+  <h2 class="text-3xl font-bold text-center mb-8">Morse Code to Text Converter</h2>
 
   <div class="relative max-w-2xl mx-auto p-6 space-y-6 bg-white dark:bg-gray-900 rounded-lg shadow-xl">
-    <!-- Drop Zone -->
-    <div id="drop-zone-blank"
-      class="border-2 border-dashed border-gray-400 rounded-md p-8 text-center transition hover:border-purple-500 cursor-pointer dark:bg-gray-800 bg-gray-100">
-      <p class="text-sm text-gray-600 dark:text-gray-300">Drag & Drop PDF here or</p>
-      <label
-        class="mt-2 inline-block bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-4 py-2 rounded-md cursor-pointer hover:opacity-90 transition">
-        Choose PDF File
-        <input id="blank-file-input" type="file" accept="application/pdf" multiple class="hidden" />
-      </label>
+    <!-- Morse Code Input -->
+    <div>
+      <label class="block text-sm font-medium text-gray-600 dark:text-gray-300 mb-2">Enter Morse code to decode:</label>
+      <textarea id="morse-decode-input" rows="5"
+        class="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white resize-none"
+        placeholder="Example: ... --- ..."></textarea>
     </div>
 
     <!-- Convert Button -->
     <div class="text-center">
-      <button id="remove-blank-btn"
+      <button id="morse-decode-btn"
         class="mt-4 px-6 py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-md hover:opacity-90 transition">
-        Remove Blank Pages & Download
+        Convert to Text
       </button>
     </div>
 
-    <!-- Loader -->
-    <div id="loader-blank"
-      class="hidden absolute inset-0 bg-black/40 flex items-center justify-center z-10 rounded-md">
-      <div class="animate-spin rounded-full h-10 w-10 border-4 border-t-transparent border-purple-500"></div>
-    </div>
-
-    <!-- Output -->
-    <div id="blank-result" class="hidden mt-6 text-center">
-      <p class="text-sm text-gray-500 dark:text-gray-300">✅ Blank pages removed and PDF downloaded.</p>
+    <!-- Output Area -->
+    <div id="morse-decode-result" class="hidden mt-6 space-y-4">
+      <textarea id="morse-decode-output"
+        class="w-full h-48 px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white resize-none"
+        readonly></textarea>
+      <div class="text-center">
+        <button id="morse-decode-copy-btn"
+          class="px-4 py-2 bg-purple-600 text-white rounded-md hover:opacity-90 transition">Copy Decoded Text</button>
+      </div>
     </div>
   </div>
 
-
 </section>
-
 
 
 <section class="max-w-3xl mx-auto mt-16 px-6">
-  <h3 class="text-2xl font-bold mb-4">How to Remove Blank Pages from PDF</h3>
-  <p class="mb-4">Use this free <strong>Remove Blank Pages from PDF</strong> tool to instantly delete empty pages from your PDF documents. Whether you're scanning documents or merging PDFs, unwanted blank pages can sneak in. This tool cleans them out — fast, private, and entirely in your browser.</p>
+  <h3 class="text-2xl font-bold mb-4">How to Convert Morse Code to Text</h3>
+  <p class="mb-4">This free <strong>Morse Code to Text Converter</strong> lets you decode Morse signals back into readable text. Great for decoding secret messages, learning Morse, or practicing communication.</p>
 
   <ol class="list-decimal ml-6 space-y-2 text-gray-700 dark:text-gray-500">
-    <li>Upload your PDF file(s) via drag-and-drop or by clicking the upload button.</li>
-    <li>Click <strong>"Remove Blank Pages & Download"</strong>.</li>
-    <li>The tool will detect empty pages, remove them, and automatically download the cleaned PDF.</li>
+    <li>Paste or type the Morse code using <code>.</code> for dots, <code>-</code> for dashes, spaces between letters, and <code>/</code> between words.</li>
+    <li>Click <strong>"Convert to Text"</strong>.</li>
+    <li>View the translated text and copy it with one click.</li>
   </ol>
 
-  <h4 class="text-xl font-semibold mt-6 mb-2">Use Cases</h4>
-  <ul class="list-disc ml-6 space-y-1 text-gray-700 dark:text-gray-500">
-    <li>📄 Cleaning scanned PDFs with blank pages.</li>
-    <li>🗂️ Removing empty pages after splitting or merging PDFs.</li>
-    <li>🚀 Optimizing PDFs for smaller file size.</li>
-    <li>✅ Making PDF reports and presentations clean and professional.</li>
-  </ul>
+  <h4 class="text-xl font-semibold mt-6 mb-2">Example</h4>
+  <p class="mb-4"><strong>Input:</strong> ... --- ...<br><strong>Output:</strong> SOS</p>
 
-  <h4 class="text-xl font-semibold mt-6 mb-2">Other Popular Tools</h4>
+  <h4 class="text-xl font-semibold mt-6 mb-2">Other Useful Tools</h4>
   <ul class="list-disc ml-6 space-y-1 text-purple-600 dark:text-purple-400 underline">
+    <li><a href="/text-repeater" target="_blank">Text Repeater Tool</a></li>
+    <li><a href="/word-counter" target="_blank">Word Count & Frequency Tool</a></li>
+    <li><a href="/morse-code-converter" target="_blank">Text to Morse Code Converter</a></li>
     <li><a href="/merge-pdfs" target="_blank">Merge PDF Files</a></li>
     <li><a href="/split-pdfs" target="_blank">Split PDF Pages</a></li>
-    <li><a href="/page-numbers-pdf" target="_blank">Add Page Numbers to PDF</a></li>
     <li><a href="/pdf-password-remover" target="_blank">Remove PDF Password</a></li>
-    <li><a href="/image-pdf-converter" target="_blank">Image to PDF Converter</a></li>
-    <li><a href="/text-repeater" target="_blank">Text Repeater Tool</a></li>
   </ul>
 
-  <p class="mt-6 text-sm text-gray-500">SEO Tags: remove blank pdf pages, pdf cleaner, delete empty pages, clean pdf, pdf optimization, free pdf tool</p>
+  <p class="mt-6 text-sm text-gray-500">SEO Tags: morse to text, decode morse code, morse translator, morse code decoder, online morse converter, decode morse online</p>
 </section>
 
 
 
-        <div id="tools-container"></div>
 
+
+
+
+
+
+  <div id="tools-container"></div>
     </main>
 
     <footer class="py-8 border-t border-gray-800 dark:border-gray-700">
@@ -717,8 +705,6 @@
                     link.classList.add('active');
                 }
             });
-
-
         }
 
         window.addEventListener('scroll', highlightNavLink);
@@ -730,152 +716,61 @@
             yearSpan.textContent = `© ${currentYear} toools.in. All rights reserved.`;
         });
 
-        function showToast(message, type = 'success') {
+function showToast(msg, type = 'success') {
   const toast = document.createElement('div');
-  const color = type === 'success' ? 'bg-green-600' : 'bg-red-600';
-
-  toast.className = `${color} text-white px-4 py-3 rounded shadow-md animate-slideIn`;
-  toast.textContent = message;
-
+  toast.className = `px-4 py-3 rounded shadow-md animate-slideIn text-white ${type === 'error' ? 'bg-red-600' : 'bg-green-600'}`;
+  toast.textContent = msg;
   document.getElementById('toast-container').appendChild(toast);
-
   setTimeout(() => {
     toast.classList.add('opacity-0');
-    setTimeout(() => toast.remove(), 500);
+    setTimeout(() => toast.remove(), 400);
   }, 3000);
 }
-  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js';
 
-  const input = document.getElementById('blank-file-input');
-  const dropZone = document.getElementById('drop-zone-blank');
-  const loader = document.getElementById('loader-blank');
-  const convertBtn = document.getElementById('remove-blank-btn');
-  const resultBox = document.getElementById('blank-result');
+const reverseMorseMap = {};
+Object.entries({
+  A: '.-', B: '-...', C: '-.-.', D: '-..', E: '.', F: '..-.',
+  G: '--.', H: '....', I: '..', J: '.---', K: '-.-', L: '.-..',
+  M: '--', N: '-.', O: '---', P: '.--.', Q: '--.-', R: '.-.',
+  S: '...', T: '-', U: '..-', V: '...-', W: '.--', X: '-..-',
+  Y: '-.--', Z: '--..',
+  0: '-----', 1: '.----', 2: '..---', 3: '...--',
+  4: '....-', 5: '.....', 6: '-....', 7: '--...',
+  8: '---..', 9: '----.',
+  '.': '.-.-.-', ',': '--..--', '?': '..--..', '!': '-.-.--',
+  '/': '-..-.', '(': '-.--.', ')': '-.--.-', '&': '.-...',
+  ':': '---...', ';': '-.-.-.', '=': '-...-', '+': '.-.-.',
+  '-': '-....-', '_': '..--.-', '"': '.-..-.', '$': '...-..-',
+  '@': '.--.-.', ' ': '/'
+}).forEach(([letter, morse]) => reverseMorseMap[morse] = letter);
 
-  let selectedFiles = [];
+document.getElementById('morse-decode-btn').addEventListener('click', () => {
+  const input = document.getElementById('morse-decode-input').value.trim();
+  const outputBox = document.getElementById('morse-decode-output');
+  const resultBox = document.getElementById('morse-decode-result');
 
-  input.addEventListener('change', () => {
-    selectedFiles = [...input.files];
-  });
-
-  dropZone.addEventListener('drop', e => {
-    e.preventDefault();
-    dropZone.classList.remove('border-purple-500');
-    selectedFiles = [...e.dataTransfer.files];
-  });
-  dropZone.addEventListener('dragover', e => {
-    e.preventDefault();
-    dropZone.classList.add('border-purple-500');
-  });
-  dropZone.addEventListener('dragleave', () => {
-    dropZone.classList.remove('border-purple-500');
-  });
-
-  convertBtn.addEventListener('click', async () => {
-    if (!selectedFiles.length) {
-      showToast('Please upload at least one PDF.', 'error');
-      return;
-    }
-
-    try {
-      showLoader();
-      for (const file of selectedFiles) {
-        const cleanedBytes = await removeBlankPages(file);
-        const blob = new Blob([cleanedBytes], { type: 'application/pdf' });
-        const url = URL.createObjectURL(blob);
-
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = file.name.replace(/\.pdf$/i, '-cleaned.pdf');
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }
-      hideLoader();
-      resultBox.classList.remove('hidden');
-      showToast('✅ Blank pages removed successfully!');
-    } catch (err) {
-      console.error(err);
-      hideLoader();
-      showToast('❌ Failed to remove blank pages.', 'error');
-    }
-  });
-
-  async function removeBlankPages(file) {
-    const arrayBuffer = await file.arrayBuffer();
-    const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
-    const pages = pdfDoc.getPages();
-
-    const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
-    const pdf = await loadingTask.promise;
-
-    const nonBlankPages = [];
-
-    for (let i = 0; i < pdf.numPages; i++) {
-      const page = await pdf.getPage(i + 1);
-      const viewport = page.getViewport({ scale: 1 });
-
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d');
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-
-      await page.render({ canvasContext: context, viewport }).promise;
-
-      const imageData = context.getImageData(0, 0, canvas.width, canvas.height).data;
-      const isBlank = isPageBlank(imageData);
-
-      if (!isBlank) {
-        nonBlankPages.push(i);
-      }
-    }
-
-    const newPdfDoc = await PDFLib.PDFDocument.create();
-    for (const pageIndex of nonBlankPages) {
-      const [copiedPage] = await newPdfDoc.copyPages(pdfDoc, [pageIndex]);
-      newPdfDoc.addPage(copiedPage);
-    }
-
-    newPdfDoc.setTitle('PDF without Blank Pages');
-    newPdfDoc.setAuthor('17x Tools');
-    newPdfDoc.setCreator('Adobe Acrobat Pro DC');
-    newPdfDoc.setProducer('Adobe PDF Library 15.0');
-    newPdfDoc.setSubject('Blank pages removed');
-    newPdfDoc.setCreationDate(new Date());
-    newPdfDoc.setModificationDate(new Date());
-
-    return await newPdfDoc.save({ useObjectStreams: true });
+  if (!input) {
+    showToast('Please enter Morse code.', 'error');
+    return;
   }
 
-  function isPageBlank(imageData) {
-    const threshold = 10; // pixel brightness threshold
-    let blank = true;
+  const words = input.split(' / ').map(word => {
+    return word.split(' ').map(code => reverseMorseMap[code] || '').join('');
+  });
 
-    for (let i = 0; i < imageData.length; i += 4) {
-      const r = imageData[i];
-      const g = imageData[i + 1];
-      const b = imageData[i + 2];
-      const alpha = imageData[i + 3];
+  const decoded = words.join(' ').trim();
+  outputBox.value = decoded || '⚠️ Invalid or empty Morse code.';
+  resultBox.classList.remove('hidden');
+  showToast('✅ Morse code decoded!');
+});
 
-      const brightness = (r + g + b) / 3;
+document.getElementById('morse-decode-copy-btn').addEventListener('click', () => {
+  const outputBox = document.getElementById('morse-decode-output');
+  outputBox.select();
+  document.execCommand('copy');
+  showToast('📋 Decoded text copied!');
+});
 
-      if (alpha !== 0 && brightness < 250) {
-        blank = false;
-        break;
-      }
-    }
-
-    return blank;
-  }
-
-  function showLoader() {
-    loader.classList.remove('hidden');
-  }
-
-  function hideLoader() {
-    loader.classList.add('hidden');
-  }
 
         function updateThemeIcon(theme) {
             themeIcon.innerHTML = theme === 'dark'
@@ -891,10 +786,7 @@
 
     </script>
     <script src="../sloot-content.js"></script>
-    <div id="toast-container" class="fixed bottom-6 right-6 space-y-2 z-50"></div>
-    <!-- <script>
-  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
-</script> -->
+ <div id="toast-container" class="fixed bottom-6 right-6 space-y-2 z-50"></div>
 </body>
 
 </html>
