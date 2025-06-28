@@ -13,6 +13,7 @@ const tools = [
   { name: "JPG Converter", path: "jpg-converter", emoji: "🟦", category: "Image" },
   { name: "BMP Converter", path: "bmp-converter", emoji: "🟧", category: "Image" },
   { name: "TIFF Converter", path: "tiff-converter", emoji: "🟪", category: "Image" },
+   { name: "Image Pixelator", path: "image-pixelator", emoji: "⏹️", category: "Image" },
 
 
   { name: "SQL Formatter", path: "sql-formatter", emoji: "🗃️", category: "Developer" },
