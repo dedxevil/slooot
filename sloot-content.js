@@ -45,6 +45,13 @@ const tools = [
   { name: "Text Repeater", path: "text-repeater", emoji: "🔤", category: "Text" },
     { name: "Text to Morse Code Converter", path: "text-to-morse-code", emoji: "▫️", category: "Text" },
   { name: "Morse Code to Text Converter", path: "morse-code-to-text", emoji: "▫️", category: "Text" },
+  { name: "Remove random letters from Text", path: "remove-random-letters", emoji: "🔤", category: "Text" },
+  { name: "Sort Sentences in Text", path: "sort-sentences-in-text", emoji: "📄", category: "Text" },
+  { name: "Reverse Words in Text", path: "reverse-words-in-text", emoji: "🙃", category: "Text" },
+   { name: "Replace Letters in Text", path: "replace-letters-in-text", emoji: "⇄", category: "Text" },
+   { name: "Sort Words in Text", path: "sort-words-in-text", emoji: "📄", category: "Text" },
+    { name: "Sort Letters in Words", path: "sort-letters-in-words", emoji: "📄", category: "Text" },
+    { name: "Scramble Words in Text", path: "scramble-words-in-text", emoji: "🙃", category: "Text" },
   // { name: "YouTube Channel Profile Picture Downloader", path: "youtube-channel-profile-picture-downloader", emoji: "📽️", category: "Social" },
 ];
 
