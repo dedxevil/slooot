@@ -512,12 +512,14 @@
 
   <div class="relative max-w-2xl mx-auto p-6 space-y-6 bg-white dark:bg-gray-900 rounded-lg shadow-xl">
 
-    <!-- Image Upload -->
-    <div>
-      <label class="block text-sm font-medium text-gray-600 dark:text-gray-300 mb-2">Upload Image:</label>
-      <input id="pixelator-input" type="file" accept="image/*"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white" />
-    </div>
+<div id="drop-zone"
+  class="border-2 border-dashed border-purple-600 rounded-md p-6 text-center cursor-pointer hover:bg-purple-100 mb-4">
+  <p class="text-gray-600 dark:text-gray-300">
+    📤 <strong>Click or Drag & Drop</strong> an image here to upload
+  </p>
+  <input id="pixelator-input" type="file" accept="image/*" class="hidden" />
+</div>
+
 
     <!-- Pixelation Range -->
     <div>
@@ -528,9 +530,12 @@
         <span id="pixelation-value">10</span> px
       </div>
     </div>
-
+    <p class="text-center text-gray-500 dark:text-gray-400 mb-2">
+  💡 <strong>Tip:</strong> Drag to select an area on the image to pixelate only that part. <br>
+  Double-click on the image to clear selection.
+</p>
     <!-- Canvas Preview -->
-    <div class="text-center">
+    <div class="flex justify-center">
       <canvas id="pixelator-canvas" class="border rounded-md shadow-lg max-w-full hidden"></canvas>
 
     </div>
@@ -730,7 +735,9 @@
             }, 3000);
         }
 
-const input = document.getElementById('pixelator-input');
+
+const dropZone = document.getElementById('drop-zone');
+const fileInput = document.getElementById('pixelator-input');
 const range = document.getElementById('pixelation-range');
 const valueLabel = document.getElementById('pixelation-value');
 const canvas = document.getElementById('pixelator-canvas');
@@ -738,13 +745,42 @@ const ctx = canvas.getContext('2d');
 const downloadBtn = document.getElementById('download-btn');
 
 let originalImg = new Image();
+let selection = null;
+let isDragging = false;
+let dragOffsetX = 0;
+let dragOffsetY = 0;
+let isSelecting = false;
 
-input.addEventListener('change', (e) => {
+// 🔥 Combined Drag, Drop, Click Upload
+dropZone.addEventListener('click', () => {
+  fileInput.click();
+});
+
+fileInput.addEventListener('change', (e) => {
   const file = e.target.files[0];
-  if (!file) return;
+  handleFile(file);
+});
 
-  if (!file.type.startsWith('image/')) {
-    showToast('❌ Please upload a valid image file.', 'error');
+dropZone.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  dropZone.classList.add('bg-purple-100');
+});
+
+dropZone.addEventListener('dragleave', () => {
+  dropZone.classList.remove('bg-purple-100');
+});
+
+dropZone.addEventListener('drop', (e) => {
+  e.preventDefault();
+  dropZone.classList.remove('bg-purple-100');
+  const file = e.dataTransfer.files[0];
+  handleFile(file);
+});
+
+// 🔥 File Handler
+function handleFile(file) {
+  if (!file || !file.type.startsWith('image/')) {
+    showToast('❌ Please upload a valid image.', 'error');
     return;
   }
 
@@ -754,49 +790,230 @@ input.addEventListener('change', (e) => {
     originalImg.onload = () => {
       canvas.width = originalImg.width;
       canvas.height = originalImg.height;
-      applyPixelation();
-
-      // Show preview and download button
+      redrawCanvas();
+      selection = null;
       canvas.classList.remove('hidden');
       downloadBtn.classList.remove('hidden');
     };
     originalImg.src = event.target.result;
   };
   reader.readAsDataURL(file);
-});
+}
 
-range.addEventListener('input', () => {
-  valueLabel.textContent = range.value;
-  if (originalImg.src) {
-    applyPixelation();
+// 🔥 Mouse Position Calculation (Accurate)
+function getMousePos(e) {
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+  return {
+    x: (e.clientX - rect.left) * scaleX,
+    y: (e.clientY - rect.top) * scaleY
+  };
+}
+
+// 🔥 Selection & Drag Logic
+canvas.addEventListener('mousedown', (e) => {
+  const { x, y } = getMousePos(e);
+
+  if (selection &&
+    x >= selection.x &&
+    x <= selection.x + selection.width &&
+    y >= selection.y &&
+    y <= selection.y + selection.height) {
+    // Dragging existing selection
+    isDragging = true;
+    dragOffsetX = x - selection.x;
+    dragOffsetY = y - selection.y;
+  } else {
+    // New selection
+    isSelecting = true;
+    selection = { x, y, width: 0, height: 0 };
   }
 });
 
-function applyPixelation() {
-  const pixelSize = parseInt(range.value);
+canvas.addEventListener('mousemove', (e) => {
+  const { x, y } = getMousePos(e);
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.imageSmoothingEnabled = false;
-
-  const scaledWidth = Math.ceil(canvas.width / pixelSize);
-  const scaledHeight = Math.ceil(canvas.height / pixelSize);
-
-  // Scale down
-  ctx.drawImage(originalImg, 0, 0, scaledWidth, scaledHeight);
-
-  // Scale back up
-  ctx.drawImage(canvas, 0, 0, scaledWidth, scaledHeight, 0, 0, canvas.width, canvas.height);
-}
-
-
-downloadBtn.addEventListener('click', () => {
-  const link = document.createElement('a');
-  link.download = 'pixelated-image.png';
-  link.href = canvas.toDataURL('image/png');
-  link.click();
+  if (isDragging) {
+    selection.x = x - dragOffsetX;
+    selection.y = y - dragOffsetY;
+    constrainSelection();
+    redrawCanvas();
+    drawSelection();
+  } else if (isSelecting) {
+    selection.width = x - selection.x;
+    selection.height = y - selection.y;
+    redrawCanvas();
+    drawSelection();
+  }
 });
 
+canvas.addEventListener('mouseup', () => {
+  if (isSelecting) {
+    if (Math.abs(selection.width) < 5 || Math.abs(selection.height) < 5) {
+      selection = null;
+    } else {
+      normalizeSelection();
+      showToast('💡 Tip: Pixelation now applies to the selected area.');
+    }
+  }
+  isDragging = false;
+  isSelecting = false;
+});
 
+canvas.addEventListener('dblclick', () => {
+  selection = null;
+  redrawCanvas();
+  showToast('💡 Selection cleared. Pixelating full image.');
+});
+
+// 🔥 Pixelation on Slider Change
+range.addEventListener('input', () => {
+  valueLabel.textContent = range.value;
+  if (originalImg.src) {
+    redrawCanvas();
+    if (selection) {
+      pixelateSelectedArea();
+    } else {
+      applyFullPixelation();
+    }
+  }
+});
+
+// 🔥 Redraw the Canvas
+function redrawCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(originalImg, 0, 0, canvas.width, canvas.height);
+}
+
+// 🔥 Draw Selection Box (Improved Visibility)
+function drawSelection() {
+  ctx.save();
+  ctx.strokeStyle = '#6b21a8';
+  ctx.lineWidth = 2;
+  ctx.setLineDash([6]);
+  ctx.fillStyle = 'rgba(107, 33, 168, 0.2)';
+  ctx.fillRect(selection.x, selection.y, selection.width, selection.height);
+  ctx.strokeRect(selection.x, selection.y, selection.width, selection.height);
+  ctx.restore();
+}
+
+// 🔥 Constrain Selection Within Canvas
+function constrainSelection() {
+  if (selection.x < 0) selection.x = 0;
+  if (selection.y < 0) selection.y = 0;
+  if (selection.x + selection.width > canvas.width) selection.x = canvas.width - selection.width;
+  if (selection.y + selection.height > canvas.height) selection.y = canvas.height - selection.height;
+}
+
+// 🔥 Normalize negative width/height
+function normalizeSelection() {
+  if (selection.width < 0) {
+    selection.x += selection.width;
+    selection.width *= -1;
+  }
+  if (selection.height < 0) {
+    selection.y += selection.height;
+    selection.height *= -1;
+  }
+}
+
+// 🔥 Apply Full Image Pixelation
+function applyFullPixelation() {
+  const pixelSize = parseInt(range.value);
+  const scaledW = Math.ceil(canvas.width / pixelSize);
+  const scaledH = Math.ceil(canvas.height / pixelSize);
+
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(originalImg, 0, 0, scaledW, scaledH);
+  ctx.drawImage(canvas, 0, 0, scaledW, scaledH, 0, 0, canvas.width, canvas.height);
+}
+
+// 🔥 Apply Pixelation to Selected Area
+function pixelateSelectedArea() {
+  const { x, y, width, height } = selection;
+  const pixelSize = parseInt(range.value);
+
+  const imageData = ctx.getImageData(x, y, width, height);
+  const tempCanvas = document.createElement('canvas');
+  const tempCtx = tempCanvas.getContext('2d');
+  tempCanvas.width = width;
+  tempCanvas.height = height;
+  tempCtx.putImageData(imageData, 0, 0);
+
+  const scaledW = Math.ceil(width / pixelSize);
+  const scaledH = Math.ceil(height / pixelSize);
+
+  tempCtx.imageSmoothingEnabled = false;
+  const small = document.createElement('canvas');
+  const smallCtx = small.getContext('2d');
+  small.width = scaledW;
+  small.height = scaledH;
+  smallCtx.drawImage(tempCanvas, 0, 0, scaledW, scaledH);
+
+  tempCtx.clearRect(0, 0, width, height);
+  tempCtx.drawImage(small, 0, 0, scaledW, scaledH, 0, 0, width, height);
+
+  const pixelatedData = tempCtx.getImageData(0, 0, width, height);
+  ctx.putImageData(pixelatedData, x, y);
+
+  drawSelection();
+}
+
+// 🔥 Download Button
+downloadBtn.addEventListener('click', () => {
+  // 🔥 Create offscreen canvas
+  const tempCanvas = document.createElement('canvas');
+  const tempCtx = tempCanvas.getContext('2d');
+  tempCanvas.width = canvas.width;
+  tempCanvas.height = canvas.height;
+
+  // 🔥 Draw original image
+  tempCtx.drawImage(originalImg, 0, 0, canvas.width, canvas.height);
+
+  // 🔥 Apply pixelation
+  if (selection) {
+    const { x, y, width, height } = selection;
+    const pixelSize = parseInt(range.value);
+
+    const imageData = tempCtx.getImageData(x, y, width, height);
+    const areaCanvas = document.createElement('canvas');
+    const areaCtx = areaCanvas.getContext('2d');
+    areaCanvas.width = width;
+    areaCanvas.height = height;
+    areaCtx.putImageData(imageData, 0, 0);
+
+    const scaledW = Math.ceil(width / pixelSize);
+    const scaledH = Math.ceil(height / pixelSize);
+
+    areaCtx.imageSmoothingEnabled = false;
+    const small = document.createElement('canvas');
+    const smallCtx = small.getContext('2d');
+    small.width = scaledW;
+    small.height = scaledH;
+    smallCtx.drawImage(areaCanvas, 0, 0, scaledW, scaledH);
+
+    areaCtx.clearRect(0, 0, width, height);
+    areaCtx.drawImage(small, 0, 0, scaledW, scaledH, 0, 0, width, height);
+
+    const pixelatedData = areaCtx.getImageData(0, 0, width, height);
+    tempCtx.putImageData(pixelatedData, x, y);
+  } else {
+    const pixelSize = parseInt(range.value);
+    const scaledW = Math.ceil(tempCanvas.width / pixelSize);
+    const scaledH = Math.ceil(tempCanvas.height / pixelSize);
+
+    tempCtx.imageSmoothingEnabled = false;
+    tempCtx.drawImage(originalImg, 0, 0, scaledW, scaledH);
+    tempCtx.drawImage(tempCanvas, 0, 0, scaledW, scaledH, 0, 0, tempCanvas.width, tempCanvas.height);
+  }
+
+  // 🔥 Generate and download the image
+  const link = document.createElement('a');
+  link.download = 'pixelated-image.png';
+  link.href = tempCanvas.toDataURL('image/png');
+  link.click();
+});
 
 
 
