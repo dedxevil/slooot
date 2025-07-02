@@ -53,6 +53,7 @@ const tools = [
    { name: "Sort Words in Text", path: "sort-words-in-text", emoji: "📄", category: "Text" },
     { name: "Sort Letters in Words", path: "sort-letters-in-words", emoji: "📄", category: "Text" },
     { name: "Scramble Words in Text", path: "scramble-words-in-text", emoji: "🙃", category: "Text" },
+    { name: "Scramble Paragraphs in Text", path: "scramble-paragraphs-in-text", emoji: "🙃", category: "Text" },
   // { name: "YouTube Channel Profile Picture Downloader", path: "youtube-channel-profile-picture-downloader", emoji: "📽️", category: "Social" },
 ];
 
