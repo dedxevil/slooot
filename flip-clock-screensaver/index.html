@@ -7,15 +7,14 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="icon"
-        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">🙃</text></svg>'>
-<title>Randomize Text Paragraphs | Free Online Tool</title>
-<meta name="description"
-  content="Quickly randomize the order of paragraphs in your text. Free online paragraph randomizer tool for writers, students, and content creators.">
-<meta name="keywords"
-  content="randomize paragraphs, paragraph randomizer, shuffle paragraphs, text randomizer, free text tool">
-  <meta name="title" content="Scramble Paragraph in Text – Free Online Paragraph Scrambler" />
 
+<title>Flip Clock Screensaver | Free Online Time</title>
+<meta name="description" content="A fullscreen flip clock screensaver for your browser. Retro style, clean design, and perfect for desk displays.">
+<meta name="keywords" content="flip clock screensaver, retro clock, fullscreen clock, browser screensaver, online flip clock">
+
+
+    <link rel="icon"
+        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">⌚️</text></svg>'>
 
 
 
@@ -481,6 +480,73 @@
   animation: fadeIn 0.3s ease-out;
 }
 
+#flip-clock {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 10vw;
+  display: flex;
+  gap: 1vw;
+  justify-content: center;
+  align-items: center;
+}
+
+.flip-digit {
+  position: relative;
+  perspective: 1000px;
+}
+
+.flip-panel {
+  position: relative;
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+}
+
+.flip-top, .flip-bottom, .flip-new-top, .flip-new-bottom {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  line-height: 1;
+  text-align: center;
+  backface-visibility: hidden;
+}
+
+.flip-top {
+  top: 0;
+  transform-origin: bottom;
+}
+
+.flip-bottom {
+  bottom: 0;
+  transform-origin: top;
+}
+
+.flip-new-top {
+  top: 0;
+  transform-origin: bottom;
+  transform: rotateX(90deg);
+}
+
+.flip-new-bottom {
+  bottom: 0;
+  transform-origin: top;
+  transform: rotateX(-90deg);
+}
+
+.theme-dark {
+  background-color: #000;
+  color: #fff;
+}
+
+.theme-light {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+.theme-pastel {
+  background-color: #ffe4e1;
+  color: #6a5acd;
+}
+
     </style>
 </head>
 
@@ -513,55 +579,52 @@
     </header>
 
     <main class="container mx-auto py-8">
-<section class="category-section fade-in max-w-3xl mx-auto mt-20">
-  <h2 class="text-3xl font-bold text-center mb-6">Randomize Text Paragraphs</h2>
+<section class="category-section fade-in max-w-3xl mx-auto mt-20 text-center">
+  <h1 class="text-3xl font-bold mb-6">Flip Clock Screensaver</h1>
+  <p class="text-gray-600 dark:text-gray-300 mb-6">
+    Click below to launch a fullscreen flip clock screensaver. Press <kbd>Esc</kbd> or tap to exit.
+  </p>
 
-  <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-xl space-y-6">
-    <div>
-      <label for="input-text" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-        Enter Text (Paragraphs separated by blank lines):
-      </label>
-      <textarea id="input-text" rows="10"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white"
-        placeholder="Paste your paragraphs here..."></textarea>
-    </div>
-
-    <div class="text-center">
-      <button id="randomize-btn"
-        class="px-6 py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-md hover:opacity-90 transition">
-        Randomize Paragraphs
-      </button>
-    </div>
-
-    <div>
-      <label for="output-text" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-        Output:
-      </label>
-      <textarea id="output-text" rows="10" readonly
-        class="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white"></textarea>
-    </div>
-
-    <div class="text-center">
-      <button id="copy-btn"
-        class="px-4 py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-md hover:opacity-90">
-        Copy to Clipboard
-      </button>
-    </div>
+  <div class="mb-4">
+    <label for="time-format" class="mr-2 font-medium">Time Format:</label>
+    <select id="time-format" class="px-2 py-1 rounded border">
+      <option value="24">24-hour</option>
+      <option value="12">12-hour</option>
+    </select>
   </div>
+
+  <div class="mb-6">
+    <label for="theme-select" class="mr-2 font-medium">Theme:</label>
+    <select id="theme-select" class="px-2 py-1 rounded border">
+      <option value="dark">Dark</option>
+      <option value="light">Light</option>
+      <option value="pastel">Pastel</option>
+    </select>
+  </div>
+
+  <button id="start-btn"
+    class="px-6 py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-md hover:opacity-90 transition">
+    Start Flip Clock Screensaver
+  </button>
+
+  <div id="flip-clock" class="hidden fixed top-0 left-0 w-screen h-screen flex items-center justify-center z-50"></div>
 </section>
 
 
 
 
-<section class="max-w-3xl mx-auto mt-12">
-  <h2 class="text-2xl font-bold mb-4">How to Randomize Paragraphs in Text</h2>
+
+<section class="max-w-3xl mx-auto mt-16 mb-12">
+  <h2 class="text-2xl font-bold mb-4">Classic DVD Screensaver in Your Browser</h2>
   <p class="text-gray-600 dark:text-gray-500 mb-4">
-    This free online tool helps you quickly randomize the order of paragraphs in your text. Simply paste your text where each paragraph is separated by one or more blank lines, then click the <strong>“Randomize Paragraphs”</strong> button. The shuffled paragraphs will appear instantly.
+    This is the iconic DVD screensaver you remember — a bouncing "DVD" logo that changes color every time it hits a screen edge.
+    It’s great for nostalgia, fun screens, or just zoning out watching it bounce endlessly.
   </p>
-  <p class="text-gray-600 dark:text-gray-500 mb-4">
-    Ideal for writers, teachers, students, and content creators who need to shuffle text for creative writing, exercises, assignments, or presentations.
+  <p class="text-gray-600 dark:text-gray-500">
+    Click the start button above to begin. The animation will go fullscreen and respond to your screen size. Press <kbd>any key</kbd> or click anywhere to stop the screensaver.
   </p>
 </section>
+
 
 
 
@@ -718,57 +781,115 @@ function showToast(msg, type = 'success') {
   }, 3000);
 }
 
-const randomizeBtn = document.getElementById('randomize-btn');
-const copyBtn = document.getElementById('copy-btn');
-const inputText = document.getElementById('input-text');
-const outputText = document.getElementById('output-text');
+const startBtn = document.getElementById('start-btn');
+  const flipClock = document.getElementById('flip-clock');
+  const timeFormatSelect = document.getElementById('time-format');
+  const themeSelect = document.getElementById('theme-select');
 
-// 🔥 Randomize Paragraphs
-randomizeBtn.addEventListener('click', () => {
-  const text = inputText.value.trim();
-  if (!text) {
-    showToast('❌ Please enter some text to randomize.', 'error');
-    return;
+  let intervalId = null;
+  let lastTime = '';
+
+  function startFlipClock() {
+    clearInterval(intervalId);
+
+    const theme = themeSelect.value;
+    flipClock.className = `fixed top-0 left-0 w-screen h-screen flex items-center justify-center z-50 theme-${theme}`;
+    flipClock.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+
+    lastTime = ''; // reset
+    showTime();
+    intervalId = setInterval(showTime, 1000);
+
+    enableExitHandlers();
   }
 
-  const paragraphs = splitIntoParagraphs(text);
+  function stopFlipClock() {
+    clearInterval(intervalId);
+    intervalId = null;
 
-  if (paragraphs.length <= 1) {
-    showToast('⚠️ Need at least 2 paragraphs to randomize.', 'error');
-    return;
+    flipClock.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+    disableExitHandlers();
+
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+      document.exitFullscreen?.();
+      document.webkitExitFullscreen?.();
+    }
   }
 
-  // 🔥 Shuffle
-  for (let i = paragraphs.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [paragraphs[i], paragraphs[j]] = [paragraphs[j], paragraphs[i]];
+  function showTime() {
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+
+    if (timeFormatSelect.value === '12') {
+      hours = hours % 12 || 12;
+    }
+
+    const displayTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+
+    flipClock.innerHTML = ''; // clear
+
+    displayTime.split('').forEach((char, index) => {
+      const digitContainer = document.createElement('div');
+      digitContainer.className = 'flip-digit';
+
+      if (char === ':') {
+        digitContainer.textContent = ':';
+      } else {
+        const previousChar = lastTime.charAt(index) || char;
+        digitContainer.innerHTML = `
+          <div class="flip-panel">
+            <div class="flip-top">${previousChar}</div>
+            <div class="flip-bottom">${previousChar}</div>
+            <div class="flip-new-top">${char}</div>
+            <div class="flip-new-bottom">${char}</div>
+          </div>
+        `;
+
+        const top = digitContainer.querySelector('.flip-new-top');
+        const bottom = digitContainer.querySelector('.flip-new-bottom');
+
+        setTimeout(() => {
+          top.style.transform = 'rotateX(0deg)';
+        }, 100);
+        setTimeout(() => {
+          bottom.style.transform = 'rotateX(0deg)';
+        }, 400);
+      }
+      flipClock.appendChild(digitContainer);
+    });
+
+    lastTime = displayTime;
   }
 
-  outputText.value = paragraphs.join('\n\n');
-  showToast('✅ Paragraphs randomized!');
-});
-
-// 🔥 Copy to Clipboard
-copyBtn.addEventListener('click', () => {
-  if (!outputText.value.trim()) {
-    showToast('⚠️ Nothing to copy.', 'error');
-    return;
+  function pad(num) {
+    return num.toString().padStart(2, '0');
   }
-  navigator.clipboard.writeText(outputText.value);
-  showToast('📋 Copied to clipboard!');
-});
 
-// 🔥 Paragraph Splitter (Newlines Only)
-function splitIntoParagraphs(text) {
-  if (text.includes('\n\n')) {
-    // 🔸 Split by blank lines
-    return text.split(/\n\s*\n/).filter(p => p.trim() !== '');
-  } else {
-    // 🔸 Fallback: split by single newlines
-    return text.split(/\n/).filter(p => p.trim() !== '');
+  function enableExitHandlers() {
+    document.addEventListener('keydown', stopFlipClock);
+    document.addEventListener('mousedown', stopFlipClock);
+    document.addEventListener('touchstart', stopFlipClock);
   }
-}
 
+  function disableExitHandlers() {
+    document.removeEventListener('keydown', stopFlipClock);
+    document.removeEventListener('mousedown', stopFlipClock);
+    document.removeEventListener('touchstart', stopFlipClock);
+  }
+
+  startBtn.addEventListener('click', () => {
+    startFlipClock();
+    if (flipClock.requestFullscreen) {
+      flipClock.requestFullscreen().catch(err => {
+        console.warn("Fullscreen not allowed:", err);
+      });
+    }
+  });
+    
 
 
         function updateThemeIcon(theme) {

@@ -7,15 +7,12 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="icon"
-        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">🙃</text></svg>'>
-<title>Randomize Text Paragraphs | Free Online Tool</title>
-<meta name="description"
-  content="Quickly randomize the order of paragraphs in your text. Free online paragraph randomizer tool for writers, students, and content creators.">
-<meta name="keywords"
-  content="randomize paragraphs, paragraph randomizer, shuffle paragraphs, text randomizer, free text tool">
-  <meta name="title" content="Scramble Paragraph in Text – Free Online Paragraph Scrambler" />
 
+<title>Full Screen Color Generator - Fullscreen Solid Color Display</title>
+<meta name="description" content="Turn your screen into a full-screen solid color. Choose from white, black, blue, green, and more. Use it for monitor testing, pranks, or aesthetics.">
+<meta name="keywords" content="Full screen, full screen color, white screen, black screen, solid color display, fullscreen Full screen">
+    <link rel="icon"
+        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">🟩</text></svg>'>
 
 
 
@@ -514,52 +511,37 @@
 
     <main class="container mx-auto py-8">
 <section class="category-section fade-in max-w-3xl mx-auto mt-20">
-  <h2 class="text-3xl font-bold text-center mb-6">Randomize Text Paragraphs</h2>
+  <h1 class="text-3xl font-bold text-center mb-8">Full Color Screen Generator</h1>
 
-  <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-xl space-y-6">
-    <div>
-      <label for="input-text" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-        Enter Text (Paragraphs separated by blank lines):
-      </label>
-      <textarea id="input-text" rows="10"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white"
-        placeholder="Paste your paragraphs here..."></textarea>
-    </div>
+  <p class="text-gray-600 dark:text-gray-500 text-center mb-6">
+    Click a color below to turn your screen into a full-screen solid color display.
+  </p>
 
-    <div class="text-center">
-      <button id="randomize-btn"
-        class="px-6 py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-md hover:opacity-90 transition">
-        Randomize Paragraphs
-      </button>
-    </div>
+  <div id="color-grid" class="grid grid-cols-3 sm:grid-cols-5 gap-4 justify-center text-center mb-8">
+    <!-- Thumbnails added by JS -->
+  </div>
 
-    <div>
-      <label for="output-text" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-        Output:
-      </label>
-      <textarea id="output-text" rows="10" readonly
-        class="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white"></textarea>
-    </div>
-
-    <div class="text-center">
-      <button id="copy-btn"
-        class="px-4 py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-md hover:opacity-90">
-        Copy to Clipboard
-      </button>
-    </div>
+  <div class="text-center mb-10">
+    <label class="block text-sm font-medium text-gray-700 dark:text-gray-500 mb-2">
+      Pick a custom color:
+    </label>
+    <input type="color" id="custom-color" class="h-10 w-24 p-0 border rounded cursor-pointer">
   </div>
 </section>
 
 
 
 
-<section class="max-w-3xl mx-auto mt-12">
-  <h2 class="text-2xl font-bold mb-4">How to Randomize Paragraphs in Text</h2>
+<section class="max-w-3xl mx-auto mt-16 mb-12">
+  <h2 class="text-2xl font-bold mb-4">What is a Full Color Screen Tool?</h2>
   <p class="text-gray-600 dark:text-gray-500 mb-4">
-    This free online tool helps you quickly randomize the order of paragraphs in your text. Simply paste your text where each paragraph is separated by one or more blank lines, then click the <strong>“Randomize Paragraphs”</strong> button. The shuffled paragraphs will appear instantly.
+    A Full screen tool lets you display a solid full-screen color on your monitor. This is useful for testing display quality, lighting for photography, screen calibration, or even playing pranks.
   </p>
   <p class="text-gray-600 dark:text-gray-500 mb-4">
-    Ideal for writers, teachers, students, and content creators who need to shuffle text for creative writing, exercises, assignments, or presentations.
+    With this tool, you can choose from standard colors like white, black, green, and blue — or use the color picker for a custom display. Click on a color to instantly fill the screen. Press <kbd>Esc</kbd> or click again to exit full-screen mode.
+  </p>
+  <p class="text-gray-600 dark:text-gray-500">
+    ✅ No ads. No nonsense. Just a full-color screen.
   </p>
 </section>
 
@@ -716,57 +698,78 @@ function showToast(msg, type = 'success') {
     toast.classList.add('opacity-0');
     setTimeout(() => toast.remove(), 400);
   }, 3000);
-}
+}const predefinedColors = [
+  { name: 'White', value: '#ffffff' },
+  { name: 'Black', value: '#000000' },
+  { name: 'Red', value: '#ff0000' },
+  { name: 'Green', value: '#00ff00' },
+  { name: 'Blue', value: '#0000ff' },
+  { name: 'Yellow', value: '#ffff00' },
+  { name: 'Orange', value: '#ffa500' },
+  { name: 'Purple', value: '#800080' },
+  { name: 'Pink', value: '#ffc0cb' },
+  { name: 'Indigo', value: '#4b0082' },
+  { name: 'Gray', value: '#808080' },
+  { name: 'Cyan', value: '#00ffff' },
+  { name: 'Magenta', value: '#ff00ff' },
+  { name: 'Lime', value: '#bfff00' },
+  { name: 'Teal', value: '#008080' },
+  { name: 'Brown', value: '#8b4513' },
+  { name: 'Lavender', value: '#e6e6fa' },
+  { name: 'Beige', value: '#f5f5dc' }
+];
 
-const randomizeBtn = document.getElementById('randomize-btn');
-const copyBtn = document.getElementById('copy-btn');
-const inputText = document.getElementById('input-text');
-const outputText = document.getElementById('output-text');
+const colorGrid = document.getElementById('color-grid');
+const customColorPicker = document.getElementById('custom-color');
 
-// 🔥 Randomize Paragraphs
-randomizeBtn.addEventListener('click', () => {
-  const text = inputText.value.trim();
-  if (!text) {
-    showToast('❌ Please enter some text to randomize.', 'error');
-    return;
-  }
-
-  const paragraphs = splitIntoParagraphs(text);
-
-  if (paragraphs.length <= 1) {
-    showToast('⚠️ Need at least 2 paragraphs to randomize.', 'error');
-    return;
-  }
-
-  // 🔥 Shuffle
-  for (let i = paragraphs.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [paragraphs[i], paragraphs[j]] = [paragraphs[j], paragraphs[i]];
-  }
-
-  outputText.value = paragraphs.join('\n\n');
-  showToast('✅ Paragraphs randomized!');
+// 🔥 Add color thumbnails
+predefinedColors.forEach(({ name, value }) => {
+  const box = document.createElement('div');
+  box.className = 'cursor-pointer rounded shadow border h-14 w-14 mx-auto';
+  box.style.backgroundColor = value;
+  box.title = name;
+  box.setAttribute('data-color', value);
+  colorGrid.appendChild(box);
 });
 
-// 🔥 Copy to Clipboard
-copyBtn.addEventListener('click', () => {
-  if (!outputText.value.trim()) {
-    showToast('⚠️ Nothing to copy.', 'error');
-    return;
-  }
-  navigator.clipboard.writeText(outputText.value);
-  showToast('📋 Copied to clipboard!');
+customColorPicker.addEventListener('input', (e) => {
+  openColorScreen(e.target.value);
 });
 
-// 🔥 Paragraph Splitter (Newlines Only)
-function splitIntoParagraphs(text) {
-  if (text.includes('\n\n')) {
-    // 🔸 Split by blank lines
-    return text.split(/\n\s*\n/).filter(p => p.trim() !== '');
-  } else {
-    // 🔸 Fallback: split by single newlines
-    return text.split(/\n/).filter(p => p.trim() !== '');
-  }
+// 🔥 Fullscreen Color View
+colorGrid.addEventListener('click', (e) => {
+  const color = e.target.getAttribute('data-color');
+  if (color) openColorScreen(color);
+});
+
+function openColorScreen(color) {
+  const overlay = document.createElement('div');
+  overlay.style.backgroundColor = color;
+  overlay.style.position = 'fixed';
+  overlay.style.top = 0;
+  overlay.style.left = 0;
+  overlay.style.width = '100vw';
+  overlay.style.height = '100vh';
+  overlay.style.zIndex = 9999;
+
+  document.body.appendChild(overlay);
+
+  overlay.requestFullscreen?.();
+  overlay.webkitRequestFullscreen?.();
+
+  const exit = () => {
+    document.exitFullscreen?.();
+    document.webkitExitFullscreen?.();
+    overlay.remove();
+    document.removeEventListener('keydown', escListener);
+  };
+
+  const escListener = (e) => {
+    if (e.key === 'Escape') exit();
+  };
+
+  overlay.addEventListener('click', exit);
+  document.addEventListener('keydown', escListener);
 }
 
 

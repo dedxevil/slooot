@@ -7,14 +7,12 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+
+<title>DVD Screensaver | Classic Bouncing Logo</title>
+<meta name="description" content="Enjoy the nostalgic bouncing DVD logo screensaver in your browser. Watch it bounce and change colors on screen edges.">
+<meta name="keywords" content="dvd screensaver, bouncing dvd logo, fullscreen animation, nostalgic screen bounce, classic screensaver, retro tools">
     <link rel="icon"
-        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">🙃</text></svg>'>
-<title>Randomize Text Paragraphs | Free Online Tool</title>
-<meta name="description"
-  content="Quickly randomize the order of paragraphs in your text. Free online paragraph randomizer tool for writers, students, and content creators.">
-<meta name="keywords"
-  content="randomize paragraphs, paragraph randomizer, shuffle paragraphs, text randomizer, free text tool">
-  <meta name="title" content="Scramble Paragraph in Text – Free Online Paragraph Scrambler" />
+        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">📀</text></svg>'>
 
 
 
@@ -52,6 +50,10 @@
             font-family: 'Outfit', sans-serif;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
+canvas {
+  background-color: #000;
+  display: block;
+}
 
         h1,
         h2,
@@ -513,55 +515,43 @@
     </header>
 
     <main class="container mx-auto py-8">
-<section class="category-section fade-in max-w-3xl mx-auto mt-20">
-  <h2 class="text-3xl font-bold text-center mb-6">Randomize Text Paragraphs</h2>
+<section class="category-section fade-in max-w-3xl mx-auto mt-20 text-center">
+  <h1 class="text-3xl font-bold mb-6">DVD Screensaver</h1>
 
-  <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-xl space-y-6">
-    <div>
-      <label for="input-text" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-        Enter Text (Paragraphs separated by blank lines):
-      </label>
-      <textarea id="input-text" rows="10"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white"
-        placeholder="Paste your paragraphs here..."></textarea>
-    </div>
+  <div class="text-center mb-6">
+  <label for="logo-input" class="block text-sm font-medium text-gray-700 dark:text-gray-500 mb-2">
+    Enter Your Text
+  </label>
+  <input id="logo-input" type="text" placeholder="DVD" maxlength="20"
+    class="px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white text-center w-64" />
+</div>
 
-    <div class="text-center">
-      <button id="randomize-btn"
-        class="px-6 py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-md hover:opacity-90 transition">
-        Randomize Paragraphs
-      </button>
-    </div>
+  <p class="text-gray-600 dark:text-gray-500 mb-8">
+    Click below to start the classic DVD bouncing logo screensaver. Press <kbd>Esc</kbd> or click to exit.
+  </p>
 
-    <div>
-      <label for="output-text" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-        Output:
-      </label>
-      <textarea id="output-text" rows="10" readonly
-        class="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white"></textarea>
-    </div>
+  <button id="start-btn"
+    class="px-6 py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-md hover:opacity-90 transition">
+    Start Screensaver
+  </button>
 
-    <div class="text-center">
-      <button id="copy-btn"
-        class="px-4 py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-md hover:opacity-90">
-        Copy to Clipboard
-      </button>
-    </div>
-  </div>
+  <canvas id="dvd-canvas" class="fixed top-0 left-0 w-screen h-screen z-50 hidden"></canvas>
 </section>
 
 
 
 
-<section class="max-w-3xl mx-auto mt-12">
-  <h2 class="text-2xl font-bold mb-4">How to Randomize Paragraphs in Text</h2>
+<section class="max-w-3xl mx-auto mt-16 mb-12">
+  <h2 class="text-2xl font-bold mb-4">Classic DVD Screensaver in Your Browser</h2>
   <p class="text-gray-600 dark:text-gray-500 mb-4">
-    This free online tool helps you quickly randomize the order of paragraphs in your text. Simply paste your text where each paragraph is separated by one or more blank lines, then click the <strong>“Randomize Paragraphs”</strong> button. The shuffled paragraphs will appear instantly.
+    This is the iconic DVD screensaver you remember — a bouncing "DVD" logo that changes color every time it hits a screen edge.
+    It’s great for nostalgia, fun screens, or just zoning out watching it bounce endlessly.
   </p>
-  <p class="text-gray-600 dark:text-gray-500 mb-4">
-    Ideal for writers, teachers, students, and content creators who need to shuffle text for creative writing, exercises, assignments, or presentations.
+  <p class="text-gray-600 dark:text-gray-500">
+    Click the start button above to begin. The animation will go fullscreen and respond to your screen size. Press <kbd>any key</kbd> or click anywhere to stop the screensaver.
   </p>
 </section>
+
 
 
 
@@ -718,56 +708,135 @@ function showToast(msg, type = 'success') {
   }, 3000);
 }
 
-const randomizeBtn = document.getElementById('randomize-btn');
-const copyBtn = document.getElementById('copy-btn');
-const inputText = document.getElementById('input-text');
-const outputText = document.getElementById('output-text');
+const inputField = document.getElementById('logo-input');
+let logoText = 'DVD';
 
-// 🔥 Randomize Paragraphs
-randomizeBtn.addEventListener('click', () => {
-  const text = inputText.value.trim();
-  if (!text) {
-    showToast('❌ Please enter some text to randomize.', 'error');
-    return;
+const canvas = document.getElementById('dvd-canvas');
+const ctx = canvas.getContext('2d');
+const startBtn = document.getElementById('start-btn');
+
+let x, y, dx, dy, logoWidth = 120, logoHeight = 60;
+let logoColor = '#ffffff';
+let animationFrameId = null;
+const speed = 2.5;
+
+const colors = ['#ff0066', '#00ccff', '#33ff33', '#ffcc00', '#9900ff', '#ff3333', '#00ffcc'];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+// 🔥 DVD Logo Drawing
+function drawLogo() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.save();
+  ctx.translate(x, y);
+
+  // Oval
+  ctx.fillStyle = logoColor;
+  ctx.beginPath();
+  ctx.ellipse(logoWidth / 2, logoHeight / 2, logoWidth / 2, logoHeight / 2, 0, 0, 2 * Math.PI);
+  ctx.fill();
+
+  // Text (Italic)
+  ctx.fillStyle = 'black';
+  ctx.font = 'italic bold 24px Arial';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(logoText, logoWidth / 2, logoHeight / 2);
+
+  ctx.restore();
+}
+
+
+// 🔁 Animate
+function animate() {
+  drawLogo();
+
+  x += dx;
+  y += dy;
+
+  if (x <= 0 || x + logoWidth >= canvas.width) {
+    dx = -dx;
+    changeColor();
   }
 
-  const paragraphs = splitIntoParagraphs(text);
-
-  if (paragraphs.length <= 1) {
-    showToast('⚠️ Need at least 2 paragraphs to randomize.', 'error');
-    return;
+  if (y <= 0 || y + logoHeight >= canvas.height) {
+    dy = -dy;
+    changeColor();
   }
 
-  // 🔥 Shuffle
-  for (let i = paragraphs.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [paragraphs[i], paragraphs[j]] = [paragraphs[j], paragraphs[i]];
-  }
+  animationFrameId = requestAnimationFrame(animate);
+}
 
-  outputText.value = paragraphs.join('\n\n');
-  showToast('✅ Paragraphs randomized!');
-});
+function changeColor() {
+  logoColor = colors[Math.floor(Math.random() * colors.length)];
+}
 
-// 🔥 Copy to Clipboard
-copyBtn.addEventListener('click', () => {
-  if (!outputText.value.trim()) {
-    showToast('⚠️ Nothing to copy.', 'error');
-    return;
-  }
-  navigator.clipboard.writeText(outputText.value);
-  showToast('📋 Copied to clipboard!');
-});
+function startScreensaver() {
+  stopScreensaver();
 
-// 🔥 Paragraph Splitter (Newlines Only)
-function splitIntoParagraphs(text) {
-  if (text.includes('\n\n')) {
-    // 🔸 Split by blank lines
-    return text.split(/\n\s*\n/).filter(p => p.trim() !== '');
+  logoText = inputField.value.trim() || 'DVD'; // use input or fallback
+
+  resizeCanvas();
+  canvas.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+
+  x = Math.random() * (canvas.width - logoWidth);
+  y = Math.random() * (canvas.height - logoHeight);
+  dx = speed * (Math.random() < 0.5 ? 1 : -1);
+  dy = speed * (Math.random() < 0.5 ? 1 : -1);
+
+  requestFullscreen(canvas);
+  animate();
+  enableExitHandlers();
+}
+
+function stopScreensaver() {
+  if (animationFrameId) cancelAnimationFrame(animationFrameId);
+  animationFrameId = null;
+
+  document.body.style.overflow = 'auto';
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  disableExitHandlers();
+
+  // Exit fullscreen cleanly before hiding canvas
+  const hide = () => canvas.classList.add('hidden');
+
+  if (document.fullscreenElement || document.webkitFullscreenElement) {
+    const promise = document.exitFullscreen?.() || document.webkitExitFullscreen?.();
+    if (promise?.then) promise.then(hide).catch(hide);
+    else hide();
   } else {
-    // 🔸 Fallback: split by single newlines
-    return text.split(/\n/).filter(p => p.trim() !== '');
+    hide();
   }
 }
+
+function requestFullscreen(elem) {
+  elem.requestFullscreen?.();
+  elem.webkitRequestFullscreen?.();
+}
+
+// 🔥 Input closes screen
+function enableExitHandlers() {
+  document.addEventListener('keydown', stopScreensaver);
+  document.addEventListener('mousedown', stopScreensaver);
+  document.addEventListener('touchstart', stopScreensaver);
+}
+
+function disableExitHandlers() {
+  document.removeEventListener('keydown', stopScreensaver);
+  document.removeEventListener('mousedown', stopScreensaver);
+  document.removeEventListener('touchstart', stopScreensaver);
+}
+
+startBtn.addEventListener('click', startScreensaver);
+window.addEventListener('resize', () => {
+  if (!canvas.classList.contains('hidden')) resizeCanvas();
+});
 
 
 
