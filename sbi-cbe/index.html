@@ -8,7 +8,7 @@
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
-<title>SBI - WhatsApp Update Tool</title>
+<title>SBI - Coimbatore - WhatsApp Update Tool</title>
 <meta name="description" content="Quickly prepare and copy updates with branch lists with check/cross toggles. Perfect for WhatsApp groups. Add or remove branches dynamically.">
 <meta name="keywords" content="MF Update, WhatsApp list manager, toggle branch status, add branches, remove branches, copy to clipboard, Scale 4 branches, Scale 3 branches, Scale 2 branches">
 
@@ -517,7 +517,7 @@ canvas {
 
     <main class="container mx-auto py-8">
 <section class="category-section fade-in max-w-3xl mx-auto mt-12">
-  <h1 class="text-3xl font-bold mb-6 text-center text-purple-400">MF Update List Manager</h1>
+  <h1 class="text-3xl font-bold mb-6 text-center text-purple-400">SBI CBE WhatsApp Updates Manager</h1>
   
   <div class="mb-4">
     <label for="titleInput" class="block text-gray-400 mb-2">Title</label>
@@ -848,8 +848,20 @@ function renderScales() {
 }
 
 function copyToClipboard() {
-  const title = document.getElementById("titleInput").value.trim();
-  const subtitle = document.getElementById("subtitleInput").value.trim();
+  const titleInput = document.getElementById("titleInput");
+  const subtitleInput = document.getElementById("subtitleInput");
+  const title = titleInput.value.trim();
+  const subtitle = subtitleInput.value.trim();
+
+  // Save latest title & subtitle to localStorage
+  localStorage.setItem("mfUpdateState", JSON.stringify({
+    data,
+    state,
+    title,
+    subtitle
+  }));
+
+  // Build WhatsApp message
   let text = `*${title}*\n────────────────────\n${subtitle}\n----------------------\n\n`;
 
   Object.keys(data).forEach(scale => {
@@ -861,10 +873,12 @@ function copyToClipboard() {
     text += "\n";
   });
 
+  // Copy to clipboard
   navigator.clipboard.writeText(text)
-    .then(() => showToast("✅ Copied! WhatsApp message ready. Do you love me? 💜"))
+    .then(() => showToast("✅ Copied! Ready to paste in WhatsApp."))
     .catch(err => console.error("Clipboard error:", err));
 }
+
 
 function resetToDefault() {
   // Clear localStorage
