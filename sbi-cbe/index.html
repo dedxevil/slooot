@@ -9,11 +9,11 @@
         rel="stylesheet">
 
 <title>SBI - WhatsApp Update Tool</title>
-<meta name="description" content="Quickly prepare and copy MF Update branch lists with check/cross toggles. Perfect for WhatsApp groups. Add or remove branches dynamically.">
+<meta name="description" content="Quickly prepare and copy updates with branch lists with check/cross toggles. Perfect for WhatsApp groups. Add or remove branches dynamically.">
 <meta name="keywords" content="MF Update, WhatsApp list manager, toggle branch status, add branches, remove branches, copy to clipboard, Scale 4 branches, Scale 3 branches, Scale 2 branches">
 
     <link rel="icon"
-        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">📀</text></svg>'>
+        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">💷</text></svg>'>
 
 
 
@@ -517,7 +517,7 @@ canvas {
 
     <main class="container mx-auto py-8">
 <section class="category-section fade-in max-w-3xl mx-auto mt-12">
-  <h1 class="text-3xl font-bold mb-6 text-center text-purple-400">SBI WhatsApp Update Manager</h1>
+  <h1 class="text-3xl font-bold mb-6 text-center text-purple-400">MF Update List Manager</h1>
   
   <div class="mb-4">
     <label for="titleInput" class="block text-gray-400 mb-2">Title</label>
@@ -539,11 +539,13 @@ canvas {
     📋 Copy to Clipboard
   </button>
 
-  <!-- Toast Notification
-  <div id="toast" class="fixed bottom-5 right-5 hidden px-4 py-2 bg-green-600 text-white rounded shadow-lg transition-opacity duration-300">
-    ✅ Copied! Ready to paste in WhatsApp.
-  </div> -->
+  <button onclick="resetToDefault()" 
+          class="w-full px-4 py-3 rounded-md mt-3 bg-gradient-to-r from-red-500 to-pink-500 text-white text-lg font-medium hover:opacity-90">
+    ♻️ Reset to Default
+  </button>
+
 </section>
+
 
 
 
@@ -691,6 +693,7 @@ function showToast(msg, type = 'success') {
     setTimeout(() => toast.remove(), 400);
   }, 3000);
 }
+
 const defaultData = {
   "Scale 4": [
     "Pollachi", "Cbe City", "Peelamedu", "Singanallur", "VOC park",
@@ -738,10 +741,9 @@ function saveState() {
   localStorage.setItem("mfUpdateState", JSON.stringify({ data, state, title, subtitle }));
 }
 
-const scalesContainer = document.getElementById("scalesContainer");
-
 function renderScales() {
-  scalesContainer.innerHTML = "";
+  const container = document.getElementById("scalesContainer");
+  container.innerHTML = "";
   Object.keys(data).forEach(scale => {
     const scaleDiv = document.createElement("div");
     scaleDiv.className = "p-4 bg-gray-900 rounded-lg shadow";
@@ -841,33 +843,51 @@ function renderScales() {
     controlsDiv.appendChild(addBtn);
 
     scaleDiv.appendChild(controlsDiv);
-    scalesContainer.appendChild(scaleDiv);
+    container.appendChild(scaleDiv);
   });
 }
 
 function copyToClipboard() {
-  const title = document.getElementById('titleInput').value.trim();
-  const subtitle = document.getElementById('subtitleInput').value.trim();
-  let text = `*${title}*\n\n${subtitle}\n\n`;
+  const title = document.getElementById("titleInput").value.trim();
+  const subtitle = document.getElementById("subtitleInput").value.trim();
+  let text = `*${title}*\n────────────────────\n${subtitle}\n----------------------\n\n`;
 
   Object.keys(data).forEach(scale => {
     text += `📌 *${scale}:*\n`;
     data[scale].forEach((branch, idx) => {
       const status = state[scale][idx] ? "✅" : "❌";
-      text += `${idx + 1}. ${branch}${status}\n`;
+      text += `${idx + 1}. ${branch} ${status}\n`;
     });
     text += "\n";
   });
 
   navigator.clipboard.writeText(text)
-    .then(() => showToast("✅ Copied! Ready to paste in WhatsApp."))
+    .then(() => showToast("✅ Copied! WhatsApp message ready. Do you love me? 💜"))
     .catch(err => console.error("Clipboard error:", err));
 }
 
+function resetToDefault() {
+  // Clear localStorage
+  localStorage.removeItem("mfUpdateState");
 
+  // Reset data and state
+  data = JSON.parse(JSON.stringify(defaultData));
+  state = {};
+  Object.keys(data).forEach(scale => {
+    state[scale] = data[scale].map(() => false); // default all ❌
+  });
+
+  // Clear title and subtitle inputs
+  document.getElementById("titleInput").value = "";
+  document.getElementById("subtitleInput").value = "";
+
+  renderScales();
+  showToast("♻️ Reset to default! Will you love me? 🩷");
+}
 
 loadState();
 renderScales();
+
 
         function updateThemeIcon(theme) {
             themeIcon.innerHTML = theme === 'dark'
