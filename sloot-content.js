@@ -58,6 +58,7 @@ const tools = [
       { name: "Full Color Screen", path: "full-color-screen-generator", emoji: "🟩", category: "Color" },
 
       { name: "DVD Screensaver", path: "dvd-screensaver", emoji: "📀", category: "Screen" },
+      { name: "Fake Windows Update Screen", path: "fake-windows-update-screen", emoji: "🪟", category: "Screen" }
   // { name: "YouTube Channel Profile Picture Downloader", path: "youtube-channel-profile-picture-downloader", emoji: "📽️", category: "Social" },
 ];
 
