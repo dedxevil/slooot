@@ -59,7 +59,8 @@ const tools = [
 
       { name: "DVD Screensaver", path: "dvd-screensaver", emoji: "📀", category: "Screen" },
       { name: "Fake Windows Update Screen", path: "fake-windows-update-screen", emoji: "🪟", category: "Screen" },
-            { name: "Fake Ubuntu Update Screen", path: "ubuntu-fake-update-screen", emoji: "☸️", category: "Screen" }
+            { name: "Fake Ubuntu Update Screen", path: "ubuntu-fake-update-screen", emoji: "☸️", category: "Screen" },
+            { name: "Hacker Screen Simulator", path: "hacker-screen-simulator", emoji: "🥷", category: "Screen" }
       
   // { name: "YouTube Channel Profile Picture Downloader", path: "youtube-channel-profile-picture-downloader", emoji: "📽️", category: "Social" },
 ];
