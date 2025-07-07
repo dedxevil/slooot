@@ -54,6 +54,7 @@ const tools = [
     { name: "Sort Letters in Words", path: "sort-letters-in-words", emoji: "📄", category: "Text" },
     { name: "Scramble Words in Text", path: "scramble-words-in-text", emoji: "🙃", category: "Text" },
     { name: "Scramble Paragraphs in Text", path: "scramble-paragraphs-in-text", emoji: "🙃", category: "Text" },
+        { name: "Erase Words from Text", path: "erase-words-from-text", emoji: "🧻", category: "Text" },
 
       { name: "Full Color Screen", path: "full-color-screen-generator", emoji: "🟩", category: "Color" },
 
@@ -93,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
   container.innerHTML = `
    <div class="max-w-5xl mx-auto px-4 mt-20 mb-12 text-center">
  <h1 class="text-3xl md:text-4xl font-bold mb-3">Curated collection of micro tools that simplify your time on the internet</h1>
-<p class="text-2xl text-white font-semibold mb-4 dark:bg-gray-500">${tools.length} tools and counting...</p>
+<p class="text-2xl text-gray-500 font-semibold mb-4 ">${tools.length} tools and counting...</p>
 
  <p class="text-base text-gray-600 mb-8">Search or browse tools by category below.</p>
  <input type="text" id="toolSearch" placeholder="🔍 Search tools..." class="w-full max-w-xl mx-auto p-3 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />

@@ -4,21 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toools | Curated collecion of micro tools</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="icon"
-        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="0.9em" font-size="90">🛠️</text></svg>'>
+        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">🧻</text></svg>'>
+    <!-- SEO Meta Tags -->
+<meta name="title" content="Erase Words from Text – Online Text Cleaner Tool" />
+<meta name="description" content="Quickly remove specific words from text and preserve the original structure. Free browser-based tool. No login required." />
+<meta name="keywords" content="erase words, remove words from text, text cleaner, word eraser, delete words, text tool online" />
+<title>Erase Words from Text – Free Online Word Removal Tool</title>
 
-     
-    <meta name="description"
-        content="All-in-one online tools app offering PDF tools, image editing, text utilities, screen tools, and more. Fast, free, and easy to use.">
-     
-    <meta name="keywords"
-        content="online tools, all in one tools, pdf tools, image tools, text tools, screen tools, convert pdf, compress pdf, merge pdf, split pdf, edit images, image converter, text editor, screen recorder, ilovepdf alternative, smallpdf alternative, free online tools, productivity tools, file converter, pdf to word, word to pdf, jpg to pdf, pdf compressor, utility app, multitool app, web tools collection">
-     
-    <meta name="author" content="Toools">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -466,6 +462,17 @@
         .logo-container:hover .logo-icon svg {
             transform: rotate(-10deg) scale(1.1);
         }
+        textarea {
+  transition: height 0.2s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
     </style>
 </head>
 
@@ -485,15 +492,7 @@
 
 
             <div class="flex items-center space-x-6">
-                <!-- <nav class="hidden md:flex space-x-6" id="main-nav">
-                    <a href="#finance" class="nav-link text-lg font-medium">Finance</a>
-                    <a href="#social" class="nav-link text-lg font-medium">Social</a>
-                    <a href="#utility" class="nav-link text-lg font-medium">Utility</a>
-                    <a href="#pdf" class="nav-link text-lg font-medium">PDF</a>
-                    <a href="#fun" class="nav-link text-lg font-medium">Fun</a>
-                    <a href="#dev" class="nav-link text-lg font-medium">Dev</a>
 
-                </nav> -->
 
                 <div class="flex items-center space-x-2">
                     <div class="theme-toggle" id="themeToggle"></div>
@@ -506,30 +505,103 @@
     </header>
 
     <main class="container mx-auto py-8">
+<section id="erase-words-tool" class="category-section fade-in mt-20 max-w-3xl mx-auto">
+  <h2 class="text-3xl font-bold text-center mb-8">Erase Words from Text</h2>
 
-        </div>
+  <div class="relative max-w-2xl mx-auto p-6 space-y-6 bg-white dark:bg-gray-900 rounded-lg shadow-xl">
+    <!-- Text Input -->
+    <div>
+      <label class="block text-sm font-medium text-gray-600 dark:text-gray-300 mb-2">Enter your text:</label>
+      <textarea id="erase-input" rows="6"
+        class="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white resize-none"
+        placeholder="Type or paste your text here..."></textarea>
+    </div>
 
-        <div id="tools-container"></div>
+    <!-- Words to Remove -->
+    <div>
+      <label class="block text-sm font-medium text-gray-600 dark:text-gray-300 mb-2">Words to remove (comma separated):</label>
+      <input id="erase-words" type="text"
+        class="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white"
+        placeholder="e.g., the, and, is">
+    </div>
+
+    <!-- Erase Button -->
+    <div class="text-center">
+      <button id="erase-btn"
+        class="mt-4 px-6 py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-md hover:opacity-90 transition">
+        Erase Words
+      </button>
+    </div>
+
+    <!-- Output Area -->
+    <div id="erase-result" class="hidden mt-6 space-y-4">
+      <textarea id="erase-output"
+        class="w-full h-48 px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white resize-none"
+        readonly></textarea>
+      <div class="text-center">
+        <button id="erase-copy-btn"
+          class="px-4 py-2 bg-purple-600 text-white rounded-md hover:opacity-90 transition">Copy Cleaned Text</button>
+      </div>
+    </div>
+  </div>
+</section>
 
 
+
+
+
+<section class="max-w-3xl mx-auto mt-16 px-6">
+  <h3 class="text-2xl font-bold mb-4">How to Erase Words from Text</h3>
+  <p class="mb-4">This tool helps you <strong>quickly erase specific words</strong> from a block of text while keeping the rest of the structure intact. Ideal for cleaning content, simplifying inputs, or filtering out filler words.</p>
+
+  <ol class="list-decimal ml-6 space-y-2 text-gray-700 dark:text-gray-500">
+    <li>Paste or type your full text in the input box.</li>
+    <li>List the words you want to erase (separated by commas).</li>
+    <li>Click <strong>"Erase Words"</strong> to clean the text.</li>
+    <li>Copy the cleaned output with one click.</li>
+  </ol>
+
+  <h4 class="text-xl font-semibold mt-6 mb-2">Example</h4>
+  <p class="mb-4">
+    <strong>Input:</strong> The quick brown fox jumps over the lazy dog.<br>
+    <strong>Words to erase:</strong> the, over<br>
+    <strong>Output:</strong> quick brown fox jumps lazy dog.
+  </p>
+
+  <p class="mt-6 text-sm text-gray-500">SEO Tags: erase words, remove text, clean input, delete specific words, word remover</p>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div id="tools-container"></div>
     </main>
 
     <footer class="py-8 border-t border-gray-800 dark:border-gray-700">
         <div class="container mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <a href="/" class="logo-container flex items-center space-x-3">
-                        <div class="logo-icon text-indigo-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
-                            </svg>
-                        </div>
-                        <h2 class="logo-text text-2xl font-semibold text-gray-800">Toools</h2>
-                    </a>
-                    <p class="mt-2 text-sm text-gray-600 italic">Made in Coimbatore, India</p>
-                </div>
+<div class="mb-6 md:mb-0">
+    <a href="/" class="logo-container flex items-center space-x-3">
+        <div class="logo-icon text-indigo-600">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
+            </svg>
+        </div>
+        <h2 class="logo-text text-2xl font-semibold text-gray-800">Toools</h2>
+    </a>
+    <p class="mt-2 text-sm text-gray-600 italic">Made in Coimbatore, India</p>
+</div>
 
 
                 <div class="text-center md:text-right">
@@ -572,6 +644,7 @@
                 header.classList.add('bg-white');
             }
         }
+
         const themeIcon = document.getElementById('themeIcon');
         updateThemeIcon(savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
 
@@ -642,6 +715,53 @@
             const currentYear = new Date().getFullYear();
             yearSpan.textContent = `© ${currentYear} toools.in. All rights reserved.`;
         });
+
+function showToast(msg, type = 'success') {
+  const toast = document.createElement('div');
+  toast.className = `px-4 py-3 rounded shadow-md animate-slideIn text-white ${type === 'error' ? 'bg-red-600' : 'bg-green-600'}`;
+  toast.textContent = msg;
+  document.getElementById('toast-container').appendChild(toast);
+  setTimeout(() => {
+    toast.classList.add('opacity-0');
+    setTimeout(() => toast.remove(), 400);
+  }, 3000);
+}
+
+document.getElementById('erase-btn').addEventListener('click', () => {
+  const input = document.getElementById('erase-input').value;
+  const words = document.getElementById('erase-words').value;
+  const outputBox = document.getElementById('erase-output');
+  const resultBox = document.getElementById('erase-result');
+
+  if (!input.trim() || !words.trim()) {
+    showToast('Please enter both text and words to erase.', 'error');
+    return;
+  }
+
+  // Prepare regex to match whole words while preserving spaces/newlines
+  const wordList = words.split(',').map(w => w.trim()).filter(Boolean);
+  const regex = new RegExp(`\\b(${wordList.join('|')})\\b`, 'gi');
+
+  // Replace words but preserve spacing/newlines
+  const cleaned = input.replace(regex, '');
+
+  outputBox.value = cleaned;
+  resultBox.classList.remove('hidden');
+  showToast('🧹 Words erased while preserving formatting!');
+});
+
+document.getElementById('erase-copy-btn').addEventListener('click', () => {
+  const outputBox = document.getElementById('erase-output');
+  outputBox.select();
+  document.execCommand('copy');
+  showToast('📋 Cleaned text copied!');
+});
+
+
+
+
+
+
         function updateThemeIcon(theme) {
             themeIcon.innerHTML = theme === 'dark'
                 ? `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -655,7 +775,8 @@
         }
 
     </script>
-    <script src="sloot-content.js"></script>
+    <script src="../sloot-content.js"></script>
+ <div id="toast-container" class="fixed bottom-6 right-6 space-y-2 z-50"></div>
 </body>
 
 </html>
