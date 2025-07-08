@@ -862,7 +862,13 @@ function copyToClipboard() {
   }));
 
   // Build WhatsApp message
-  let text = `*${title}*\n────────────────────\n${subtitle}\n----------------------\n\n`;
+  let text = `*${title}*\n────────────────────\n`;
+
+  if (subtitle) {
+    text += `${subtitle}\n----------------------\n\n`;
+  } else {
+    text += `\n`;
+  }
 
   Object.keys(data).forEach(scale => {
     text += `📌 *${scale}:*\n`;
