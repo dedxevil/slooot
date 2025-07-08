@@ -55,6 +55,8 @@ const tools = [
     { name: "Scramble Words in Text", path: "scramble-words-in-text", emoji: "🙃", category: "Text" },
     { name: "Scramble Paragraphs in Text", path: "scramble-paragraphs-in-text", emoji: "🙃", category: "Text" },
         { name: "Erase Words from Text", path: "erase-words-from-text", emoji: "🧻", category: "Text" },
+        { name: "Swap Words in Text", path: "swap-words-in-text", emoji: "🔃", category: "Text" },
+        { name: "Duplicate Sentences in Text", path: "duplicate-sentences-in-text", emoji: "🈁", category: "Text" },
 
       { name: "Full Color Screen", path: "full-color-screen-generator", emoji: "🟩", category: "Color" },
 
