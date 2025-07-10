@@ -558,6 +558,18 @@
                             <option value="#10b981,#06b6d4">Green → Teal</option>
                             <option value="#ec4899,#ef4444">Pink → Red</option>
                             <option value="#fbbf24,#f97316">Yellow → Orange</option>
+
+                            <option value="#0f2027,#203a43,#2c5364">Dark Blue Steel</option>
+                            <option value="#1c92d2,#f2fcfe">Sky Blue Mist</option>
+                            <option value="#373b44,#4286f4">Charcoal → Blue</option>
+                            <option value="#bdc3c7,#2c3e50">Silver → Midnight</option>
+                            <option value="#e0eafc,#cfdef3">Soft Blue Fade</option>
+                            <option value="#fdfbfb,#ebedee">Subtle Gray</option>
+                            <option value="#ffecd2,#fcb69f">Peach Cream</option>
+                            <option value="#c9d6ff,#e2e2e2">Cool Gray → Blue</option>
+                            <option value="#4b6cb7,#182848">Royal Blue Depth</option>
+                            <option value="#232526,#414345">Graphite Gradient</option>
+
                         </select>
                     </div>
                     <div>
@@ -789,25 +801,25 @@
             });
         });
 
-document.getElementById('download-card').addEventListener('click', () => {
-  const name = document.getElementById('card-name').value.trim() || 'profile-card';
-  const safeName = name.replace(/\s+/g, '_').replace(/[^\w\-]/g, '');
+        document.getElementById('download-card').addEventListener('click', () => {
+            const name = document.getElementById('card-name').value.trim() || 'profile-card';
+            const safeName = name.replace(/\s+/g, '_').replace(/[^\w\-]/g, '');
 
-  const now = new Date();
-  const day = String(now.getDate()).padStart(2, '0');
-  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  const month = monthNames[now.getMonth()];
-  const year = now.getFullYear();
+            const now = new Date();
+            const day = String(now.getDate()).padStart(2, '0');
+            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const month = monthNames[now.getMonth()];
+            const year = now.getFullYear();
 
-  const formattedDate = `${day}-${month}-${year}`;
-  const filename = `${safeName}_${formattedDate}.png`;
+            const formattedDate = `${day}-${month}-${year}`;
+            const filename = `${safeName}_${formattedDate}.png`;
 
-  const link = document.createElement('a');
-  link.download = filename;
-  link.href = canvas.toDataURL('image/png');
-  link.click();
-});
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
 
 
         function generateCard() {
