@@ -37,6 +37,7 @@ const tools = [
   { name: "PDF Compressor", path: "pdf-compressor", emoji: "📑", category: "PDF" },
   { name: "Rotate PDF pages", path: "rotate-pdf-pages", emoji: "📄", category: "PDF" },
    { name: "Remove blank PDF pages", path: "remove-blank-pages-pdf", emoji: "📄", category: "PDF" },
+      { name: "Stamp PDF pages", path: "stamp-pdfs", emoji: "📝", category: "PDF" },
 
   { name: "WhatsApp Link Generator", path: "whatsapp-link-generator", emoji: "💬", category: "Social" },
   { name: "YouTube Video Thumbnail Downloader", path: "youtube-thumbnail-downloader", emoji: "📺️", category: "Social" },
@@ -57,7 +58,7 @@ const tools = [
         { name: "Erase Words from Text", path: "erase-words-from-text", emoji: "🧻", category: "Text" },
         { name: "Swap Words in Text", path: "swap-words-in-text", emoji: "🔃", category: "Text" },
         { name: "Duplicate Sentences in Text", path: "duplicate-sentences-in-text", emoji: "🈁", category: "Text" },
-
+{ name: "Justify Text", path: "justify-text", emoji: "🧾", category: "Text" },
       { name: "Full Color Screen", path: "full-color-screen-generator", emoji: "🟩", category: "Color" },
 
       { name: "DVD Screensaver", path: "dvd-screensaver", emoji: "📀", category: "Screen" },
