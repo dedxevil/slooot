@@ -860,7 +860,27 @@
             ctx.textAlign = 'center';
             ctx.shadowColor = 'rgba(0,0,0,0.4)';
             ctx.shadowBlur = 10;
-            ctx.fillText(`⭐ ${title.toUpperCase()} ⭐`, canvas.width / 2, 200);
+
+            //  ctx.fillText(`⭐ ${title.toUpperCase()} ⭐`, canvas.width / 2, 200);
+const titleText = `⭐ ${title.toUpperCase()} ⭐`;
+
+if (title.length <= 11) {
+  ctx.font = '700 115px "Fira Sans", sans-serif';
+  ctx.textAlign = "center";
+  ctx.fillText(titleText, canvas.width / 2, 200);
+} else {
+  ctx.font = '700 120px "Fira Sans", sans-serif';
+  ctx.textAlign = "center";
+
+  // Split the title into two parts
+  const mid = Math.floor(title.length / 2);
+  const line1 = `⭐ ${title.substring(0, mid).toUpperCase()}`;
+  const line2 = `${title.substring(mid).toUpperCase()} ⭐`;
+
+  ctx.fillText(line1, canvas.width / 2, 190);
+  ctx.fillText(line2, canvas.width / 2, 320);
+}
+
 
             const centerX = canvas.width / 2;
             const avatarY = 730;
