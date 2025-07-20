@@ -7,15 +7,24 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-
-    <title>SBI - Coimbatore - WhatsApp Badge Creator</title>
+    <title>Mermaid Diagram Exporter - Export to PNG, JPEG, and SVG</title>
     <meta name="description"
-        content="Quickly prepare and copy updates with branch lists with check/cross toggles. Perfect for WhatsApp groups. Add or remove branches dynamically.">
+        content="Create and export Mermaid diagrams to PNG, JPEG, or SVG online. Paste your Mermaid code, render the diagram, and download instantly.">
     <meta name="keywords"
-        content="MF Update, WhatsApp list manager, toggle branch status, add branches, remove branches, copy to clipboard, Scale 4 branches, Scale 3 branches, Scale 2 branches">
+        content="mermaid diagram exporter, mermaid to png, mermaid to jpeg, mermaid to svg, export mermaid diagrams, mermaid renderer online, mermaid diagram to image">
+    <meta property="og:title" content="Mermaid Diagram Exporter - Export to PNG, JPEG, and SVG">
+    <meta property="og:description"
+        content="Create and export Mermaid diagrams to PNG, JPEG, or SVG online. Paste your Mermaid code, render the diagram, and download instantly.">
+    <!-- <meta property="og:url" content="https://tools.in/mermaid-exporter"> -->
+    <!-- <meta property="og:image" content="https://tools.in/assets/mermaid-exporter-preview.png"> -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mermaid Diagram Exporter - Export to PNG, JPEG, and SVG">
+    <meta name="twitter:description"
+        content="Create and export Mermaid diagrams to PNG, JPEG, or SVG online. Paste your Mermaid code, render the diagram, and download instantly.">
+    <!-- <meta name="twitter:image" content="https://tools.in/assets/mermaid-exporter-preview.png"> -->
 
     <link rel="icon"
-        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">💷</text></svg>'>
+        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><text y="90" font-size="100">🧜🏻‍♀️</text></svg>'>
     <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&family=Playfair+Display:wght@900&display=swap" rel="stylesheet"> -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,11 +35,13 @@
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvg@3.0.7/lib/umd.min.js"></script>
+
+
     <style>
         :root {
             --primary: #6d28d9;
@@ -534,122 +545,72 @@
 
     <main class="container mx-auto py-8">
 
-        <section id="card-creator-tool" class="category-section fade-in mt-20 max-w-3xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-8">Create Your SBI Card</h2>
-<div>
-    <label for="excel-upload" class="block text-base font-medium text-gray-700 dark:text-gray-300 mb-2">
-      Upload Excel File:
-    </label>
-    <input type="file" id="excel-upload" accept=".xlsx, .xls"
-      class="w-full px-4 py-3 border border-gray-300 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-  </div>
-
-  <!-- Generate Button -->
-  <div class="flex justify-center">
-    <button id="bulk-generate"
-      class="w-full md:w-auto px-8 py-3 bg-gradient-to-r from-pink-500 to-red-500 text-white text-lg font-semibold rounded-lg shadow-md hover:scale-105 hover:shadow-lg transition-transform duration-200">
-      🚀 Generate & Download All as ZIP
-    </button>
-  </div>
-
-  <p class="text-sm text-center text-gray-500 dark:text-gray-400 italic">
-    Excel should include columns: 
-    <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">imagePath</code>,
-    <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">title</code>,
-    <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">badgeText</code>, etc.
-  </p>
-
+        <section id="mermaid-exporter" class="category-section fade-in mt-20 max-w-3xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-4">Mermaid Diagram Exporter</h2>
+            <p class="text-center text-gray-500 mb-6">
+                Create and export beautiful Mermaid diagrams to PNG, JPEG, or SVG instantly.
+            </p>
 
             <div class="relative max-w-2xl mx-auto p-6 space-y-6 bg-white dark:bg-gray-900 rounded-lg shadow-xl">
-                <!-- Inputs -->
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Main Title:</label>
-                        <input id="card-title" type="text" placeholder="I AM ACTIVE"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Badge Text (e.g.,
-                            QUALIFIED):</label>
-                        <input id="badge-text" type="text" placeholder="QUALIFIED"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Choose
-                            Gradient:</label>
-                        <select id="card-gradient"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white">
-                            <option value="#3b82f6,#8b5cf6">Blue → Purple</option>
-                            <option value="#ffffff,#f0f0f0">White</option>
-                            <option value="#10b981,#06b6d4">Green → Teal</option>
-                            <option value="#ec4899,#ef4444">Pink → Red</option>
-                            <option value="#fbbf24,#f97316">Yellow → Orange</option>
-
-                            <option value="#0f2027,#203a43,#2c5364">Dark Blue Steel</option>
-                            <option value="#1c92d2,#f2fcfe">Sky Blue Mist</option>
-                            <option value="#373b44,#4286f4">Charcoal → Blue</option>
-                            <option value="#bdc3c7,#2c3e50">Silver → Midnight</option>
-                            <option value="#e0eafc,#cfdef3">Soft Blue Fade</option>
-                            <option value="#fdfbfb,#ebedee">Subtle Gray</option>
-                            <option value="#ffecd2,#fcb69f">Peach Cream</option>
-                            <option value="#c9d6ff,#e2e2e2">Cool Gray → Blue</option>
-                            <option value="#4b6cb7,#182848">Royal Blue Depth</option>
-                            <option value="#232526,#414345">Graphite Gradient</option>
-
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Upload Avatar:</label>
-                        <input id="card-avatar" type="file" accept="image/*"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white">
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name:</label>
-                            <input id="card-name" type="text" placeholder="Priya Subash"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white">
-                        </div>
-                        <div>
-                            <label
-                                class="block text-sm font-medium text-gray-700 dark:text-gray-300">Designation:</label>
-                            <input id="card-designation" type="text" placeholder="Senior Manager"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white">
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Branch:</label>
-                            <input id="card-branch" type="text" placeholder="RACPC Branch"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Location:</label>
-                            <input id="card-location" type="text" placeholder="Coimbatore"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white">
-                        </div>
-                    </div>
+                <!-- Mermaid Code Input -->
+                <div>
+                    <label for="mermaid-input"
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Mermaid Diagram
+                        Code:</label>
+                    <textarea id="mermaid-input" rows="8" placeholder="Paste your Mermaid code here..."
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white resize-none"></textarea>
                 </div>
 
-                <!-- Buttons -->
-                <!-- Buttons -->
-                <div class="flex justify-center gap-4 mt-6">
-                    <button id="generate-card"
-                        class="px-6 py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-md hover:opacity-90 transition">
-                        Generate Card
+                <!-- Render & Export Buttons -->
+                <div class="flex justify-between space-x-2 flex-wrap gap-y-2">
+                    <button id="render-mermaid"
+                        class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-md hover:opacity-90 transition">
+                        Render Diagram
                     </button>
-                    <button id="download-card"
-                        class="px-6 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-md hover:opacity-90 transition hidden">
-                        Download Image
+                    <button id="export-png"
+                        class="flex-1 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-md hover:opacity-90 transition">
+                        Export PNG
+                    </button>
+                    <button id="export-jpeg"
+                        class="flex-1 px-4 py-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-md hover:opacity-90 transition">
+                        Export JPEG
+                    </button>
+                    <button id="export-svg"
+                        class="flex-1 px-4 py-2 bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-md hover:opacity-90 transition">
+                        Export SVG
                     </button>
                 </div>
 
-                <!-- Scaled Preview -->
-                <div id="card-preview-container"
-                    class="hidden mt-6 w-full h-auto overflow-hidden rounded-lg border shadow-lg bg-gray-100">
-                    <canvas id="card-canvas" width="1200" height="1700"
-                        style="width:100%; height:auto; display:block;"></canvas>
+                <!-- Diagram Preview -->
+                <div id="mermaid-preview" class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 overflow-auto">
+                    <div id="mermaid-container" class="flex justify-center items-center"></div>
                 </div>
             </div>
+        </section>
+        <section class="mt-10 max-w-3xl mx-auto p-4">
+            <h3 class="text-2xl font-bold mb-4">About the Mermaid Diagram Exporter</h3>
+            <p class="mb-3 text-gray-700 dark:text-gray-300">
+                The Mermaid Diagram Exporter lets you create and download stunning diagrams directly from your browser.
+                Using Mermaid syntax, you can visualize flowcharts, sequence diagrams, Gantt charts, and more, then
+                export them as high-quality PNG, JPEG, or SVG images for your projects.
+            </p>
+            <h4 class="text-xl font-semibold mb-2">Why Use This Tool?</h4>
+            <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 mb-3">
+                <li>✅ Instantly render Mermaid diagrams from plain text.</li>
+                <li>✅ Export to PNG, JPEG, or SVG formats with a single click.</li>
+                <li>✅ Works fully in-browser with no server uploads for privacy.</li>
+                <li>✅ Supports flowcharts, class diagrams, state diagrams, and more.</li>
+            </ul>
+            <h4 class="text-xl font-semibold mb-2">How to Use</h4>
+            <p class="text-gray-700 dark:text-gray-300 mb-2">
+                1. Paste your Mermaid diagram code into the input box.
+                2. Click “Render Diagram” to preview it.
+                3. Export the diagram as PNG, JPEG, or SVG for use in documentation, presentations, or reports.
+            </p>
+            <p class="text-gray-700 dark:text-gray-300">
+                This free tool helps developers, designers, and technical writers quickly turn diagram code into
+                shareable images.
+            </p>
         </section>
 
 
@@ -793,18 +754,15 @@
             const yearSpan = document.getElementById('footer-year');
             const currentYear = new Date().getFullYear();
             yearSpan.textContent = `© ${currentYear} toools.in. All rights reserved.`;
+            const input = document.getElementById('mermaid-input');
+            const container = document.getElementById('mermaid-container');
 
-            const savedData = JSON.parse(localStorage.getItem('cardData'));
-            if (savedData) {
-                document.getElementById('card-title').value = savedData.title || '';
-                document.getElementById('badge-text').value = savedData.badgeText || '';
-                document.getElementById('card-gradient').value = savedData.gradientValue || '';
-                document.getElementById('card-name').value = savedData.name || '';
-                document.getElementById('card-designation').value = savedData.designation || '';
-                document.getElementById('card-branch').value = savedData.branch || '';
-                document.getElementById('card-location').value = savedData.location || '';
+            if (input && container) {
+                input.value = 'graph TD; A-->B;';
+                mermaid.render('mermaid-svg', input.value, (svgCode) => {
+                    container.innerHTML = svgCode;
+                });
             }
-
         });
 
         function showToast(msg, type = 'success') {
@@ -818,299 +776,132 @@
             }, 3000);
         }
 
-        const canvas = document.getElementById('card-canvas');
-        const ctx = canvas.getContext('2d');
+// Get DOM elements
+const mermaidInput = document.getElementById('mermaid-input');
+const renderBtn = document.getElementById('render-mermaid');
+const exportPngBtn = document.getElementById('export-png');
+const exportJpegBtn = document.getElementById('export-jpeg');
+const exportSvgBtn = document.getElementById('export-svg');
+const previewContainer = document.getElementById('mermaid-container');
 
-        document.getElementById('generate-card').addEventListener('click', () => {
-            document.fonts.ready.then(() => {
-                generateCard();
-            });
-        });
+// Load saved diagram from localStorage
+const savedCode = localStorage.getItem('mermaidDiagram');
+if (savedCode) mermaidInput.value = savedCode;
 
-        document.getElementById('download-card').addEventListener('click', () => {
-            const name = document.getElementById('card-name').value.trim() || 'profile-card';
-            const safeName = name.replace(/\s+/g, '_').replace(/[^\w\-]/g, '');
+// Initialize Mermaid v10
+mermaid.initialize({ startOnLoad: false, theme: "default" });
 
-            const now = new Date();
-            const day = String(now.getDate()).padStart(2, '0');
-            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            const month = monthNames[now.getMonth()];
-            const year = now.getFullYear();
+// Render diagram
+renderBtn.addEventListener('click', async () => {
+  const code = mermaidInput.value.trim();
+  if (!code) {
+    showToast('⚠️ Please enter Mermaid code.', 'error');
+    return;
+  }
 
-            const formattedDate = `${day}-${month}-${year}`;
-            const filename = `${safeName}_${formattedDate}.png`;
+  // Save diagram to localStorage
+  localStorage.setItem('mermaidDiagram', code);
 
-            const link = document.createElement('a');
-            link.download = filename;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-        });
+  // Validate Mermaid syntax
+  try {
+    mermaid.parse(code);
+  } catch (err) {
+    console.error("Mermaid syntax error:", err);
+    showToast('❌ Invalid Mermaid syntax.', 'error');
+    return;
+  }
 
-
-        function generateCard() {
-            const title = document.getElementById('card-title').value;
-            const badgeText = document.getElementById('badge-text').value;
-            const gradientValue = document.getElementById('card-gradient').value;
-            const [startColor, endColor] = gradientValue.split(',');
-            const avatarFile = document.getElementById('card-avatar').files[0];
-            const name = document.getElementById('card-name').value
-            const designation = document.getElementById('card-designation').value
-            const branch = document.getElementById('card-branch').value
-            const location = document.getElementById('card-location').value
-
-            // Save values to localStorage
-            localStorage.setItem('cardData', JSON.stringify({
-                title,
-                badgeText,
-                gradientValue,
-                name,
-                designation,
-                branch,
-                location
-            }));
-
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Background gradient
-            const grd = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-            grd.addColorStop(0, startColor);
-            grd.addColorStop(1, endColor);
-            ctx.fillStyle = grd;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Main title
-            ctx.font = '700 120px "Fira Sans", sans-serif';
-            ctx.fillStyle = '#facc15'; // Gold
-            ctx.textAlign = 'center';
-            ctx.shadowColor = 'rgba(0,0,0,0.4)';
-            ctx.shadowBlur = 10;
-
-            //  ctx.fillText(`⭐ ${title.toUpperCase()} ⭐`, canvas.width / 2, 200);
-const titleText = `⭐ ${title.toUpperCase()} ⭐`;
-
-if (title.length <= 11) {
-  ctx.font = '700 120px "Fira Sans", sans-serif';
-  ctx.textAlign = "center";
-  ctx.fillText(titleText, canvas.width / 2, 200);
-} else {
-  ctx.font = '700 130px "Fira Sans", sans-serif';
-  ctx.textAlign = "center";
-
-  // Split the title into two parts
-  const mid = Math.floor(title.length / 2);
-  const line1 = `⭐ ${title.substring(0, mid).toUpperCase()}`;
-  const line2 = `${title.substring(mid).toUpperCase()} ⭐`;
-
-  ctx.fillText(line1, canvas.width / 2, 190);
-  ctx.fillText(line2, canvas.width / 2, 320);
-}
-
-
-            const centerX = canvas.width / 2;
-            const avatarY = 730;
-
-            if (avatarFile) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const img = new Image();
-                    img.onload = function () {
-                        // Draw avatar
-                        ctx.save();
-                        ctx.beginPath();
-                        ctx.arc(centerX, avatarY, 330, 0, Math.PI * 2, false);
-                        ctx.clip();
-                        ctx.drawImage(img, centerX - 330, avatarY - 330, 660, 660);
-                        ctx.restore();
-
-                        // Golden check badge overlapping avatar
-                        ctx.beginPath();
-                        ctx.arc(centerX + 250, avatarY + 250, 75, 0, Math.PI * 2, false);
-                        ctx.fillStyle = '#34b233';
-                        ctx.fill();
-
-                        ctx.font = '900 60px "Fira Sans", sans-serif';
-                        ctx.fillStyle = '#ffffff';
-                        ctx.fillText("✔", centerX + 250, avatarY + 275);
-
-                        // QUALIFIED text
-                        ctx.font = '900 100px "Fira Sans", sans-serif';
-                        ctx.fillStyle = '#facc15';
-                        ctx.shadowBlur = 10;
-                        ctx.fillText(badgeText, centerX, avatarY + 450);
-
-                        drawBottomSection(name, designation, branch, location, centerX);
-                    };
-                    img.src = e.target.result;
-                };
-                reader.readAsDataURL(avatarFile);
-            } else {
-                // No avatar → directly draw QUALIFIED + bottom section
-                ctx.font = '900 100px "Fira Sans", sans-serif';
-                ctx.fillStyle = '#facc15';
-                ctx.shadowBlur = 10;
-                ctx.fillText(badgeText, centerX, avatarY + 450);
-
-                drawBottomSection(name, designation, branch, location, centerX);
-            }
-        }
-
-        function drawBottomSection(name, designation, branch, location, centerX) {
-            ctx.shadowBlur = 0;
-
-            // Bottom section background
-            ctx.fillStyle = 'rgba(0,0,0,0.4)';
-            ctx.fillRect(0, canvas.height - 400, canvas.width, 400);
-
-            ctx.fillStyle = '#ffffff';
-            ctx.textAlign = 'center';
-
-            const baseY = canvas.height - 300;
-            const lineSpacing = 70;
-
-            // Name
-            ctx.font = '900 65px "Fira Sans", sans-serif';
-            ctx.fillText(name, centerX, baseY);
-
-            // Designation
-            ctx.font = '50px "Fira Sans", sans-serif';
-            ctx.fillText(designation, centerX, baseY + lineSpacing);
-
-            // Branch
-            ctx.font = '40px "Fira Sans", sans-serif';
-            ctx.fillText(branch, centerX, baseY + lineSpacing * 2);
-
-            // Location with white pin
-            const locationY = baseY + lineSpacing * 3;
-            ctx.font = '35px "Fira Sans", sans-serif';
-            ctx.fillText(location, centerX + 20, locationY);
-
-            // Align pin with the left edge of the location text
-            const locationTextWidth = ctx.measureText(location).width;
-            const pinX = centerX - locationTextWidth / 2 - 20;
-            const pinY = locationY - 10;
-
-            ctx.beginPath();
-            ctx.arc(pinX, pinY, 8, 0, Math.PI * 2, false);
-            ctx.fillStyle = '#ffffff';
-            ctx.fill();
-
-            ctx.beginPath();
-            ctx.moveTo(pinX, pinY + 8);
-            ctx.lineTo(pinX, pinY + 18);
-            ctx.lineWidth = 2;
-            ctx.strokeStyle = '#ffffff';
-            ctx.stroke();
-
-            document.getElementById('card-preview-container').classList.remove('hidden');
-            document.getElementById('download-card').classList.remove('hidden');
-        }
-
-
-document.getElementById('bulk-generate').addEventListener('click', async () => {
-    const fileInput = document.getElementById('excel-upload');
-    if (!fileInput.files[0]) return alert("Please upload an Excel file");
-
-    const file = fileInput.files[0];
-    const data = await file.arrayBuffer();
-    const workbook = XLSX.read(data);
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
-    const rows = XLSX.utils.sheet_to_json(sheet);
-
-    const zip = new JSZip();
-
-    for (const [index, row] of rows.entries()) {
-        const {
-            imagePath,
-            title,
-            badgeText,
-            name,
-            designation,
-            branch,
-            location,
-            gradient
-        } = row;
-
-        // Split gradient
-        const [startColor, endColor] = gradient.split(',');
-
-        // Load image
-        const img = await loadImage(imagePath);
-
-        // Render card to canvas
-        await renderCardToCanvas({
-            ctx, canvas, img, title, badgeText, name, designation, branch, location, startColor, endColor
-        });
-
-        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-        zip.file(`${name.replace(/\s+/g, '_')}_${index + 1}.png`, blob);
-    }
-
-    zip.generateAsync({ type: 'blob' }).then(content => {
-        saveAs(content, 'bulk_badges.zip');
-    });
+  // Render the diagram
+  try {
+    const svgId = "mermaid-svg";
+    const { svg } = await mermaid.render(svgId, code);
+    previewContainer.innerHTML = svg;
+    showToast('✅ Diagram rendered successfully!');
+  } catch (err) {
+    console.error("Mermaid render error:", err);
+    showToast('❌ Error rendering diagram.', 'error');
+  }
 });
 
-function loadImage(path) {
-    return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.crossOrigin = "anonymous";
-        img.onload = () => resolve(img);
-        img.onerror = reject;
-        img.src = path;
-    });
+// Add white background to SVG
+function addWhiteBackgroundToSVG(svgText) {
+  return svgText.replace(
+    "<svg",
+    '<svg style="background-color:white;"'
+  );
 }
 
-async function renderCardToCanvas({
-    ctx, canvas, img, title, badgeText, name, designation, branch, location, startColor, endColor
-}) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+// Export as PNG or JPEG
+async function exportDiagramAsImage(type, scale = 3) {
+  const svgNode = previewContainer.querySelector("svg");
+  if (!svgNode) {
+    showToast('⚠️ No diagram to export. Please render first.', 'error');
+    return;
+  }
 
-    // Background gradient
-    const grd = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-    grd.addColorStop(0, startColor);
-    grd.addColorStop(1, endColor);
-    ctx.fillStyle = grd;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // Fix missing viewBox for scaling
+  if (!svgNode.getAttribute("viewBox")) {
+    const width = svgNode.getAttribute("width");
+    const height = svgNode.getAttribute("height");
+    svgNode.setAttribute("viewBox", `0 0 ${width} ${height}`);
+  }
 
-    const centerX = canvas.width / 2;
-    const avatarY = 730;
+  // Serialize SVG and add white background
+  const serializer = new XMLSerializer();
+  let svgText = serializer.serializeToString(svgNode);
+  svgText = svgText.replace(/<br>/g, '<br/>'); // Fix unclosed <br>
+  svgText = addWhiteBackgroundToSVG(svgText);
 
-    // Title
-    ctx.font = '700 120px "Fira Sans", sans-serif';
-    ctx.fillStyle = '#facc15';
-    ctx.textAlign = 'center';
-    ctx.shadowColor = 'rgba(0,0,0,0.4)';
-    ctx.shadowBlur = 10;
-    ctx.fillText(`⭐ ${title.toUpperCase()} ⭐`, canvas.width / 2, 200);
+  // Setup canvas
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = svgNode.clientWidth * scale;
+  canvas.height = svgNode.clientHeight * scale;
 
-    // Avatar
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(centerX, avatarY, 330, 0, Math.PI * 2, false);
-    ctx.clip();
-    ctx.drawImage(img, centerX - 330, avatarY - 330, 660, 660);
-    ctx.restore();
+  // Fill white background
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Badge ✔
-    ctx.beginPath();
-    ctx.arc(centerX + 250, avatarY + 250, 75, 0, Math.PI * 2, false);
-    ctx.fillStyle = '#34b233';
-    ctx.fill();
-    ctx.font = '900 60px "Fira Sans", sans-serif';
-    ctx.fillStyle = '#ffffff';
-    ctx.fillText("✔", centerX + 250, avatarY + 275);
+  // Render SVG to Canvas using Canvg
+  const v = await window.canvg.Canvg.fromString(ctx, svgText);
+  await v.render();
 
-    // Badge text
-    ctx.font = '900 100px "Fira Sans", sans-serif';
-    ctx.fillStyle = '#facc15';
-    ctx.shadowBlur = 10;
-    ctx.fillText(badgeText, centerX, avatarY + 450);
-
-    // Bottom section
-    drawBottomSection(name, designation, branch, location, centerX);
+  // Export to Blob
+  canvas.toBlob((blob) => {
+    const link = document.createElement('a');
+    link.download = `mermaid-diagram.${type}`;
+    link.href = URL.createObjectURL(blob);
+    link.click();
+    showToast(`✅ Diagram exported as high-res ${type.toUpperCase()}!`);
+  }, `image/${type}`);
 }
+
+// Hook up PNG/JPEG export buttons
+exportPngBtn.addEventListener('click', () => exportDiagramAsImage('png', 3));
+exportJpegBtn.addEventListener('click', () => exportDiagramAsImage('jpeg', 3));
+
+// Export as SVG
+exportSvgBtn.addEventListener('click', () => {
+  const svgNode = previewContainer.querySelector("svg");
+  if (!svgNode) {
+    showToast('⚠️ No diagram to export. Please render first.', 'error');
+    return;
+  }
+
+  const serializer = new XMLSerializer();
+  let svgText = serializer.serializeToString(svgNode);
+  svgText = svgText.replace(/<br>/g, '<br/>'); // Fix unclosed <br>
+  svgText = addWhiteBackgroundToSVG(svgText);  // Force white background
+
+  const blob = new Blob([svgText], { type: 'image/svg+xml' });
+  const link = document.createElement('a');
+  link.download = 'mermaid-diagram.svg';
+  link.href = URL.createObjectURL(blob);
+  link.click();
+  showToast('✅ Diagram exported as SVG!');
+});
+
+
 
         function updateThemeIcon(theme) {
             themeIcon.innerHTML = theme === 'dark'
