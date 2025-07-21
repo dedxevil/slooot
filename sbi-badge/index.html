@@ -537,6 +537,8 @@
         <section id="card-creator-tool" class="category-section fade-in mt-20 max-w-3xl mx-auto">
             <h2 class="text-3xl font-bold text-center mb-8">Create Your SBI Card</h2>
   <!-- Excel Upload -->
+
+  <!-- Excel Upload -->
   <div>
     <label for="excel-upload" class="block text-base font-medium text-gray-700 dark:text-gray-300 mb-2">
       Upload Excel File:
@@ -554,11 +556,15 @@
       class="w-full px-4 py-3 border border-gray-300 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
   </div>
 
-  <!-- Generate Button -->
-  <div class="flex justify-center">
-    <button id="bulk-generate"
-      class="w-full md:w-auto px-8 py-3 bg-gradient-to-r from-pink-500 to-red-500 text-white text-lg font-semibold rounded-lg shadow-md hover:scale-105 hover:shadow-lg transition-transform duration-200">
-      🚀 Generate & Download All as ZIP
+  <!-- Buttons -->
+  <div class="flex flex-col md:flex-row justify-center gap-4 mt-6">
+    <button id="bulk-download-zip"
+      class="w-full md:w-auto px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-lg font-semibold rounded-lg shadow-md hover:scale-105 hover:shadow-lg transition-transform duration-200">
+      📦 Download All as ZIP
+    </button>
+    <button id="bulk-download-individual"
+      class="w-full md:w-auto px-8 py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-lg font-semibold rounded-lg shadow-md hover:scale-105 hover:shadow-lg transition-transform duration-200">
+      🖼 Download Individually
     </button>
   </div>
 
@@ -1010,21 +1016,13 @@ if (title.length <= 11) {
         }
 
 
-document.getElementById('bulk-generate').addEventListener('click', async () => {
-    const excelInput = document.getElementById('excel-upload');
-    const imageInput = document.getElementById('bulk-images');
-    if (!excelInput.files[0]) return alert("Please upload an Excel file");
-    if (!imageInput.files.length) return alert("Please upload images");
+document.getElementById('bulk-download-zip').addEventListener('click', async () => {
+    const rows = await getExcelRows();
+    const imageMap = getImageMap();
 
-    const imageFiles = Array.from(imageInput.files);
-    const imageMap = {};
-    imageFiles.forEach(file => {
-        imageMap[file.name] = file;
-    });
+    if (!rows || !imageMap) return;
 
-    const workbook = XLSX.read(await excelInput.files[0].arrayBuffer());
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
-    const rows = XLSX.utils.sheet_to_json(sheet);
+    const zip = new JSZip();
 
     for (const row of rows) {
         const imgFile = imageMap[row.imagePath];
@@ -1035,37 +1033,70 @@ document.getElementById('bulk-generate').addEventListener('click', async () => {
 
         const imgBlob = await imgFile.arrayBuffer();
         const img = await loadImage(URL.createObjectURL(new Blob([imgBlob])));
+        await renderCardToCanvas(row, img);
 
-        // Render badge on canvas
-        await renderCardToCanvas({
-            ctx, canvas, img,
-            title: row.title,
-            badgeText: row.badgeText,
-            name: row.name,
-            designation: row.designation,
-            branch: row.branch,
-            location: row.location,
-            startColor: row.gradient.split(',')[0],
-            endColor: row.gradient.split(',')[1]
-        });
-
-        // Generate timestamped filename
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        const safeName = row.name.replace(/\s+/g, '_');
-        const fileName = `${safeName}_${timestamp}.png`;
-
-        // Download the file
-        const link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png');
-        link.download = fileName;
-        link.click();
-
-        // Wait briefly to avoid browser throttling
-        await new Promise(r => setTimeout(r, 200));
+        const pngBlob = await new Promise(res => canvas.toBlob(res, 'image/png'));
+        const fileName = getFileName(row.name);
+        zip.file(fileName, pngBlob);
     }
 
-    showToast("✅ All badges have been downloaded!");
+    const zipBlob = await zip.generateAsync({ type: 'blob' });
+    saveAs(zipBlob, 'badges.zip');
+    showToast("✅ All badges downloaded as ZIP!");
 });
+
+document.getElementById('bulk-download-individual').addEventListener('click', async () => {
+    const rows = await getExcelRows();
+    const imageMap = getImageMap();
+
+    if (!rows || !imageMap) return;
+
+    for (const row of rows) {
+        const imgFile = imageMap[row.imagePath];
+        if (!imgFile) {
+            console.warn(`Image not found for ${row.imagePath}`);
+            continue;
+        }
+
+        const imgBlob = await imgFile.arrayBuffer();
+        const img = await loadImage(URL.createObjectURL(new Blob([imgBlob])));
+        await renderCardToCanvas(row, img);
+
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = getFileName(row.name);
+        link.click();
+
+        await new Promise(r => setTimeout(r, 100)); // Delay for Safari
+    }
+
+    showToast("✅ All badges downloaded individually!");
+});
+
+async function getExcelRows() {
+    const excelInput = document.getElementById('excel-upload');
+    if (!excelInput.files[0]) {
+        showToast("Please upload an Excel file");
+        return null;
+    }
+    const workbook = XLSX.read(await excelInput.files[0].arrayBuffer());
+    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    return XLSX.utils.sheet_to_json(sheet);
+}
+
+function getImageMap() {
+    const imageInput = document.getElementById('bulk-images');
+    if (!imageInput.files.length) {
+        showToast("Please upload images");
+        return null;
+    }
+    const imageFiles = Array.from(imageInput.files);
+    const imageMap = {};
+    imageFiles.forEach(file => {
+        imageMap[file.name] = file;
+    });
+    return imageMap;
+}
 
 function loadImage(src) {
     return new Promise((resolve, reject) => {
@@ -1076,12 +1107,17 @@ function loadImage(src) {
     });
 }
 
-async function renderCardToCanvas({
-    ctx, canvas, img, title, badgeText, name, designation, branch, location, startColor, endColor
-}) {
+function getFileName(name) {
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const safeName = name.replace(/\s+/g, '_');
+    return `${safeName}_${timestamp}.png`;
+}
+
+async function renderCardToCanvas(row, img) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Background gradient
+    const [startColor, endColor] = row.gradient.split(',');
     const grd = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
     grd.addColorStop(0, startColor);
     grd.addColorStop(1, endColor);
@@ -1097,7 +1133,7 @@ async function renderCardToCanvas({
     ctx.textAlign = 'center';
     ctx.shadowColor = 'rgba(0,0,0,0.4)';
     ctx.shadowBlur = 10;
-    ctx.fillText(`⭐ ${title.toUpperCase()} ⭐`, canvas.width / 2, 200);
+    ctx.fillText(`⭐ ${row.title.toUpperCase()} ⭐`, centerX, 200);
 
     // Avatar
     ctx.save();
@@ -1107,23 +1143,14 @@ async function renderCardToCanvas({
     ctx.drawImage(img, centerX - 330, avatarY - 330, 660, 660);
     ctx.restore();
 
-    // Badge ✔
-    ctx.beginPath();
-    ctx.arc(centerX + 250, avatarY + 250, 75, 0, Math.PI * 2, false);
-    ctx.fillStyle = '#34b233';
-    ctx.fill();
-    ctx.font = '900 60px "Fira Sans", sans-serif';
-    ctx.fillStyle = '#ffffff';
-    ctx.fillText("✔", centerX + 250, avatarY + 275);
-
     // Badge text
     ctx.font = '900 100px "Fira Sans", sans-serif';
     ctx.fillStyle = '#facc15';
     ctx.shadowBlur = 10;
-    ctx.fillText(badgeText, centerX, avatarY + 450);
+    ctx.fillText(row.badgeText, centerX, avatarY + 450);
 
     // Bottom section
-    drawBottomSection(name, designation, branch, location, centerX);
+    drawBottomSection(row.name, row.designation, row.branch, row.location, centerX);
 }
 
         function updateThemeIcon(theme) {
