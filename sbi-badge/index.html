@@ -501,6 +501,8 @@
         .animate-fadeIn {
             animation: fadeIn 0.3s ease-out;
         }
+
+        
     </style>
 </head>
 
@@ -556,48 +558,65 @@
       class="w-full px-4 py-3 border border-gray-300 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
   </div>
 
+    <div>
+    <label for="bulk-title" class="block text-base font-medium text-gray-700 dark:text-gray-300 mb-2">
+      📝 Title (for all badges):
+    </label>
+    <input type="text" id="bulk-title" placeholder="I AM ACTIVE"
+      class="w-full px-4 py-3 border border-gray-300 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+  </div>
+
+  <!-- Badge Text Input -->
+  <div>
+    <label for="bulk-badgetext" class="block text-base font-medium text-gray-700 dark:text-gray-300 mb-2">
+      🏆 Badge Text (for all badges):
+    </label>
+    <input type="text" id="bulk-badgetext" placeholder="QUALIFIED"
+      class="w-full px-4 py-3 border border-gray-300 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+  </div>
+
   <div>
   <label for="bulk-gradient" class="block text-base font-medium text-gray-700 dark:text-gray-300 mb-2">
     Choose Gradient for Bulk Badges:
   </label>
+
   <select id="bulk-gradient"
     class="w-full px-4 py-3 border border-gray-300 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 appearance-none">
-    <option value="#232526,#414345" style="background: linear-gradient(to right, #232526, #414345); color: white;">
-      Midnight City
-    </option>
-    <option value="#673AB7,#512DA8" style="background: linear-gradient(to right, #673AB7, #512DA8); color: white;">
-      Deep Purple
-    </option>
-    <option value="#37474F,#263238" style="background: linear-gradient(to right, #37474F, #263238); color: white;">
-      Blue Grey
-    </option>
-    <option value="#2C3E50,#4CA1AF" style="background: linear-gradient(to right, #2C3E50, #4CA1AF); color: white;">
-      Charcoal
-    </option>
-    <option value="#0F2027,#203A43,#2C5364" style="background: linear-gradient(to right, #0F2027, #203A43, #2C5364); color: white;">
-      Cosmic Fusion
-    </option>
-    <option value="#1F1C2C,#928DAB" style="background: linear-gradient(to right, #1F1C2C, #928DAB); color: white;">
-      Obsidian Glow
-    </option>
-    <option value="#ff512f,#dd2476" style="background: linear-gradient(to right, #ff512f, #dd2476); color: white;">
-      🔥 Sunset Flame
-    </option>
-    <option value="#ff6a88,#ff99ac" style="background: linear-gradient(to right, #ff6a88, #ff99ac); color: black;">
-      💖 Pink Candy
-    </option>
-    <option value="#360033,#0b8793" style="background: linear-gradient(to right, #360033, #0b8793); color: white;">
-      💜 Purple Bliss
-    </option>
-    <option value="#141e30,#243b55" style="background: linear-gradient(to right, #141e30, #243b55); color: white;">
-      👑 Royal Blue Glow
-    </option>
-    <option value="#000000,#434343" style="background: linear-gradient(to right, #000000, #434343); color: white;">
-      🖤 Jet Black Fade
-    </option>
-    <option value="#3f2b96,#a8c0ff" style="background: linear-gradient(to right, #3f2b96, #a8c0ff); color: white;">
-      🟣 Indigo Vortex
-    </option>
+   
+<option value="#00c6fb,#005bea" style="background: linear-gradient(to right, #00c6fb, #005bea); color: white;">
+    Sharp Blue
+  </option>
+  <option value="#673AB7,#512DA8" style="background: linear-gradient(to right, #673AB7, #512DA8); color: white;">
+    Deep Purple
+  </option>
+  <option value="#0250c5,#d43f8d" style="background: linear-gradient(to right, #0250c5, #d43f8d); color: white;">
+    Night Party
+  </option>
+  <option value="#f43b47,#453a94" style="background: linear-gradient(to right, #f43b47, #453a94); color: white;">
+    YONO
+  </option>
+  <option value="#5f72bd,#9b23ea" style="background: linear-gradient(to right, #5f72bd, #9b23ea); color: white;">
+    Mars Party
+  </option>
+  <option value="#c71d6f,#d09693" style="background: linear-gradient(to right, #c71d6f, #d09693); color: white;">
+    Big Mango
+  </option>
+  <option value="#4481eb,#04befe" style="background: linear-gradient(to right, #4481eb, #04befe); color: white;">
+    Party Bliss
+  </option>
+  <option value="#1e3c72,#2a5298" style="background: linear-gradient(to right, #1e3c72, #2a5298); color: white;">
+    Night Sky
+  </option>
+  <option value="#2a5298,#6713d2" style="background: linear-gradient(to right, #2a5298, #6713d2); color: white;">
+    Plum Bath
+  </option>
+  <option value="#b224ef,#7579ff" style="background: linear-gradient(to right, #b224ef, #7579ff); color: white;">
+    Smart Indigo
+  </option>
+  <option value="#007adf,#00ecbc" style="background: linear-gradient(to right, #007adf, #00ecbc); color: white;">
+    Lily Meadow
+  </option>
+
   </select>
 </div>
 
@@ -841,6 +860,8 @@
 
         window.addEventListener('scroll', highlightNavLink);
         window.addEventListener('load', highlightNavLink);
+        const bulkTitleInput = document.getElementById('bulk-title');
+const bulkBadgeTextInput = document.getElementById('bulk-badgetext');
 
         document.addEventListener('DOMContentLoaded', () => {
             const yearSpan = document.getElementById('footer-year');
@@ -857,6 +878,10 @@
                 document.getElementById('card-branch').value = savedData.branch || '';
                 document.getElementById('card-location').value = savedData.location || '';
             }
+             const savedTitle = localStorage.getItem('bulkTitle');
+    const savedBadgeText = localStorage.getItem('bulkBadgeText');
+    if (savedTitle) bulkTitleInput.value = savedTitle;
+    if (savedBadgeText) bulkBadgeTextInput.value = savedBadgeText;
 
         });
 
@@ -1088,6 +1113,8 @@ document.getElementById('bulk-download-zip').addEventListener('click', async () 
     const zipBlob = await zip.generateAsync({ type: 'blob' });
     saveAs(zipBlob, 'badges.zip');
     showToast("✅ All badges downloaded as ZIP!");
+      localStorage.setItem('bulkTitle', bulkTitleInput.value);
+    localStorage.setItem('bulkBadgeText', bulkBadgeTextInput.value);
 });
 
 document.getElementById('bulk-download-individual').addEventListener('click', async () => {
@@ -1116,6 +1143,8 @@ document.getElementById('bulk-download-individual').addEventListener('click', as
     }
 
     showToast("✅ All badges downloaded individually!");
+      localStorage.setItem('bulkTitle', bulkTitleInput.value);
+    localStorage.setItem('bulkBadgeText', bulkBadgeTextInput.value);
 });
 
 async function getExcelRows() {
@@ -1163,8 +1192,8 @@ const bulkGradientSelect = document.getElementById('bulk-gradient');
 async function renderCardToCanvas(row, img) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Background gradient
-     const gradientColors = bulkGradientSelect.value.split(',');
+    // Gradient background
+    const gradientColors = bulkGradientSelect.value.split(',');
     const grd = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
     gradientColors.forEach((color, i) => {
         grd.addColorStop(i / (gradientColors.length - 1), color);
@@ -1175,30 +1204,66 @@ async function renderCardToCanvas(row, img) {
     const centerX = canvas.width / 2;
     const avatarY = 730;
 
-    // Title
-    ctx.font = '700 120px "Fira Sans", sans-serif';
-    ctx.fillStyle = '#facc15';
-    ctx.textAlign = 'center';
-    ctx.shadowColor = 'rgba(0,0,0,0.4)';
-    ctx.shadowBlur = 10;
-    ctx.fillText(`⭐ ${row.title.toUpperCase()} ⭐`, centerX, 200);
+    // Rounded rectangle card
+    roundRect(ctx, 50, 50, canvas.width - 100, canvas.height - 100, 50);
 
-    // Avatar
+    // Draw Avatar with Gold Border
+    const goldGradient = ctx.createLinearGradient(centerX - 330, avatarY - 330, centerX + 330, avatarY + 330);
+    goldGradient.addColorStop(0, '#FFD700'); // Gold
+    goldGradient.addColorStop(1, '#FFA500'); // Orange Gold
+
     ctx.save();
     ctx.beginPath();
-    ctx.arc(centerX, avatarY, 330, 0, Math.PI * 2, false);
+    ctx.arc(centerX, avatarY, 350, 0, Math.PI * 2, false); // slightly larger circle for border
+    ctx.fillStyle = goldGradient;
+    ctx.fill();
+    ctx.clip();
+
+    ctx.beginPath();
+    ctx.arc(centerX, avatarY, 330, 0, Math.PI * 2, false); // inner circle for avatar
     ctx.clip();
     ctx.drawImage(img, centerX - 330, avatarY - 330, 660, 660);
     ctx.restore();
 
-    // Badge text
-    ctx.font = '900 100px "Fira Sans", sans-serif';
+    // Golden ✔ Tick
+    ctx.beginPath();
+    ctx.arc(centerX + 250, avatarY + 250, 75, 0, Math.PI * 2, false);
+    ctx.fillStyle = '#34b233';
+    ctx.fill();
+    ctx.font = '900 60px "Fira Sans", sans-serif';
+    ctx.fillStyle = '#ffffff';
+    ctx.textAlign = 'center';
+    ctx.fillText("✔", centerX + 250, avatarY + 275);
+
+    // Title
+    ctx.font = '700 120px "Fira Sans", sans-serif';
     ctx.fillStyle = '#facc15';
     ctx.shadowBlur = 10;
-    ctx.fillText(row.badgeText, centerX, avatarY + 450);
+    ctx.fillText(document.getElementById('bulk-title').value, centerX, 200);
 
-    // Bottom section
+    // Badge Text
+    ctx.font = '900 100px "Fira Sans", sans-serif';
+    ctx.fillStyle = '#facc15';
+    ctx.fillText(document.getElementById('bulk-badgetext').value, centerX, avatarY + 450);
+
+    // Bottom Details
     drawBottomSection(row.name, row.designation, row.branch, row.location, centerX);
+}
+
+function roundRect(ctx, x, y, width, height, radius) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.clip();
+    ctx.restore();
 }
 
         function updateThemeIcon(theme) {
