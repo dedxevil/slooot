@@ -556,6 +556,51 @@
       class="w-full px-4 py-3 border border-gray-300 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
   </div>
 
+  <div>
+  <label for="bulk-gradient" class="block text-base font-medium text-gray-700 dark:text-gray-300 mb-2">
+    Choose Gradient for Bulk Badges:
+  </label>
+  <select id="bulk-gradient"
+    class="w-full px-4 py-3 border border-gray-300 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 appearance-none">
+    <option value="#232526,#414345" style="background: linear-gradient(to right, #232526, #414345); color: white;">
+      Midnight City
+    </option>
+    <option value="#673AB7,#512DA8" style="background: linear-gradient(to right, #673AB7, #512DA8); color: white;">
+      Deep Purple
+    </option>
+    <option value="#37474F,#263238" style="background: linear-gradient(to right, #37474F, #263238); color: white;">
+      Blue Grey
+    </option>
+    <option value="#2C3E50,#4CA1AF" style="background: linear-gradient(to right, #2C3E50, #4CA1AF); color: white;">
+      Charcoal
+    </option>
+    <option value="#0F2027,#203A43,#2C5364" style="background: linear-gradient(to right, #0F2027, #203A43, #2C5364); color: white;">
+      Cosmic Fusion
+    </option>
+    <option value="#1F1C2C,#928DAB" style="background: linear-gradient(to right, #1F1C2C, #928DAB); color: white;">
+      Obsidian Glow
+    </option>
+    <option value="#ff512f,#dd2476" style="background: linear-gradient(to right, #ff512f, #dd2476); color: white;">
+      🔥 Sunset Flame
+    </option>
+    <option value="#ff6a88,#ff99ac" style="background: linear-gradient(to right, #ff6a88, #ff99ac); color: black;">
+      💖 Pink Candy
+    </option>
+    <option value="#360033,#0b8793" style="background: linear-gradient(to right, #360033, #0b8793); color: white;">
+      💜 Purple Bliss
+    </option>
+    <option value="#141e30,#243b55" style="background: linear-gradient(to right, #141e30, #243b55); color: white;">
+      👑 Royal Blue Glow
+    </option>
+    <option value="#000000,#434343" style="background: linear-gradient(to right, #000000, #434343); color: white;">
+      🖤 Jet Black Fade
+    </option>
+    <option value="#3f2b96,#a8c0ff" style="background: linear-gradient(to right, #3f2b96, #a8c0ff); color: white;">
+      🟣 Indigo Vortex
+    </option>
+  </select>
+</div>
+
   <!-- Buttons -->
   <div class="flex flex-col md:flex-row justify-center gap-4 mt-6">
     <button id="bulk-download-zip"
@@ -1113,14 +1158,17 @@ function getFileName(name) {
     return `${safeName}_${timestamp}.png`;
 }
 
+const bulkGradientSelect = document.getElementById('bulk-gradient');
+
 async function renderCardToCanvas(row, img) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Background gradient
-    const [startColor, endColor] = row.gradient.split(',');
+     const gradientColors = bulkGradientSelect.value.split(',');
     const grd = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-    grd.addColorStop(0, startColor);
-    grd.addColorStop(1, endColor);
+    gradientColors.forEach((color, i) => {
+        grd.addColorStop(i / (gradientColors.length - 1), color);
+    });
     ctx.fillStyle = grd;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
