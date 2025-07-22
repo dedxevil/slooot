@@ -616,6 +616,36 @@
   <option value="#007adf,#00ecbc" style="background: linear-gradient(to right, #007adf, #00ecbc); color: white;">
     Lily Meadow
   </option>
+<option value="#000000,#434343" style="background: linear-gradient(to right, #000000, #434343); color: white;">
+  Midnight Black
+</option>
+<option value="#3E2723,#5D4037" style="background: linear-gradient(to right, #3E2723, #5D4037); color: white;">
+  Earth Brown
+</option>
+<option value="#1A2980,#26D0CE" style="background: linear-gradient(to right, #1A2980, #26D0CE); color: white;">
+  Ocean Breeze
+</option>
+<option value="#0f2027,#203a43,#2c5364" style="background: linear-gradient(to right, #0f2027, #203a43, #2c5364); color: white;">
+  Deep Space
+</option>
+<option value="#2C3E50,#4CA1AF" style="background: linear-gradient(to right, #2C3E50, #4CA1AF); color: white;">
+  Steel Blue
+</option>
+<option value="#4B2C20,#2C1608" style="background: linear-gradient(to right, #4B2C20, #2C1608); color: white;">
+  Rustic Brown
+</option>
+<option value="#000428,#004e92" style="background: linear-gradient(to right, #000428, #004e92); color: white;">
+  Nightfall Blue
+</option>
+<option value="#3C3B3F,#605C3C" style="background: linear-gradient(to right, #3C3B3F, #605C3C); color: white;">
+  Smoky Bronze
+</option>
+<option value="#1c1c1c,#383838" style="background: linear-gradient(to right, #1c1c1c, #383838); color: white;">
+  Charcoal
+</option>
+<option value="#2b5876,#4e4376" style="background: linear-gradient(to right, #2b5876, #4e4376); color: white;">
+  Twilight Indigo
+</option>
 
   </select>
 </div>
@@ -1236,10 +1266,24 @@ async function renderCardToCanvas(row, img) {
     ctx.fillText("✔", centerX + 250, avatarY + 275);
 
     // Title
-    ctx.font = '700 120px "Fira Sans", sans-serif';
+ctx.textAlign = 'center';
+ctx.shadowColor = 'rgba(0,0,0,0.4)';
+ctx.shadowBlur = 10;
+
+const title = document.getElementById('bulk-title').value;
+const [firstLine, secondLine] = title.split('\\n'); // Split at literal \n
+
+// First line (bigger & bolder)
+ctx.font = '900 130px "Fira Sans", sans-serif'; // Bold & big
+ctx.fillStyle = '#facc15';
+ctx.fillText(firstLine.trim(), canvas.width / 2, 200);
+
+// Second line (smaller)
+if (secondLine) {
+    ctx.font = '700 90px "Fira Sans", sans-serif'; // Slightly smaller
     ctx.fillStyle = '#facc15';
-    ctx.shadowBlur = 10;
-    ctx.fillText(document.getElementById('bulk-title').value, centerX, 200);
+    ctx.fillText(secondLine.trim(), canvas.width / 2, 320); // Adjust Y position
+}
 
     // Badge Text
     ctx.font = '900 100px "Fira Sans", sans-serif';
